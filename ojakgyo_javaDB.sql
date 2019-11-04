@@ -26,3 +26,7 @@ create table groups( <!-- 그룹 생성시 저장되는 정보 -->
 create sequence seq_groups; <!-- 그룹 테이블의 gno를 위한 시퀀스 -->
 
 
+
+
+
+

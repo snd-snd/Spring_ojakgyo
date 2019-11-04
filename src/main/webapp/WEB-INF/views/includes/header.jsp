@@ -114,6 +114,8 @@
 								</ul>	
 							</div>
 						</li>
+						<li><a href="/board/review" class="active"><i
+							class="lnr lnr-dice"></i> <span>Review</span></a></li>
 					</ul>
 				</nav>
 			</div>
