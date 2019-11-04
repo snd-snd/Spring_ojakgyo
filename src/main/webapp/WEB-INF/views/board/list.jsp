@@ -19,6 +19,7 @@
 			<div class="row">
 				<div class="col-md-8">							
 					<!-- TABLE STRIPED -->
+					
 					<div class="panel">
 						<div class="panel-heading">
 							<h3 class="panel-title text-left"># ${info.group.groupName } 게시판</h3>
