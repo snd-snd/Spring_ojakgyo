@@ -95,6 +95,14 @@
 				<nav>
 					<ul class="nav">
 						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="/board/login" class="">Login</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
 							<a href="#subBoards" data-toggle="collapse" class="collapsed"><i class="lnr lnr-dice"></i> <span>My Group Board</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subBoards" class="collapse">
 								<c:if test="${!empty login.groups }">
