@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.BoardMapper">
+
+	<!-- 페이지 단위로 끊어서 리스트 가져오기 -->
+	<select id="list" resultType="com.ojakgyo.domain.BoardVO">
+		<![CDATA[
+			select bno, title, content, writer, regDate, readCount, goodCount
+			from (select /*+INDEX_DESC(board_${groupCode} pk_board_${groupCode})*/
+        		rownum rn, bno, title, content, writer, regdate, readCount, goodCount
+        		from board_${groupCode}
+        		where
+        ]]>
+        	<include refid="typeSplit"/>
+        <![CDATA[  		
+        		rownum <= #{pageNum} * #{amount})
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>		
+	</select>
+	
+	<!-- 하나의 게시물에 대한 정보 가져오기 -->	
+	<select id="read" resultType="com.ojakgyo.domain.BoardVO">
+		<![CDATA[
+		select * from board_${groupCode} where bno = #{bno}
+		]]>
+	</select>
+	
+	<!-- 게시물 작성 -->
+	<insert id="register">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+			select seq_board_${groupCode}.nextVal from dual
+		</selectKey>
+		insert into board_${groupCode} (bno, title, content, writer) values (#{bno}, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 게시물 수정 -->
+	<update id="modify">
+		update board_${groupCode} set title=#{title}, content=#{content} where bno=#{bno}
+	</update>
+	
+	<!-- 조회수 -->
+	<update id="readCount">
+		update board_${groupCode} set readCount=readCount+1 where bno=#{bno}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="remove">
+		delete from board_${groupCode} where bno=#{bno}
+	</delete>
+	
+	<!-- 게시물의 총 개수 가져오기 -->
+	<select id="totalCount" resultType="int">
+    	<![CDATA[
+			select count(*) from board_${groupCode}
+			where
+		]]>
+			<include refid="typeSplit"/>
+		<![CDATA[
+			bno>0
+		]]>
+	</select>
+	
+	<!-- 검색조건에 맞게 테이블을 가져오기 위한 작업 -->
+	<sql id="typeSplit">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeList" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<update id="readUp">
+		update board_${groupCode} set readCount = readCount+1 where bno = #{bno}
+	</update>
+	
+	<!-- 좋아요,싫어요  -->
+	<update id="likeUpDown">
+		update board_${groupCode} set likeCount = likeCount+#{amount} where bno = #{bno}
+	</update>
+	
+	<!-- 댓글 추가, 제거시 카운트 -->
+	<update id="replyUpDown">
+		update board_${groupCode} set replyCount = replyCount+#{amount} where bno = #{bno}
+	</update>
+	
+
+	
+</mapper>

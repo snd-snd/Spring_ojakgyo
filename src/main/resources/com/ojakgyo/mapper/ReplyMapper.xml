@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.ReplyMapper">
+
+	<!-- 해당 게시물에 대한 댓글을 페이지 단위로 끊어서 리스트 가져오기 -->
+	<select id="list" resultType="com.ojakgyo.domain.ReplyVO">
+		<![CDATA[
+			select *
+			from (select /*+INDEX(reply_${groupCode} idx_reply_${groupCode})*/
+        		rownum rn, rno, bno, reply, replyer, replydate
+        		from reply_${groupCode}
+        		where bno = #{bno} and rno > 0 and rownum <= #{criteria.pageNum} * #{criteria.amount})
+			where rn > (#{criteria.pageNum} -1) * #{criteria.amount}
+		]]>		
+	</select>
+
+	<!-- 하나의 댓글에 대한 정보 가져오기 -->
+	<select id="read" resultType="com.ojakgyo.domain.ReplyVO">
+		select * from reply_${groupCode} where rno = #{rno}
+	</select>
+	
+	<!-- 해당 게시물에 달린 댓글 총 개수 -->
+	<select id="totalCount" resultType="int">
+		select count(*) from reply_${groupCode} where bno = #{bno}
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="register">
+		insert into reply_${groupCode} (rno, bno, reply, replyer)
+		values(seq_reply_${groupCode}.nextVal, #{bno}, #{reply}, #{replyer})
+	</insert>		
+	
+	<!-- 댓글 수정 -->
+	<update id="modify">
+		update reply_${groupCode} set reply = #{reply} where rno = #{rno}
+	</update>
+	
+	<!-- 댓글 제거 -->
+	<delete id="remove">
+		delete from reply_${groupCode} where rno = #{rno}
+	</delete>
+	
+</mapper>

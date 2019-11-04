@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.GroupMapper">
+
+	<!-- 로그인시 해당 계정이 가입된 그룹정보를 담기 위한 작업 -->
+	<select id="groupList" resultType="com.ojakgyo.domain.GroupVO">
+		select groupId, groupName, leader from groups
+		<include refid="ids"/>
+	</select>
+
+	<!-- 해당 계정이 가입된 그룹Id 리스트를 Split -->
+	<sql id="ids">
+		<trim prefix="where" prefixOverrides="OR">
+			<foreach collection="groupIds" item="groupId">
+				<trim prefix="OR">
+					groupId = #{groupId}
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 새 그룹 코드 발급을 위해 현재 가장 높은 수의 그룹 코드를 GET -->
+	<select id="maxGroupCode" resultType="java.lang.String">
+		select max(groupCode) from groups
+	</select>
+	
+	<insert id="groupRegister">
+		insert into groups (groupCode, groupName, content, leader)
+		values (#{groupCode}, #{groupName}, #{content}, #{leader})
+	</insert>
+	
+	<select id="groupRead" resultType="com.ojakgyo.domain.GroupVO">
+		select * from groups where groupCode = #{groupCode}
+	</select>
+	
+	<update id="groupModify">
+		update groups set groupName = #{groupName}, content = #{content} where groupCode = #{groupCode}
+	</update>
+	
+	<delete id="groupRemove">
+		delete from groups where groupCode = #{groupCode}
+	</delete>
+	
+</mapper>

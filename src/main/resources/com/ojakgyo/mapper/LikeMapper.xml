@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.LikeMapper">
+	<select id="likeTotal" resultType="int">
+		select count(*) from like_${groupCode} where bno = #{bno}
+	</select>
+	
+	<select id="likeCheck" resultType="int">
+		select count(*) from like_${groupCode} where bno = #{bno} and nickName = #{nickName}
+	</select>
+	
+	<insert id="action">
+		insert into like_${groupCode} values(seq_like_${groupCode}.nextVal, #{bno}, #{nickName})
+	</insert>
+	
+	<delete id="cancel">
+		delete from like_${groupCode} where where bno = #{bno} and nickName = #{nickName}
+	</delete>	
+</mapper>
