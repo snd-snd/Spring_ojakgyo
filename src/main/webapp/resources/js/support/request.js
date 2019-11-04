@@ -1,7 +1,6 @@
 /**
  * 그룹 신청과 관련된 스크립트
  */
-
 var groupRequest = (function(){
 	
 	// 그룹 생성 요청시 호출되는 함수
@@ -89,7 +88,7 @@ $(function(){
 		var myId = '${login.userId}';
 		var groupCode = $(this).data("code");
 		
-/* 		if (myId != leader){
+ 		/*if (myId != leader){
 			alert("본인이 신청한 내역만 수정할 수 있습니다.")
 			return;
 		} */		

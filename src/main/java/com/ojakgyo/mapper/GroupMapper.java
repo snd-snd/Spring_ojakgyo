@@ -12,4 +12,7 @@ public interface GroupMapper {
 	GroupVO groupRead(String groupCode);
 	boolean groupModify(GroupVO group);
 	boolean groupRemove(String groupCode);
+	
+	List<GroupVO>listStatus (int status);
+	boolean changeStatus(GroupVO group);
 }

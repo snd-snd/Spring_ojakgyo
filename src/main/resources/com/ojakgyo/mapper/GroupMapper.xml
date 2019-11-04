@@ -4,16 +4,16 @@
 
 	<!-- 로그인시 해당 계정이 가입된 그룹정보를 담기 위한 작업 -->
 	<select id="groupList" resultType="com.ojakgyo.domain.GroupVO">
-		select groupId, groupName, leader from groups
+		select groupCode, groupName, leader from groups
 		<include refid="ids"/>
 	</select>
 
 	<!-- 해당 계정이 가입된 그룹Id 리스트를 Split -->
 	<sql id="ids">
 		<trim prefix="where" prefixOverrides="OR">
-			<foreach collection="groupIds" item="groupId">
+			<foreach collection="groupCodes" item="groupCode">
 				<trim prefix="OR">
-					groupId = #{groupId}
+					groupCode = #{groupCode}
 				</trim>
 			</foreach>
 		</trim>
@@ -41,4 +41,11 @@
 		delete from groups where groupCode = #{groupCode}
 	</delete>
 	
+	<select id="listStatus" resultType="com.ojakgyo.domain.GroupVO">
+		select * from groups where status = #{status}
+	</select>
+	
+	<update id="changeStatus">
+		update groups set status = ${status} where groupCode = #{groupCode}
+	</update>
 </mapper>

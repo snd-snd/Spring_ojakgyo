@@ -72,7 +72,7 @@ DBMS_SQL.PARSE(item_cursor, item_sql7, dbms_sql.v7);
 DBMS_SQL.PARSE(item_cursor, item_sql8, dbms_sql.v7);
 DBMS_SQL.PARSE(item_cursor, item_sql9, dbms_sql.v7);
 DBMS_SQL.CLOSE_CURSOR(item_cursor);
-out_name := '1';
+out_name := 'success';
 commit;
 end;
 /
@@ -116,7 +116,7 @@ DBMS_SQL.PARSE(item_cursor, item_sql6, dbms_sql.v7);
 DBMS_SQL.PARSE(item_cursor, item_sql7, dbms_sql.v7);
 DBMS_SQL.PARSE(item_cursor, item_sql8, dbms_sql.v7);
 DBMS_SQL.CLOSE_CURSOR(item_cursor);
-out_name := '1';
+out_name := 'success';
 commit;
 end;
 /

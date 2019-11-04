@@ -58,7 +58,15 @@
 										<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
 										<td>${group.regDate }</td>
-										<td>${group.status }</td>
+										<c:if test="${group.status == 1}">
+										<td><span class="label label-success">SUCCESS</span></td>
+										</c:if>
+										<c:if test="${group.status == 2}">
+										<td><span class="label label-warning">PENDING</span></td>
+										</c:if>
+										<c:if test="${group.status == 3}">
+										<td><span class="label label-danger">FAILED</span></td>
+										</c:if>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -113,5 +121,6 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- END Modal -->
+<script src="/resources/js/support/group.js"></script>
 <script src="/resources/js/support/request.js"></script>
 <%@ include file="../includes/footer.jsp" %>
