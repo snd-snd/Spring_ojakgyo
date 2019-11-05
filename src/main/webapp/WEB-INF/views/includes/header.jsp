@@ -122,8 +122,7 @@
 								</ul>	
 							</div>
 						</li>
-						<li><a href="/board/review" class="active"><i
-							class="lnr lnr-dice"></i> <span>Review</span></a></li>
+						<li><a href="/review/review" class=""><i class="lnr lnr-heart"></i><span>Review</span></a></li>
 					</ul>
 				</nav>
 			</div>
