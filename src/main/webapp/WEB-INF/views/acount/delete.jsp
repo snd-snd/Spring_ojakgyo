@@ -33,27 +33,19 @@
 						<div class="content">
 							<div class="header">
 								<div class="logo text-center"><img src="/resources/assets/img/logo-dark.png" alt="Klorofil Logo"></div>
-								<p class="lead">Login to your account</p>
+								<p class="lead">delete to your account</p>
 							</div>
-							<form class="form-auth-small"><!-- action="index.php"-->
+							<form class="form-auth-small" action="" method="post">
 								<div class="form-group">
-									<label for="signin-userId" class="control-label sr-only">아이디</label>
-									<input type="text" class="form-control" id="signin-userId" value="${userId}" placeholder="아이디를 입력하세요">
+									<label for="userId" class="control-label sr-only">아이디</label>
+									<input type="text" class="form-control" id="userId" name="userId" value="${info.userId}" readonly/>
 								</div>
 								<div class="form-group">
-									<label for="signin-password" class="control-label sr-only">비밀번호</label>
-									<input type="password" class="form-control" id="signin-password" value="${current_password}" placeholder="비밀번호를 입력하세요">
+									<label for="current_password" class="control-label sr-only">비밀번호</label>
+									<input type="password" class="form-control" id=current_password name="current_password" placeholder="비밀번호를 입력하세요">
 								</div>
-								<div class="form-group clearfix">
-									<label class="fancy-checkbox element-left">
-										<input type="checkbox">
-										<span>Remember me</span>
-									</label>
-								</div>
-								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-								<div class="bottom">
-									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-								</div>
+
+								<button type="submit" class="btn btn-primary btn-lg btn-block">Delete</button>
 							</form>
 						</div>
 					</div>

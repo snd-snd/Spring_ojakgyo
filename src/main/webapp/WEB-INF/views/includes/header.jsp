@@ -98,7 +98,8 @@
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
-									<li><a href="/board/login" class="">Login</a></li>
+									<li><a href="/acount/login" class=""><i class="lnr lnr-user"></i>로그인</a></li>
+									<li><a href="/acount/delete" class="">회원탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
