@@ -6,7 +6,7 @@
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
-			<h3 class="page-title">Support</h3>
+			<h3 class="page-title">Admin</h3>
 			<div class="row">
 				<div class="col-md-6">							
 					<!-- TABLE STRIPED -->

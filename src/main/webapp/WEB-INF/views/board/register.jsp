@@ -50,13 +50,37 @@
 </footer>
 <script>
 	$(function(){
-		CKEDITOR.replace('edit', {height: 500});
+		CKEDITOR.replace('edit', {
+			height: 500,
+			filebrowserUploadUrl: '/file/fileupload'
+			
+
+		});
+		
+		
+		  CKEDITOR.on('dialogDefinition', function( ev ){
+		        var dialogName = ev.data.name;
+		        var dialogDefinition = ev.data.definition;
+
+		        switch (dialogName) {
+		            case 'image': //Image Properties dialog
+		            //dialogDefinition.removeContents('info');
+		            dialogDefinition.removeContents('Link');
+		            dialogDefinition.removeContents('advanced');
+		            break;
+		        }
+		    });
 			
 		$("#register").on("click",function(){				
-			var content = CKEDITOR.instances.edit.getData();			
-			$("#edit").val(content);		
-			$("#form").submit();
+			var content = CKEDITOR.instances.edit.getData();
+			console.log(content);
+			//$("#edit").val(content);		
+			//$("#form").submit();
 		})
+		
+		
+		
+		
 	})
 </script>
 <%@ include file="../includes/footer.jsp" %>
