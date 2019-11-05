@@ -124,7 +124,21 @@
 								</ul>	
 							</div>
 						</li>
-						<li><a href="/review/review" class=""><i class="lnr lnr-heart"></i><span>Review</span></a></li>
+						<li>
+							<a href="/review/review" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
+						</li>
+						<li>
+							<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="adminPage" class="collapse">
+								<ul class="nav">							
+									<li><a href="#" class=""><i class="lnr lnr-users"></i>회원관리</a></li>
+									<li><a href="/admin/group" class=""><i class="lnr lnr-users"></i>그룹관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>머머관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>댕댕관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>냥냥관리</a></li>
+								</ul>						
+							</div>
+						</li>					
 					</ul>
 				</nav>
 			</div>
