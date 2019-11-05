@@ -120,7 +120,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="/board/review" class=""><i class="lnr lnr-dice"></i> <span>Review</span></a>
+							<a href="/review/review" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
 						</li>
 						<li>
 							<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
