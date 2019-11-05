@@ -1,9 +1,6 @@
 package com.ojakgyo.mapper;
 
-import com.ojakgyo.domain.MemberInfoVO;
 import com.ojakgyo.domain.MemberVO;
-import com.ojakgyo.domain.MemberLoginVO;
-import com.ojakgyo.domain.MemberUpdateVO;
 
 public interface AcountMapper {
 	
@@ -12,9 +9,9 @@ public interface AcountMapper {
 	//중복 아이디 검사
 	public MemberVO MemberIdCheck(String userId);
 	//로그인
-	public MemberInfoVO MemberLogin(MemberLoginVO vo);
+	public MemberVO MemberLogin(MemberVO vo);
 	//회원탈퇴
-	public int MemberDelete(MemberLoginVO vo);
+	public int MemberDelete(MemberVO vo);
 	//비밀번호 변경
-	public int MemberUpdate(MemberUpdateVO vo);
+	public int MemberUpdate(MemberVO vo);
 }

@@ -38,11 +38,11 @@
 							<form class="form-auth-small" action="" method="post">
 								<div class="form-group">
 									<label for="userId" class="control-label sr-only">아이디</label>
-									<input type="text" class="form-control" id="userId" name="userId" value="${info.userId}" readonly/>
+									<input type="text" class="form-control" id="userId" name="userId" value="${login.userId}" readonly/>
 								</div>
 								<div class="form-group">
-									<label for="current_password" class="control-label sr-only">비밀번호</label>
-									<input type="password" class="form-control" id=current_password name="current_password" placeholder="비밀번호를 입력하세요">
+									<label for="userPw" class="control-label sr-only">비밀번호</label>
+									<input type="password" class="form-control" id=userPw name="userPw" placeholder="비밀번호를 입력하세요">
 								</div>
 
 								<button type="submit" class="btn btn-primary btn-lg btn-block">Delete</button>

@@ -1,9 +1,7 @@
 package com.ojakgyo.service;
 
-import com.ojakgyo.domain.MemberInfoVO;
+import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
-import com.ojakgyo.domain.MemberLoginVO;
-import com.ojakgyo.domain.MemberUpdateVO;
 
 public interface AcountService {
 
@@ -12,10 +10,10 @@ public interface AcountService {
 	//중복 아이디 검사
 	public MemberVO CheckId(String userId);
 	//로그인
-	public MemberInfoVO Login(MemberLoginVO vo);
+	public LoginVO Login(MemberVO vo);
 	//회원탈퇴
-	public boolean Delete(MemberLoginVO vo);
+	public boolean Delete(MemberVO vo);
 	//비밀번호 변경
-	public boolean Update(MemberUpdateVO vo);
+	public boolean Update(MemberVO vo);
 
 }

@@ -4,24 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ojakgyo.domain.MemberInfoVO;
+import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
-import com.ojakgyo.domain.MemberLoginVO;
-import com.ojakgyo.domain.MemberUpdateVO;
 import com.ojakgyo.service.AcountService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes("info")
+
+@SessionAttributes("login")
 @Controller
 @Slf4j
 public class AcountController {
@@ -37,19 +31,23 @@ public class AcountController {
 	
 	@PostMapping("/acount/login")
 // login.jsp에서 넘긴 값 가지고 오기
-	public String loginPost(MemberLoginVO vo, RedirectAttributes rttr, Model model) {
+	public String loginPost(MemberVO vo, Model model) {
 		log.info("로그인 요청...");
 		// acountservice.Login() => MemberInfoVO 가 널이 아니라면
-		MemberInfoVO info = acountservice.Login(vo);
+		LoginVO login = acountservice.Login(vo);
+		
 
-		if (info != null) // 로그인 성공(세션 처리 HttpSession, @SessionAttributes)
+		if (login != null) // 로그인 성공(세션 처리 HttpSession, @SessionAttributes)
 		{
-			model.addAttribute("info", info);
-			// index.jsp 보여지게 만들어 주고
+			model.addAttribute("login", login);
+			
+		
+			
+			// 홈이 보여지게 만들어 주고
 			return "redirect:/";
 		} else {
-			rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
-			// MemberInfoVO 널이라면 login.jsp 보여지게 만들기
+			//rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
+			// LoginVO가 널이라면 로그인창으로 돌아가기
 			return "redirect:/acount/login"; // forward(데이1터를 살릴수있다) or sendRedirect
 		}
 	}
@@ -89,7 +87,7 @@ public class AcountController {
 	
 // 회원탈퇴
 	@PostMapping("/acount/delete")
-	public String DeletePost(MemberLoginVO vo, SessionStatus status) {
+	public String DeletePost(MemberVO vo, SessionStatus status) {
 		log.info("회원탈퇴 진행");
 
 		if (acountservice.Delete(vo)) {
