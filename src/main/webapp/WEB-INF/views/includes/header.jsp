@@ -50,7 +50,7 @@
 						<a class="btn btn-info" href="/acount/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
 					</c:if>
 					<c:if test="${not empty login }">
-						<a class="btn btn-info" href="/acount/logout"><i class="fa fa-rocket"></i> <span>Logout</span></a>
+						<a class="btn btn-info" href="/logout"><i class="fa fa-rocket"></i> <span>Logout</span></a>
 					</c:if>
 				</div>
 				<div id="navbar-menu">
@@ -78,15 +78,16 @@
 								<li><a href="#">Troubleshooting</a></li>
 							</ul>
 						</li>
+						<c:if test="${not empty login }">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
+						</c:if>
 						<!-- <li>
 							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
 						</li> -->
