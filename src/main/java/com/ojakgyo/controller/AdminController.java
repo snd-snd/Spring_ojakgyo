@@ -1,14 +1,11 @@
 package com.ojakgyo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.service.GroupService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +30,11 @@ public class AdminController {
 //		model.addAttribute("groups_pending", groups_pending);
 //		model.addAttribute("groups_failed", groups_failed);
 		
+	}
+	
+	@GetMapping("/member")
+	public void member(Model model) {
+		log.info("AdminController => 회원관리 페이지로 이동");
 	}
 	
 
