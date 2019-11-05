@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,12 +30,12 @@ public class AcountController {
 	private AcountService acountservice;
 	
 	//로그인 폼 요청
-	@GetMapping("/board/login")
+	@GetMapping("/acount/login")
 	public void loginGet() {
 		log.info("로그인 폼 요청...");
 	}
 	
-	@PostMapping("/board/login")
+	@PostMapping("/acount/login")
 // login.jsp에서 넘긴 값 가지고 오기
 	public String loginPost(MemberLoginVO vo, RedirectAttributes rttr, Model model) {
 		log.info("로그인 요청...");
@@ -49,7 +50,7 @@ public class AcountController {
 		} else {
 			rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
 			// MemberInfoVO 널이라면 login.jsp 보여지게 만들기
-			return "redirect:/board/login"; // forward(데이1터를 살릴수있다) or sendRedirect
+			return "redirect:/acount/login"; // forward(데이1터를 살릴수있다) or sendRedirect
 		}
 	}
 	
@@ -65,20 +66,40 @@ public class AcountController {
 //		else
 //			return "true";
 //	}
+// 로그아웃
+	@GetMapping("/logout")
+	public String logout(SessionStatus session) {
+		log.info("로그아웃 처리...");
+		// 세션삭제
+		// 세션이 있다면 세션삭제
+		if (!session.isComplete()) {
+			// 세션이 존재하면 false 존재하지 않으면 true
+			session.setComplete();
+		}
+		return "redirect:/";
+	}
 	
-//// 회원탈퇴
-//	@PostMapping("/delete")
-//	public String DeletePost(MemberLoginVO vo, SessionStatus status) {
-//		log.info("회원탈퇴 진행");
-//
-//		if (acountservice.Delete(vo)) {
-//			// 세션해제
-//			// redirect
-//			status.setComplete();
-//			return "redirect:/";
-//		}
-//		return "redirect:/delete";
-//	}
+// 회원탈퇴 페이지로
+	@GetMapping("/acount/delete")
+	public void leave() {
+		log.info("회원탈퇴 폼 보여주기");
+		// 회원탈퇴
+		// 비밀번호를 입력할수 있는 폼 보여주기(leave.jsp)
+	}
+	
+// 회원탈퇴
+	@PostMapping("/acount/delete")
+	public String DeletePost(MemberLoginVO vo, SessionStatus status) {
+		log.info("회원탈퇴 진행");
+
+		if (acountservice.Delete(vo)) {
+			// 세션해제
+			// redirect
+			status.setComplete();
+			return "redirect:/";
+		}
+		return "redirect:/delete";
+	}
 
 //// 비밀번호변경
 //// 비밀번호변경 폼 보여주기(changePwd.jsp)
@@ -88,7 +109,7 @@ public class AcountController {
 //		// 비밀번호 변경 폼 보여주기(changePwd.jsp)
 //	}
 //
-//	@PostMapping("/changePwd")
+//	@PostMapping("changePwd")
 //	public String changePwd(@SessionAttribute("info") MemberInfoVO info/* ==SessionAttribute("info") */,
 //			SessionStatus session, MemberUpdateVO vo) {
 //		log.info("비밀번호 변경 폼 보여주기");
