@@ -30,8 +30,8 @@ create sequence seq_groups; <!-- 그룹 테이블의 gno를 위한 시퀀스 -->
 
 <!--Review게시판  -->
 create table ReviewBoard( 
-	bno varchar2(10) not null,
-	title varchar2(50) not null,
+	bno number(10) not null,
+	title varchar2(100) not null,
 	content varchar2(2000) not null,
 	writer varchar2(10) not null,
 	regDate date default sysdate,
