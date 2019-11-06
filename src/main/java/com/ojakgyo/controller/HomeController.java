@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ojakgyo.domain.GroupVO;
@@ -15,11 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@SessionAttributes("login")
 public class HomeController {
 
 	@GetMapping("/")
-	public String home(Model model, LoginVO login) {
+	public String home(Model model) {
 		log.info("인덱스 페이지 요청");
 		List<GroupVO> list = new ArrayList<GroupVO>();
 
@@ -36,9 +38,9 @@ public class HomeController {
 		group3.setGroupName("호구조사");
 		list.add(group3);
 		
-		login.setGroups(list);
+		//login.setGroups(list);
 		
-		model.addAttribute("login", login);
+		//model.addAttribute("login", login);
 		return "/index";
 	}
 	

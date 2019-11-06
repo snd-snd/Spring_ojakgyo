@@ -41,8 +41,8 @@
 									<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요">
 								</div>
 								<div class="form-group">
-									<label for="signin-password" class="control-label sr-only">비밀번호</label>
-									<input type="password" class="form-control" id="signin-password" name="current_password" placeholder="비밀번호를 입력하세요">
+									<label for="userPw" class="control-label sr-only">비밀번호</label>
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요">
 								</div>
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">

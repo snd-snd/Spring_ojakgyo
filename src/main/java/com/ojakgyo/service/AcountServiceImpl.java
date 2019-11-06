@@ -1,19 +1,24 @@
 package com.ojakgyo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.ojakgyo.domain.MemberInfoVO;
+import com.ojakgyo.domain.GroupVO;
+import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
-import com.ojakgyo.domain.MemberLoginVO;
-import com.ojakgyo.domain.MemberUpdateVO;
 import com.ojakgyo.mapper.AcountMapper;
+import com.ojakgyo.mapper.GroupMapper;
 
 @Service
 public class AcountServiceImpl implements AcountService {
 
 	@Autowired // == Inject
 	private AcountMapper mapper;
+	@Autowired
+	private GroupMapper group_mapper;
 
 	@Override
 	public int Insert(MemberVO vo) {
@@ -25,18 +30,29 @@ public class AcountServiceImpl implements AcountService {
 		return mapper.MemberIdCheck(userId);
 	}
 
+	@Transactional
 	@Override
-	public MemberInfoVO Login(MemberLoginVO vo) {
-		return mapper.MemberLogin(vo);
+	public LoginVO Login(MemberVO vo) {
+		LoginVO login = null;
+		MemberVO member = mapper.MemberLogin(vo);
+		if (member != null) {
+			List<GroupVO> groups = group_mapper.groupList(member);
+			login = new LoginVO();
+			login.setGroups(groups);
+			login.setUserId(member.getUserId());
+			login.setNickName(member.getNickName());	
+		}
+		System.out.println(login);
+		return login;
 	}
 
 	@Override
-	public boolean Delete(MemberLoginVO vo) {
+	public boolean Delete(MemberVO vo) {
 		return mapper.MemberDelete(vo) == 1 ? true : false;
 	}
 
 	@Override
-	public boolean Update(MemberUpdateVO vo) {
+	public boolean Update(MemberVO vo) {
 		return mapper.MemberUpdate(vo) == 1 ? true : false;
 	}
 }

@@ -11,6 +11,7 @@ import lombok.Data;
 public class MemberVO {
 	private String userId;
 	private String userPw;
+	private String new_password;
 	private String confirm_password;
 	private String userName;
 	private String nickName;

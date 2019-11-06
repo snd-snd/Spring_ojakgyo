@@ -23,7 +23,7 @@ create table groups(
 	regDate date default sysdate,
 	status number default 2,
 	headCount number(10,0),
-	constraint fk_leader foreign key(leader) references members(userId)
+	constraint fk_leader foreign key(leader) references members(nickName)
 );
 
 create sequence seq_groups; <!-- 그룹 테이블의 gno를 위한 시퀀스 -->

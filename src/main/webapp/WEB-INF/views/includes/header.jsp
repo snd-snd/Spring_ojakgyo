@@ -27,6 +27,7 @@
 </head>
 
 <body>
+
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
@@ -45,7 +46,12 @@
 					</div>
 				</form>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+					<c:if test="${empty login }">
+						<a class="btn btn-info" href="/acount/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
+					</c:if>
+					<c:if test="${not empty login }">
+						<a class="btn btn-info" href="/logout"><i class="fa fa-rocket"></i> <span>Logout</span></a>
+					</c:if>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -72,15 +78,16 @@
 								<li><a href="#">Troubleshooting</a></li>
 							</ul>
 						</li>
+						<c:if test="${not empty login }">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
+						</c:if>
 						<!-- <li>
 							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
 						</li> -->
@@ -94,15 +101,6 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="nav">
-									<li><a href="/acount/login" class=""><i class="lnr lnr-user"></i>로그인</a></li>
-									<li><a href="/acount/delete" class="">회원탈퇴</a></li>
-								</ul>
-							</div>
-						</li>
 						<li>
 							<a href="#subBoards" data-toggle="collapse" class="collapsed"><i class="lnr lnr-dice"></i> <span>My Group Board</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subBoards" class="collapse">
@@ -130,11 +128,11 @@
 							<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="adminPage" class="collapse">
 								<ul class="nav">							
-									<li><a href="#" class=""><i class="lnr lnr-users"></i>회원관리</a></li>
-									<li><a href="/admin/group" class=""><i class="lnr lnr-users"></i>그룹관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>머머관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>댕댕관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>냥냥관리</a></li>
+									<li><a href="/admin/member" class=""><i class="lnr lnr-users"></i>회원 관리</a></li>
+									<li><a href="/admin/group" class=""><i class="lnr lnr-users"></i>그룹 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>머머 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>댕댕 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>냥냥 관리</a></li>
 								</ul>						
 							</div>
 						</li>					
