@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/assets/css/review.css">
 <!-- 실제 지도를 그리는 Javascript API를 불러오기 , 발급받은appkey삽입-->
@@ -23,27 +24,21 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>No</th>
-										<th>Title</th>
-										<th>UserID</th>
+										<th>글 번호</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<td>조회수</td>
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="vo" items="${list}">
 									<tr>
-										<td>1</td>
-										<td>Jobs</td>
-										<td>@steve</td>
+										<td>${vo.bno}</td>
+										<td><a href="${vo.title}" class="viewone">${vo.title}</a></td>
+										<td>${vo.writer}</td>
+										<td>조회수 구현X</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>Philips</td>
-										<td>@simon</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Doe</td>
-										<td>@jane</td>
-									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -86,4 +81,16 @@
 <!-- END MAIN CONTENT -->
 
 <script src="/resources/js/review/review.js"></script>
+
+<script>
+//리스트제목 클릭 시 실행 >> 페이지 한개보기
+$(function(){
+	$(".viewone").click(function(){
+		
+	})
+	
+	
+})
+
+</script>
 <%@include file="../includes/footer.jsp"%>

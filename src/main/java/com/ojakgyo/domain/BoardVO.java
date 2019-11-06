@@ -14,4 +14,6 @@ public class BoardVO {
 	private Date regDate;
 	private int readCount;
 	private int likeCount;
+	private String xpos;//지도x좌표값
+	private String ypos;//지도y좌표값
 }
