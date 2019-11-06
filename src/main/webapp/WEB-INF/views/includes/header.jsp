@@ -102,6 +102,9 @@
 				<nav>
 					<ul class="nav">
 						<li>
+							<a href="/introduction/intro" class=""><i class="lnr lnr-sort-amount-asc"></i> <span>Group Intro</span></a>
+						</li>
+						<li>
 							<a href="#subBoards" data-toggle="collapse" class="collapsed"><i class="lnr lnr-dice"></i> <span>My Group Board</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subBoards" class="collapse">
 								<c:if test="${!empty login.groups }">
