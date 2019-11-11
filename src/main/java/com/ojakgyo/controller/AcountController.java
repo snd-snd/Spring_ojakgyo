@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -48,22 +50,10 @@ public class AcountController {
 		} else {
 			//rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
 			// LoginVO가 널이라면 로그인창으로 돌아가기
-			return "redirect:/acount/login"; // forward(데이1터를 살릴수있다) or sendRedirect
+			return "redirect:/acount/login"; // forward(데이터를 살릴수있다) or sendRedirect
 		}
 	}
 	
-////중복아이디 검사
-//	@PostMapping("/checkId")
-//	@ResponseBody //리턴하는 값이 실제 문자열임
-//	public String checkId(String userId) {
-//		log.info("중복 아이디 검사");
-//		MemberInsertVO vo = acountservice.CheckId(userId);
-//		
-//		if(vo != null)
-//			return "false";
-//		else
-//			return "true";
-//	}
 // 로그아웃
 	@GetMapping("/logout")
 	public String logout(SessionStatus session) {
@@ -97,6 +87,40 @@ public class AcountController {
 			return "redirect:/";
 		}
 		return "redirect:/delete";
+	}
+	
+	@GetMapping("/acount/join")
+	public void insertGet() {
+		log.info("회원가입 폼 가져오기");			
+	}
+
+	@PostMapping("/acount/join")
+	public String InsertPost(MemberVO vo) {//@ModelAttribute("member") 
+		// join.jsp 폼에서 넘긴 값 가져오기
+		log.info("join 폼에서 넘긴 값 가져오기"+vo);
+		
+		if(vo.isPasswordEqualConfirmPassword()) {
+			// 제대로 맞다면 
+			// ~님 회원 가입을 완료했습니다. 메시지 보여주기
+			int result = acountservice.Insert(vo);
+			if(result>0)
+				return "redirect:/";
+		}
+		// 비밀번호와 confirm_password가 다르면 회원가입 페이지로 돌려보냄
+		return "forward:/acount/join";
+	}
+	
+//중복아이디 검사
+	@PostMapping("/acount/checkId")
+	@ResponseBody //리턴하는 값이 실제 문자열임
+	public String checkId(String userId) {
+		log.info("중복 아이디 검사");
+		MemberVO vo = acountservice.CheckId(userId);
+		
+		if(vo != null)
+			return "false";
+		else
+			return "true";
 	}
 
 //// 비밀번호변경

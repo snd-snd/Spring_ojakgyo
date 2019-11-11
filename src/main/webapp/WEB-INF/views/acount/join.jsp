@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
-	<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> <!-- 메인CSS -->
 	<link rel="stylesheet" href="/resources/assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/resources/assets/vendor/linearicons/style.css">
 	<!-- MAIN CSS -->
@@ -24,6 +24,7 @@
 </head>
 
 <body>
+
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<div class="vertical-align-wrap">
@@ -41,8 +42,24 @@
 									<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요">
 								</div>
 								<div class="form-group">
+									<label for="userPw" class="control-label sr-only">이름</label>
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="이름을 입력하세요">
+								</div>
+								<div class="form-group">
+									<label for="userPw" class="control-label sr-only">닉네임</label>
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="닉네임을 입력하세요">
+								</div>
+								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">비밀번호</label>
 									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요">
+								</div>
+								<div class="form-group">
+									<label for="userPw" class="control-label sr-only">비밀번호 확인</label>
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="비밀번호를 확인해주세요">
+								</div>
+								<div class="form-group">
+									<label for="userPw" class="control-label sr-only">이메일</label>
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="이메일을 입력하세요">
 								</div>
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">
@@ -50,10 +67,10 @@
 										<span>Remember me</span>
 									</label>
 								</div>
-								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+								<button type="submit" class="btn btn-success btn-lg btn-block">회원가입</button>
 								<div class="bottom">
 									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-									<span class="helper-text"><i class="fa fa-lock"></i> <a href="/acount/join">new Acount</a></span>
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">new Acount</a></span>
 								</div>
 							</form>
 						</div>
@@ -71,6 +88,8 @@
 		</div>
 	</div>
 	<!-- END WRAPPER -->
+	<!-- 사용자 작성 유효성 검증 -->
+	<script src="/resources/js/acount/joinForm.js"></script>
 </body>
 
 </html>
