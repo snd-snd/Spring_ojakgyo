@@ -111,7 +111,7 @@ public class AcountController {
 	@PostMapping("/checkId")
 	@ResponseBody //리턴하는 값이 실제 문자열임
 	public String checkId(String userId) {
-		log.info("중복 아이디 검사");
+		log.info("중복 아이디 검사"+userId);
 		MemberVO vo = acountservice.CheckId(userId);
 		
 		if(vo != null)

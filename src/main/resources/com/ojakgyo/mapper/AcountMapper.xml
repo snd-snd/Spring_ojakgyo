@@ -14,7 +14,7 @@
 	
 	<!-- 아이디 중복검사 -->
 	<select id="MemberIdCheck" resultType="com.ojakgyo.domain.MemberVO">
-		select * from member where userId=#{userId}
+		select * from members where userId=#{userId}
 	</select>
 	
 	<!-- 회원수정 -->
