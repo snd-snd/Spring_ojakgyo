@@ -85,8 +85,7 @@
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="/logout"><i class="lnr lnr-cog"></i> <span>logout</span></a></li>
-								<li><a href="/acount/delete"><i class="lnr lnr-cog"></i> <span>회원탈퇴</span></a></li>
+								<li><a href="/acount/delete"><i class="lnr lnr-trash"></i> <span>회원탈퇴</span></a></li>
 							</ul>
 						</li>
 						</c:if>

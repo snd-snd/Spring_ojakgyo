@@ -12,6 +12,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String home() {
 		log.info("인덱스 페이지 요청");
+<<<<<<< HEAD
 //		List<GroupVO> list = new ArrayList<GroupVO>();
 //
 //		GroupVO group1 = new GroupVO();
@@ -30,6 +31,9 @@ public class HomeController {
 //		login.setGroups(list);
 //		
 //		model.addAttribute("login", login);
+=======
+
+>>>>>>> branch 'master' of https://github.com/hojin-Lee-0907/Ojakgyo.git
 		return "/index";
 	}
 	

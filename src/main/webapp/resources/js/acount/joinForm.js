@@ -7,7 +7,7 @@ $(function(){
 		rules:{			
 			//userid : 필수요소, 입력값 검증(영대소문자,숫자를 사용해서 5~12까지 허용)
 			userId:{
-				required:true,
+				required: true,
 				validId : true,
 				remote:{ //$.ajax({})
 					url : '/checkId',
@@ -21,28 +21,29 @@ $(function(){
 			},
 			//password : 필수요소, 입력값 검증(영대소문자, 숫자, 특수문자 8~15까지 허용)
 			userPw:{
-				required:true,
+				required: true,
 				validPwd : true				
 			},
 			//confirm_password : password 검증규칙과 동일, password 입력값과 동일한지 검증
 			confirm_password:{
-				required:true,
-				validPwd : true,				
+				required: true,
+				validPwd : true			
 				//equalTo: "#password"
 			},
 			//name : 필수요소, 2~4자리 허용
 			userName:{
-				required:true,
-				rangelength:[2,4]
+				required: true,
+				rangelength: [2,4]
 			},
-			//gender : 필수요소
+			//nickName : 필수요소
 			nickName:{
-				required:true,
+				required: true,
+				rangelength: [2,15]
 			},
 			//email: 필수요소, 이메일 검증
 			email:{
-				required:true,
-				email:true
+				required: true,
+				email: true
 			}			
 		},
 		//규칙에 위배되는 경우 보여줄 메세지 작성
@@ -62,7 +63,10 @@ $(function(){
 				required : "이름은 반드시 기입해야합니다.",
 				rangelength : "이름은 2~4자리로 입력해야 합니다."
 			},
-			nickName : "닉네임은 반드시 기입해야합니다.",	
+			nickName:{
+				required : "닉네임은 반드시 기입해야합니다.",
+				rangelength : "닉네임은 2~15자리로 입력해야 합니다."
+			},
 			email:{
 				required : "이메일은 반드시 기입해야합니다."				
 			},
@@ -74,7 +78,7 @@ $(function(){
 	});
 });
 $.validator.addMethod("validId", function(value) {
-	var regId=/(?=.*^[A-Za-z])(?=.*\d)[A-Za-z\d]{5,12}/; //
+	var regId=/[A-Za-z\d]{5,12}/; //(?=.*^[A-Za-z])(?=.*\d)
 	return regId.test(value);
 }, '아이디는 영문자, 숫자를 사용하여 5~12자리까지 사용가능합니다.');
 $.validator.addMethod("email", function(value) {
@@ -82,9 +86,9 @@ $.validator.addMethod("email", function(value) {
 	return regEmail.test(value);
 }, '이메일 형식이 다릅니다.');
 $.validator.addMethod("validPwd", function(value) {
-	var regPwd=/^(?=.*^[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,15}$/; 
+	var regPwd=/(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,15}$/;
 	return regPwd.test(value);
-}, '비밀번호는 문자,숫자,특수문자를 사용하여 6~15자리까지 사용가능합니다.');
+}, '비밀번호는 영문자,숫자,특수문자를 사용하여 6~15자리까지 사용가능합니다.');
 
 
 
