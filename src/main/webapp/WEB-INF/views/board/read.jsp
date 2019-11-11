@@ -34,9 +34,7 @@
 								</div>																			
 							</div>					
 						<div class="panel-footer">
-							<div class="row" id="reply">	
-								
-														
+							<div class="row" id="replyContent">															
 								<nav class="panel">
 									<div class="panel-heading">
 										<span><i class="fa fa-user"></i><span>&ensp;</span>사탄&ensp;2019.11.10  11:06</span>										
@@ -72,6 +70,9 @@
 									<div class="panel-body">
 										<span class="">예수는 쓸쓸한 위하여 별과 청춘을 인간의 끓는다. 있으며, 생의 위하여 창공에 이상 것은 가슴이 꽃이 쓸쓸하랴? 있는 피부가 청춘 만물은 얼마나 이것이다. 가치를 보배를 인생을 인류의 청춘을 뿐이다. 불러 밝은 열매를 얼마나 그들에게 광야에서 찬미를 철환하였는가? 방지하는 봄바람을 얼마나 것이 보이는 만천하의 모래뿐일 가진 고동을 사막이다. 뼈 피가 이상 물방아 고행을 불어 풀이 만천하의 것이다.</span>
 									</div>
+									<div class="panel-body">
+										<button type="button" class="btn btn-default" id="reply"><i class="fa fa-pencil"></i><span>&ensp;</span>답글</button>
+									</div>
 								</nav>
 								
 								
@@ -85,7 +86,8 @@
 									<div class="panel-body text-right">
 										<button type="button" class="btn btn-primary" id="register"><i class="fa fa-pencil"></i><span>&ensp;</span>등록</button>
 									</div>
-								</nav>		            		  
+								</nav>		  
+								          		  
 							</div>
 						</div>
 					</div>

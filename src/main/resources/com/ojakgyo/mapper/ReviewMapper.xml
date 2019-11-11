@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.ReviewMapper">
+
+<!--리스트 출력  -->
+<select id="ReviewList" resultType="com.ojakgyo.domain.BoardVO">
+	<!-- 	<![CDATA[ -->
+			select *
+			from ReviewBoard
+			where bno > 0
+			order by bno desc, regDate desc	
+	<!-- 	]]> -->
+</select>
+
+<!--글 내용보기(글한개출력)  -->
+<insert id="ReviewInsert">
+	insert into ReviewBoard(bno, title, content, writer, xpos, ypos) 
+					values(seq_review.nextval, #{title}, #{content}, #{writer}, #{xpos}, #{ypos})
+</insert>
+
+<!--글작성  -->
+
+<!--글 수정  -->
+
+<!--글 삭제  -->
+
+
+
+
+
+
+</mapper>

@@ -51,7 +51,7 @@ $(function(){
 	content.html(text);
 	
 	// 댓글 추가 영역
-	var reply = $("#reply");
+	var replyContent = $("#replyContent");
 	var bno = '{board.bno}';
 	
 	
@@ -64,7 +64,7 @@ $(function(){
 				replyer:nickName
 		};
 		
- 		replySerivce.add(reply, function(result){
+ 		replySerivce.add(params, function(result){
 			if(result == "success"){
 				$("textarea").val("");					
 				showList(1);
@@ -75,7 +75,7 @@ $(function(){
 	})
 	
 	//댓글 삭제
-	reply.on("click", "button[name='remove']", function(){
+	replyContent.on("click", "button[name='remove']", function(){
 		var rno = $(this).data("rno");
 		
 		replySerivce.remove({code:code, rno:rno}, function(result){
@@ -86,7 +86,7 @@ $(function(){
 	})
 	
 	//댓글 수정
-	reply.on("click", "button[name='config']", function(){
+	replyContent.on("click", "button[name='config']", function(){
 		
 		replySerivce.read({code:code, rno:$(this).data("rno")}, function(result){
 			$(this).closest("div[class='panel-heading']").hide();
@@ -112,7 +112,7 @@ $(function(){
 	})
 	
 	//댓글 수정(수정)
-	reply.on("click", "button[name='modify']", function(){
+	replyContent.on("click", "button[name='modify']", function(){
 		var rno = $(this).data("rno");
 		var reply = $(this).closest("textarea").data("reply");
 		
@@ -122,7 +122,7 @@ $(function(){
 	})
 			
 	//댓글 수정(취소)
-	reply.on("click", "button[name='reset']", function(){			
+	replyContent.on("click", "button[name='reset']", function(){			
 		$(this).closest("nav").siblings("div[class='panel-heading']").show();
 		$(this).closest("nav").siblings("div[class='panel-body']").show();	
 		$(this).closest("nav").remove();	
@@ -133,7 +133,7 @@ $(function(){
 		
 			console.log("list-length : " + list.length);			
 			if (list == null || list.length == 0){
-				reply.html("");
+				replyContent.html("");
 				return;
 			}
 			
@@ -152,9 +152,12 @@ $(function(){
 				html += "<div class='panel-body'>";
 				html += "<span class='replyContent' data-reply='"+list[i].reply+"'>"+list[i].reply+"</span>";
 				html += "</div>";
+				html += "<div class='panel-body'>";
+				html += "<button type='button' class='btn btn-default' data-rno='"+list[i].rno+"' data-click='false'><i class='fa fa-pencil'></i><span>&ensp;</span>답글</button>";
+				html += "</div>";
 				html += "</nav>";
 			}
-			reply.html(html);
+			replyContent.html(html);
 		}); // END getList
 	}
 	

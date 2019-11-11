@@ -1,68 +1,6 @@
 /**
  * 그룹 신청과 관련된 스크립트
  */
-var groupRequest = (function(){
-	
-	// 그룹 생성 요청시 호출되는 함수
-	function add(params, callback){	
-		$.ajax({
-			type : 'post',
-			url : '/groups/new',
-			contentType : 'application/json;charset=utf-8',
-			data : JSON.stringify(params),
-			success : function(result){
-				if(callback){
-					callback(result);
-				}				
-			}
-		});
-	} // END function add
-	
-	// 그룹 신청내역 변경 시 호출되는 함수
-	function read(groupCode, callback){	
-		$.getJSON("/groups/"+groupCode, function(result){
-			if (callback){
-				callback(result);
-			}
-		});	
-	} // END function read
-	
-	// 그룹 신청내역 변경 후 수정 버튼 클릭시 호출되는 함수
-	function modify(params, callback){
-		$.ajax({
-			type : 'put',
-			url : '/groups',
-			contentType : 'application/json;charset=utf-8',
-			data : JSON.stringify(params),
-			success : function(result){
-				if(callback){
-					callback(result);
-				}				
-			}
-		});		
-	} // END function modify
-	
-	// 그룹 신청 내역을 철회할 때 호출되는 함수
-	function remove(groupCode, callback){	
-		$.ajax({
-			url : '/groups/'+groupCode,
-			type : 'delete',
-			success : function(result){
-				if(callback){
-					callback(result);
-				}
-			}
-		});		
-	} // END function remove
-	
-	return{
-		add : add,
-		read : read,
-		modify : modify,
-		remove : remove
-	};
-})();
-
 
 $(function(){
 	var modal = $("#myModal");	
@@ -85,10 +23,10 @@ $(function(){
 		var inputValue;
 		var textareaValue;
 		var leader = 'hello';
-		var myId = '${login.userId}';
+		var myNickName = '${login.nickName}';
 		var groupCode = $(this).data("code");
 		
- 		/*if (myId != leader){
+ 		/*if (myNickName != leader){
 			alert("본인이 신청한 내역만 수정할 수 있습니다.")
 			return;
 		} */		
@@ -112,7 +50,7 @@ $(function(){
 		var params = {
 			groupName : modal.find("input").val(),
 			content : modal.find("textarea").val(),
-			leader : '${login.userId}'
+			leader : '${login.nickName}'
 		};	
 		groupRequest.add(params, function(result){
 			if (result == 'success'){

@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/assets/css/review.css">
 <!-- 실제 지도를 그리는 Javascript API를 불러오기 , 발급받은appkey삽입-->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=61dcffc5bf38f384dfccc9f574ec205b&libraries=services"></script>
+<style>
+	tr th,td{
+		text-align: center;
+	}
 	
+</style>	
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
@@ -23,27 +30,23 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>No</th>
-										<th>Title</th>
-										<th>UserID</th>
+										<th>번호</th>
+										<th>제목</th>
+										<th>글쓴이</th>
+										<th>작성일</th>
+										<th>조회수</th>
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="vo" items="${list}">
 									<tr>
-										<td>1</td>
-										<td>Jobs</td>
-										<td>@steve</td>
+										<td>${vo.bno}</td>
+										<td><a href="${vo.title}" class="viewone">${vo.title}</a></td>
+										<td>${vo.writer}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.regDate}"/></td>
+										<td>조회수 구현X</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>Philips</td>
-										<td>@simon</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Doe</td>
-										<td>@jane</td>
-									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -86,4 +89,16 @@
 <!-- END MAIN CONTENT -->
 
 <script src="/resources/js/review/review.js"></script>
+
+<script>
+//리스트제목 클릭 시 실행 >> 페이지 한개보기
+$(function(){
+	$(".viewone").click(function(){
+		
+	})
+	
+	
+})
+
+</script>
 <%@include file="../includes/footer.jsp"%>
