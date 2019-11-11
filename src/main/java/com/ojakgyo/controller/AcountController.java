@@ -37,14 +37,10 @@ public class AcountController {
 		log.info("로그인 요청...");
 		// acountservice.Login() => MemberInfoVO 가 널이 아니라면
 		LoginVO login = acountservice.Login(vo);
-		
 
 		if (login != null) // 로그인 성공(세션 처리 HttpSession, @SessionAttributes)
 		{
 			model.addAttribute("login", login);
-			
-		
-			
 			// 홈이 보여지게 만들어 주고
 			return "redirect:/";
 		} else {
@@ -93,9 +89,10 @@ public class AcountController {
 	public void insertGet() {
 		log.info("회원가입 폼 가져오기");			
 	}
-
+	
+// 회원가입
 	@PostMapping("/acount/join")
-	public String InsertPost(MemberVO vo) {//@ModelAttribute("member") 
+	public String InsertPost(@ModelAttribute("members") MemberVO vo) { //
 		// join.jsp 폼에서 넘긴 값 가져오기
 		log.info("join 폼에서 넘긴 값 가져오기"+vo);
 		
@@ -104,14 +101,14 @@ public class AcountController {
 			// ~님 회원 가입을 완료했습니다. 메시지 보여주기
 			int result = acountservice.Insert(vo);
 			if(result>0)
-				return "redirect:/";
+				return "redirect:/acount/login";
 		}
 		// 비밀번호와 confirm_password가 다르면 회원가입 페이지로 돌려보냄
 		return "forward:/acount/join";
 	}
 	
 //중복아이디 검사
-	@PostMapping("/acount/checkId")
+	@PostMapping("/checkId")
 	@ResponseBody //리턴하는 값이 실제 문자열임
 	public String checkId(String userId) {
 		log.info("중복 아이디 검사");
