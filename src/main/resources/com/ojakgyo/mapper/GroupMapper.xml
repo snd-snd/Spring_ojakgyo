@@ -48,4 +48,13 @@
 	<update id="changeStatus">
 		update groups set status = ${status} where groupCode = #{groupCode}
 	</update>
+	
+	<select id="myGroups" resultType="com.ojakgyo.domain.GroupVO">
+		select * from groups where leader = #{leader}
+	</select>
+	
+	<insert id="register">
+		insert into ${groupCode} (userId, nickName) values(#{userId}, #{nickName})
+	</insert>
+	
 </mapper>

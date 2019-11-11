@@ -62,7 +62,7 @@ $(function(){
 				required : "이름은 반드시 기입해야합니다.",
 				rangelength : "이름은 2~4자리로 입력해야 합니다."
 			},
-			nickName : "닉네임은 반드시 기입해야합니다."	
+			nickName : "닉네임은 반드시 기입해야합니다.",	
 			email:{
 				required : "이메일은 반드시 기입해야합니다."				
 			},

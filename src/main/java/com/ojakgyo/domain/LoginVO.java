@@ -11,4 +11,10 @@ public class LoginVO {
 	private String nickName;
 	private List<GroupVO> groups;
 	
+	
+	public boolean isFullGroup() {
+		long count = groups.stream().filter(g -> g != null).count();
+		return count == 4 ? true : false;
+	}
+	
 }

@@ -4,7 +4,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="MemberInsert">
-		insert into members values(#{userId},#{userPw},#{userName},#{nickName},#{email})
+		insert into members (userId, userPw, userName, nickName, email) values(#{userId},#{userPw},#{userName},#{nickName},#{email})
 	</insert>
 	
 	<!-- 로그인 -->
@@ -14,7 +14,7 @@
 	
 	<!-- 아이디 중복검사 -->
 	<select id="MemberIdCheck" resultType="com.ojakgyo.domain.MemberVO">
-		select * from member where userId=#{userId}
+		select * from members where userId=#{userId}
 	</select>
 	
 	<!-- 회원수정 -->
@@ -26,5 +26,14 @@
 	<delete id="MemberDelete">
 		delete from members where userId=#{userId} and userPw=#{userPw}
 	</delete>
+	
+	<select id="read" resultType="com.ojakgyo.domain.MemberVO">
+		select * from members where userId = #{userId}
+	</select>
+	
+	<update id="modify">
+		update members set groupCode1 = #{groupCode1}, groupCode2 = #{groupCode2},
+		groupCode3 = #{groupCode3}, groupCode4 = #{groupCode4} where userId = #{userId}
+	</update>
 	
 </mapper>

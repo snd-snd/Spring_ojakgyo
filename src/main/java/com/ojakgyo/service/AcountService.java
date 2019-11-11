@@ -15,5 +15,6 @@ public interface AcountService {
 	public boolean Delete(MemberVO vo);
 	//비밀번호 변경
 	public boolean Update(MemberVO vo);
+	
 
 }

@@ -55,4 +55,6 @@ public class AcountServiceImpl implements AcountService {
 	public boolean Update(MemberVO vo) {
 		return mapper.MemberUpdate(vo) == 1 ? true : false;
 	}
+	
+	
 }

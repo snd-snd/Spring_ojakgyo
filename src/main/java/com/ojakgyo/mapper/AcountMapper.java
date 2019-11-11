@@ -14,4 +14,7 @@ public interface AcountMapper {
 	public int MemberDelete(MemberVO vo);
 	//비밀번호 변경
 	public int MemberUpdate(MemberVO vo);
+	
+	MemberVO read(String userId);
+	boolean modify(MemberVO member);
 }

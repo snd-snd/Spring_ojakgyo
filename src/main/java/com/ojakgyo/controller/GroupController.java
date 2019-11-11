@@ -82,7 +82,7 @@ public class GroupController {
 	
 	@PatchMapping("/runrun")
 	public ResponseEntity<String> statusChange(@RequestBody GroupVO group) {
-		log.info("GroupController => 스테이터스 변경 및 프로시저이용 테이블 생성★★");
+		log.info("GroupController => 스테이터스 변경 및 프로시저이용 테이블 생성");
 			
 		return service.changeStatus(group)
 				? new ResponseEntity<String>("success", HttpStatus.OK)

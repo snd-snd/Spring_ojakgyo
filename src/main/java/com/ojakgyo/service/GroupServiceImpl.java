@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.domain.ProcedureVO;
+import com.ojakgyo.mapper.AcountMapper;
 import com.ojakgyo.mapper.GroupMapper;
 import com.ojakgyo.mapper.ItemMapper;
 
@@ -19,6 +20,10 @@ public class GroupServiceImpl implements GroupService {
 	GroupMapper mapper;
 	@Autowired
 	ItemMapper item_mapper;
+	@Autowired
+	AcountMapper account_mapper;
+	
+	
 	
 	@Override
 	public List<GroupVO> groupList(MemberVO member) {
@@ -79,6 +84,36 @@ public class GroupServiceImpl implements GroupService {
 				result = false;
 			}			
 		}
+		return result;
+	}
+	
+	@Override
+	public List<GroupVO> myGroups(String leader) {
+		return mapper.myGroups(leader);
+	}
+	
+	@Transactional
+	@Override
+	public boolean register(String groupCode, MemberVO member) {
+		
+		boolean result = mapper.register(groupCode, member);
+		if (result) {
+			MemberVO member2 = account_mapper.read(member.getUserId());
+			
+			if (member2.getGroupCodes().size() != 4) {
+				
+				if (member2.getGroupCode1() == null) {
+					member2.setGroupCode1(groupCode);
+				} else if (member2.getGroupCode2() == null) {
+					member2.setGroupCode2(groupCode);
+				} else if (member2.getGroupCode3() == null) {
+					member2.setGroupCode3(groupCode);
+				} else if (member2.getGroupCode4() == null) {
+					member2.setGroupCode4(groupCode);
+				}
+			}
+		}
+		
 		return result;
 	}
 }
