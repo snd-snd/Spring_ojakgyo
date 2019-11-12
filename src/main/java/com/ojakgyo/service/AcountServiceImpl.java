@@ -29,6 +29,11 @@ public class AcountServiceImpl implements AcountService {
 	public MemberVO CheckId(String userId) {
 		return mapper.MemberIdCheck(userId);
 	}
+	
+	@Override
+	public MemberVO CheckNickName(String nickName) {
+		return mapper.MemberNickNameCheck(nickName);
+	}
 
 	@Transactional
 	@Override
@@ -39,8 +44,8 @@ public class AcountServiceImpl implements AcountService {
 			List<GroupVO> groups = group_mapper.groupList(member);
 			login = new LoginVO();
 			login.setGroups(groups);
-			login.setUserId(member.getUserId());
-			login.setNickName(member.getNickName());	
+			login.setMember(member);
+			
 		}
 		System.out.println(login);
 		return login;

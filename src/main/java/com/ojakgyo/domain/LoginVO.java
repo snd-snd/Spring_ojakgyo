@@ -7,8 +7,7 @@ import lombok.Data;
 @Data
 public class LoginVO {
 
-	private String userId;
-	private String nickName;
+	private MemberVO member;
 	private List<GroupVO> groups;
 	
 }

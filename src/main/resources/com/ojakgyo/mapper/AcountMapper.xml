@@ -4,7 +4,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="MemberInsert">
-		insert into members values(#{userId},#{userPw},#{userName},#{nickName},#{email})
+		insert into members(userId, userPw, userName, nickName, email) values(#{userId},#{userPw},#{userName},#{nickName},#{email})
 	</insert>
 	
 	<!-- 로그인 -->
@@ -17,9 +17,14 @@
 		select * from members where userId=#{userId}
 	</select>
 	
+	<!-- 닉네임 중복검사 -->
+	<select id="MemberNickNameCheck" resultType="com.ojakgyo.domain.MemberVO">
+		select * from members where nickName=#{nickName}
+	</select>
+	
 	<!-- 회원수정 -->
 	<update id="MemberUpdate">
-		update members set nickName=#{nickName} userPw=#{new_password} email=#{email} where userId=#{userId} and userPw=#{userPw}
+		update members set nickName=#{nickName}, userPw=#{confirm_password}, email=#{email} where userId=#{userId}
 	</update>
 	
 	<!-- 회원탈퇴 -->

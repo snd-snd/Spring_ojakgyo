@@ -9,11 +9,13 @@ public interface AcountService {
 	public int Insert(MemberVO vo);
 	//중복 아이디 검사
 	public MemberVO CheckId(String userId);
+	//중복 닉네임 검사
+	public MemberVO CheckNickName(String nickName);
 	//로그인
 	public LoginVO Login(MemberVO vo);
 	//회원탈퇴
 	public boolean Delete(MemberVO vo);
-	//비밀번호 변경
+	//회원수정
 	public boolean Update(MemberVO vo);
 
 }

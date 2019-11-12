@@ -78,13 +78,14 @@
 								<li><a href="#">Troubleshooting</a></li>
 							</ul>
 						</li>
-						<c:if test="${not empty login }">
+						<c:if test="${not empty login}">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.member.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="/acount/update"><i class="lnr lnr-cog"></i> <span>회원수정</span></a></li>
 								<li><a href="/acount/delete"><i class="lnr lnr-trash"></i> <span>회원탈퇴</span></a></li>
 							</ul>
 						</li>

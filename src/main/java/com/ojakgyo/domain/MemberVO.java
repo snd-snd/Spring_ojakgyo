@@ -33,4 +33,8 @@ public class MemberVO {
 	public boolean isPasswordEqualConfirmPassword() {
 		return userPw.equals(confirm_password);
 	}
+	//새비밀번호와 비밀번호확인 대조하기
+	public boolean isNewPasswordEqualConfirmPassword() {
+		return new_password.equals(confirm_password);
+	}
 }

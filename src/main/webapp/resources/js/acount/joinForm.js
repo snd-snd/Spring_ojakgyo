@@ -38,7 +38,16 @@ $(function(){
 			//nickName : 필수요소
 			nickName:{
 				required: true,
-				rangelength: [2,15]
+				rangelength: [2,15],
+				remote:{ //$.ajax({})
+					url : '/checkNickName',
+					type : 'post',
+					data:{
+						userid : function(){
+							return $("#nickName").val();
+						}
+					}
+				}
 			},
 			//email: 필수요소, 이메일 검증
 			email:{
@@ -65,6 +74,7 @@ $(function(){
 			},
 			nickName:{
 				required : "닉네임은 반드시 기입해야합니다.",
+				remote : "이 닉네임는 사용중입니다.", //false, null, undefined
 				rangelength : "닉네임은 2~15자리로 입력해야 합니다."
 			},
 			email:{
