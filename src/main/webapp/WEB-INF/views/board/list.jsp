@@ -270,6 +270,7 @@
    // 서버와 연결을 끊었을 때
     function onClose(evt) {
 
+	   
            $("#data").append("연결 끊김");
 
     }
