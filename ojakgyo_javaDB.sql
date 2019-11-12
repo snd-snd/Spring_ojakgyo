@@ -12,13 +12,14 @@ create table members(
 	groupCode4 varchar2(100),
 	admin number default 0,
 	constraint pk_members primary key (userId)
-)
+);
 
 <!-- 그룹 생성시 저장되는 정보 -->
 create table groups( 
 	groupCode varchar2(100) constraint pk_groups primary key,
 	groupName varchar2(200) not null,
 	content varchar2(2000) not null,
+	content2 varchar2(2000) not null,
 	leader varchar2(50),
 	regDate date default sysdate,
 	status number default 2,

@@ -17,5 +17,6 @@ public interface AcountService {
 	public boolean Delete(MemberVO vo);
 	//회원수정
 	public boolean Update(MemberVO vo);
+	
 
 }

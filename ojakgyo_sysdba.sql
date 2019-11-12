@@ -23,12 +23,12 @@ begin
 item_sql1 := 'create table '||in_name||' (
 	mno number(10,0) constraint pk_'||in_name||' primary key,
 	userId varchar2(50),
-	userName varchar2(50),
+	nickName varchar2(50),
 	level number,
 	regDate date default sysdate,
 	admin number default 0,
 	constraint fk_userId_'||in_name||' foreign key (userId) references members (userId),
-	constraint fk_userName_'||in_name||' foreign key (userName) references members (userName)
+	constraint fk_nickName_'||in_name||' foreign key (nickName) references members (nickName)
 )';
 item_sql2 := 'create table board_'|| in_name ||' (
     bno number(10,0) constraint pk_board_'|| in_name ||' primary key,

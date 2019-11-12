@@ -16,4 +16,8 @@ public interface GroupService {
 	
 	List<GroupVO>listStatus (int status);
 	boolean changeStatus(GroupVO group);
+	
+	List<GroupVO>myGroups (String leader);
+	boolean register(String groupCode, MemberVO member);
+	
 }

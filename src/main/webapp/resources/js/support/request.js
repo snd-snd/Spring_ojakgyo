@@ -25,19 +25,14 @@ $(function(){
 		var leader = 'hello';
 		var myNickName = '${login.nickName}';
 		var groupCode = $(this).data("code");
-		
- 		/*if (myNickName != leader){
-			alert("본인이 신청한 내역만 수정할 수 있습니다.")
-			return;
-		} */		
-		
-		groupRequest.read(groupCode, function(result) {
+					
+		/*groupRequest.read(groupCode, function(result) {
 			modal.find("input").val(result.groupName);
 			modal.find("textarea").val(result.content);
 			modal.find("button").hide();
 			modal.find("button[id!='modalRegisterBtn']").show();
-			modal.modal("show");			
-		})	
+		})*/	
+		modal.modal("show");			
 	})
 		
 	// 그룹 신청, 수정, 철회 등 버튼을 눌렀을 때 Ajax를 이용해 데이터 처리
@@ -90,6 +85,40 @@ $(function(){
 				alert("뭔가 잘못됐나본데?");
 			}
 		})
+	})
+	
+	
+	var intro = $("#intro");
+	
+	intro.on("click", "div[class='col-md-3']", function(){
+		
+		var full = '${login.fullGroup}';
+		
+		if (full == true){
+			alert("더 이상 그룹에 가입할 수 없습니다.");
+			return;
+		}
+		
+		var code = $(this).data("code");
+		var name = $(this).data("name");
+		
+		var cf = confirm(name+"에 가입하시겠습니까?");
+		
+		if (cf){
+			
+			var userId = '${login.userId}';
+			var nickName = '${login.nickName}';
+			
+			groupRequest.register({userId:userId, nickName:nickName, code:code}, function(result){
+				if (result == 'success'){
+					alert(name+"에 가입되었습니다.");
+				} else {
+					alert("뭔가 잘못됐나본데?");
+				}
+			})
+			
+			
+		}
 	})
 	
 })

@@ -69,7 +69,24 @@ var groupRequest = (function(){
 				}				
 			}
 		});		
-	} // END function modify
+	} // END function update
+	
+	
+	function register(params, callback){
+		var code = params.code;
+		
+		$.ajax({
+			type : 'post',
+			url : '/support/new/'+code,
+			contentType : 'application/json;charset=utf-8',
+			data : JSON.stringify(params),
+			success : function(result){
+				if(callback){
+					callback(result);
+				}				
+			}
+		});		
+	} // END function register
 	
 	
 	return{
@@ -77,6 +94,7 @@ var groupRequest = (function(){
 		read : read,
 		modify : modify,
 		remove : remove,
-		update : update
+		update : update,
+		register : register
 	};
 })();
