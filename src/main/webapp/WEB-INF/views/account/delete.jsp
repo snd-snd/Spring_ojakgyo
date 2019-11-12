@@ -38,11 +38,11 @@
 							<form class="form-auth-small" action="" method="post">
 								<div class="form-group">
 									<label for="userId" class="control-label sr-only">아이디</label>
-									<input type="text" class="form-control" id="userId" name="userId" value="${login.member.userId}" readonly/>
+									<input type="hidden" class="form-control" id="userId" name="userId" value="${login.member.userId}" readonly/>
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">비밀번호</label>
-									<input type="password" class="form-control" id=userPw name="userPw" placeholder="회원탈퇴를 하시려면 비밀번호를 입력하세요">
+									<input type="password" class="form-control" id=userPw name="userPw" placeholder="${login.member.nickName}님 회원탈퇴를 원하신다면 비밀번호를 입력해주세요">
 								</div>
 
 								<button type="submit" class="btn btn-primary btn-lg btn-block">회원탈퇴</button>

@@ -38,27 +38,27 @@
 						<div class="content">
 							<div class="header">
 								<div class="logo text-center"><img src="/resources/assets/img/logo-ojakgyo.png" alt="Klorofil Logo"></div>
-								<p class="lead">회원가입</p>
+								<p class="lead">회원수정</p>
 							</div>
 							<form id="update" class="form-auth-small" action="" method="post">
 								<div class="form-group">
 									<label for="userId" class="control-label sr-only">아이디</label>
-									<input type="text" class="form-control" id="userId" name="userId" value="${login.member.userId}" readonly="readonly">
+									<input type="hidden" class="form-control" id="userId" name="userId"  value="${login.member.userId}" readonly="readonly">
 									<small id="userId" class="text-info"></small>
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">이름</label>
-									<input type="text" class="form-control" id="userName" name="userName" value="${login.member.userName}" readonly="readonly">
+									<input type="hidden" class="form-control" id="userName" name="userName" value="${login.member.userName}" readonly="readonly">
 									<small id="userName" class="text-info"></small>
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">현재비밀번호</label>
-									<input type="password" class="form-control" id="userPw" name="userPw" value="${login.member.userPw}" readonly="readonly">
+									<input type="hidden" class="form-control" id="userPw" name="userPw" value="${login.member.userPw}" readonly="readonly">
 									<small id="userPw" class="text-info"></small>
 								</div>
 								<div class="form-group">
 									<label for="nickName" class="control-label sr-only">닉네임</label>
-									<input type="text" class="form-control" id="nickName" name="nickName" placeholder="${login.member.nickName}">
+									<input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 변경해주세요: ${login.member.nickName}">
 									<small id="nickName" class="text-info"></small>
 								</div>
 								<div class="form-group">
@@ -73,7 +73,7 @@
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">이메일</label>
-									<input type="email" class="form-control" id="email" name="email" placeholder="${login.member.email}">
+									<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 변경해주세요: ${login.member.email}">
 									<small id="email" class="text-info"></small>
 								</div>
 								<button type="submit" class="btn btn-success btn-lg btn-block">회원수정</button>

@@ -22,7 +22,7 @@ $(function(){
 					url : '/checkNickName',
 					type : 'post',
 					data:{
-						userid : function(){
+						nickName : function(){
 							return $("#nickName").val();
 						}
 					}
