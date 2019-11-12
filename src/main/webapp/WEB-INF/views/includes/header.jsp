@@ -33,7 +33,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="/"><img src="/resources/assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="/"><img src="/resources/assets/img/logo-ojakgyo.png" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -47,7 +47,7 @@
 				</form>
 				<div class="navbar-btn navbar-btn-right">
 					<c:if test="${empty login }">
-						<a class="btn btn-info" href="/acount/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
+						<a class="btn btn-info" href="/account/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
 					</c:if>
 					<c:if test="${not empty login }">
 						<a class="btn btn-info" href="/logout"><i class="fa fa-rocket"></i> <span>Logout</span></a>
@@ -78,13 +78,15 @@
 								<li><a href="#">Troubleshooting</a></li>
 							</ul>
 						</li>
-						<c:if test="${not empty login }">
+						<c:if test="${not empty login}">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/resources/assets/img/user.png" class="img-circle" alt="Avatar"> <span>${login.member.nickName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="/account/update"><i class="lnr lnr-cog"></i> <span>회원수정</span></a></li>
+								<li><a href="/account/delete"><i class="lnr lnr-trash"></i> <span>회원탈퇴</span></a></li>
 							</ul>
 						</li>
 						</c:if>
@@ -102,9 +104,6 @@
 				<nav>
 					<ul class="nav">
 						<li>
-							<a href="/introduction/intro" class=""><i class="lnr lnr-sort-amount-asc"></i> <span>Group Intro</span></a>
-						</li>
-						<li>
 							<a href="#subBoards" data-toggle="collapse" class="collapsed"><i class="lnr lnr-dice"></i> <span>My Group Board</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subBoards" class="collapse">
 								<c:if test="${!empty login.groups }">
@@ -117,15 +116,26 @@
 							</div>
 						</li>		
 						<li>
-							<a href="#subSupport" data-toggle="collapse" class="collapsed"><i class="lnr lnr-question-circle"></i> <span>Support Page</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subSupport" class="collapse">
-								<ul class="nav">				
-									<li><a href="/support/request" class=""><i class="lnr lnr-leaf"></i>Group Request</a></li>		
-								</ul>	
-							</div>
+							<a href="/support/request" class=""><i class="lnr lnr-leaf"></i>Group Request</a>		
 						</li>
 						<li>
 							<a href="/review/review" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
+						</li>
+						<li>
+							<a href="#manage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Manage</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="manage" class="collapse">
+								<ul class="nav">				
+									<c:forEach items="${login.groups }" var="group">
+										<c:if test="${group.admin == 1 }">
+											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName }</a></li>
+										</c:if>	
+									</c:forEach>			
+									<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>회원 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>머머 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>댕댕 관리</a></li>
+									<li><a href="#" class=""><i class="lnr lnr-layers"></i>냥냥 관리</a></li>
+								</ul>						
+							</div>
 						</li>
 						<li>
 							<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>

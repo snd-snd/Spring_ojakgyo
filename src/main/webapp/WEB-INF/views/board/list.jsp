@@ -2,18 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ 
+ <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href="/resources/assets/css/chat.css"/>
 <script src="/resources/js/board/sockjs-0.3.4.js"></script>
-
  
-
 <!-- MAIN -->
 <div class="main">
 	<!-- MAIN CONTENT -->
@@ -142,7 +140,7 @@
 
 				<div class="col-sm-4">
 					<div class="chatbody">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" >
 							<div class="panel-heading top-bar">
 								<div class="col-md-8 col-xs-8">
 									<h3 class="panel-title">
@@ -150,13 +148,14 @@
 									</h3>
 								</div>
 							</div>
+						
+							
 							<div class="panel-body msg_container_base" id="message_send">
+								<!-- 보내는 메세지 생성 -->
 <!-- 								<div class="row msg_container base_sent"
 									style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";  >
 									<div class="col-md-10 col-xs-10">
 										<div class="messages msg_sent" id=message_send>
-										
-											
 										</div>
 									</div>
 									<div class="col-md-2 col-xs-2 avatar">
@@ -165,19 +164,21 @@
 											class=" img-responsive ">
 									</div>
 								</div> -->
-								<div class="row msg_container base_receive"
-									style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";>
-									<div class="col-md-2 col-xs-2 avatar">
-										<img
-											src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
-											class=" img-responsive ">
-									</div>
-									<div class="col-md-10 col-xs-10">
-										<div class="messages msg_receive" id="message_receive">
-											
-											<!-- <time datetime="2009-11-13T20:00">Timothy • 51 min</time> -->
+								<div id="message_receive">	
+								<!-- 받은 메세지 div 생성 -->
+																
+<!-- 									 <div class="row msg_container base_receive"
+										style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";>
+										<div class="col-md-2 col-xs-2 avatar">
+											<img
+												src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+												class=" img-responsive ">
 										</div>
-									</div>
+										<div class="col-md-10 col-xs-10">
+											<div class="messages msg_receive">
+											</div>
+										</div>
+									</div> -->
 								</div>
 							</div>
 							<div class="panel-footer">
@@ -215,57 +216,63 @@
 	<input type="hidden" name="type" value="${page.criteria.type }" /> 
 	<input type="hidden" name="keyword" value="${page.criteria.keyword }" />
 
-	
 </form>
 <script src="/resources/js/board/like.js"></script>
 <script src="/resources/js/board/list.js"></script>
 <!-- 채팅 구현 스크립트 -->	
  <script>		        
-       
-	   $(document).ready(function(){
-	       //websocket을 지정한 URL로 연결
-           $("#btn-chat").click(function(){
-           		sendMessage();     		
-           });
-	       
-	    	var sock= new SockJS("/echo");
-	    	alert("커넥션");
-	        sock.onmessage=onMessage;
-	        
-		    function onMessage(evt){  //변수 안에 function자체를 넣음.
-		       		console.log("서버가 보내줄 때"+evt.data);
-		            var data = evt.data;
-		        	alert("받은내용 : " + data);
-		            $("#message_receive").append(data);
-		            alert("recevie완료"); 
-		       } 
-   
-       
-	        function sendMessage(){
-	               //websocket으로 메시지를 보내겠다.
-	               var msg=$("#btn-input").val();               
-	               console.log(msg);
-	               sock.send($("#btn-input").val());
-	               var str="";
-	               str +="<div class='row msg_container base_sent' id='message_send'";
-	               str += "style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px'; >";
-	               str += "<div class='col-md-10 col-xs-10'>";
-	               str += "<div class='messages msg_sent'>";
-	               str += $("#btn-input").val();
-	               str += "</div></div> "
-	               str +="<div class='col-md-2 col-xs-2 avatar'>";      
-	               str += "<img src='http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg' class=' img-responsive '>";
-	               str +="</div></div>"
-	               $("#message_send").append(str);
-	               $("#btn-input").val("");
-	            //   alert("보내기 완료");
-	       }     
-	       //evt 파라미터는 websocket이 보내준 데이터다.
 
-       function onClose(evt){
-           $("#message_receive").append("<p> 연결 끊김 </p>");
-       }
-       
-	   }); 
-</script> 
+       $(document).ready(function() {
+           $("#btn-chat").click(function() {
+                 sendMessage();
+
+              	 $('#btn-input').val('')
+           });
+           $("#btn-input").keydown(function(key) {
+                   if (key.keyCode == 13) {// 엔터
+                          sendMessage();
+                          $('#btn-input').val('');
+                   }
+           });
+
+    });
+
+    // 웹소켓을 지정한 url로 연결한다.
+
+    let sock = new SockJS("<c:url value="/echo"/>");
+    sock.onmessage = onMessage;
+    sock.onclose = onClose;
+    // 메시지 전송
+    function sendMessage() {
+
+        sock.send($("#btn-input").val());
+        sock.get
+		console.log();
+    }
+  	
+    // 서버로부터 메시지를 받았을 때
+    function onMessage(msg) {
+         var data = msg.data;
+    	 var str="";
+			str +="<div class='row msg_container base_sent' id='message_send'";
+			str += "style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px'; >";
+			str += "<div class='col-md-10 col-xs-10'>";
+			str += "<div class='messages msg_sent'>";
+			str += data;
+			str += "</div></div> "
+			str +="<div class='col-md-2 col-xs-2 avatar'>";		
+			str += "<img src='http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg' class=' img-responsive '>";
+			str +="</div></div>"
+         $("#message_send").append(str);
+	     $('#message_send').scrollTop($('#message_send').prop('scrollHeight'));
+	     $('#message_send').focus();
+    }
+   // 서버와 연결을 끊었을 때
+    function onClose(evt) {
+
+           $("#data").append("연결 끊김");
+
+    }
+</script>
+
 <%@ include file="../includes/footer.jsp"%>

@@ -32,7 +32,7 @@
 	
 	<beans:bean id="GroupChating" class="com.ojackgyo.handler.EchoHandler"/>
 	<websocket:handlers>
-		<websocket:mapping handler="GroupChating" path="/echo"/>
+		<websocket:mapping handler="GroupChating" path="/echo"/>			
 		<websocket:sockjs/>
 	</websocket:handlers> 
 	

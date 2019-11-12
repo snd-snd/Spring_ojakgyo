@@ -9,14 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
-import com.ojakgyo.mapper.AcountMapper;
+import com.ojakgyo.mapper.AccountMapper;
 import com.ojakgyo.mapper.GroupMapper;
 
 @Service
-public class AcountServiceImpl implements AcountService {
+public class AccountServiceImpl implements AccountService {
 
 	@Autowired // == Inject
-	private AcountMapper mapper;
+	private AccountMapper mapper;
 	@Autowired
 	private GroupMapper group_mapper;
 
@@ -29,6 +29,11 @@ public class AcountServiceImpl implements AcountService {
 	public MemberVO CheckId(String userId) {
 		return mapper.MemberIdCheck(userId);
 	}
+	
+	@Override
+	public MemberVO CheckNickName(String nickName) {
+		return mapper.MemberNickNameCheck(nickName);
+	}
 
 	@Transactional
 	@Override
@@ -39,8 +44,8 @@ public class AcountServiceImpl implements AcountService {
 			List<GroupVO> groups = group_mapper.groupList(member);
 			login = new LoginVO();
 			login.setGroups(groups);
-			login.setUserId(member.getUserId());
-			login.setNickName(member.getNickName());	
+			login.setMember(member);
+			
 		}
 		System.out.println(login);
 		return login;
@@ -55,4 +60,6 @@ public class AcountServiceImpl implements AcountService {
 	public boolean Update(MemberVO vo) {
 		return mapper.MemberUpdate(vo) == 1 ? true : false;
 	}
+	
+	
 }
