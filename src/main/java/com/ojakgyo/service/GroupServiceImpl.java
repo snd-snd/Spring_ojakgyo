@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.domain.ProcedureVO;
-import com.ojakgyo.mapper.AcountMapper;
+import com.ojakgyo.mapper.AccountMapper;
 import com.ojakgyo.mapper.GroupMapper;
 import com.ojakgyo.mapper.ItemMapper;
 
@@ -21,7 +21,7 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	ItemMapper item_mapper;
 	@Autowired
-	AcountMapper account_mapper;
+	AccountMapper account_mapper;
 	
 	
 	

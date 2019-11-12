@@ -24,7 +24,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
 	<!-- 사용자 작성 유효성 검증 -->
-	<script src="/resources/js/acount/joinForm.js"></script>
+	<script src="/resources/js/account/joinForm.js"></script>
 </head>
 
 <body>

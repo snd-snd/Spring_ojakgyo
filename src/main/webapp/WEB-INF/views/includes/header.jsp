@@ -47,7 +47,7 @@
 				</form>
 				<div class="navbar-btn navbar-btn-right">
 					<c:if test="${empty login }">
-						<a class="btn btn-info" href="/acount/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
+						<a class="btn btn-info" href="/account/login"><i class="fa fa-rocket"></i> <span>Login and Join</span></a>
 					</c:if>
 					<c:if test="${not empty login }">
 						<a class="btn btn-info" href="/logout"><i class="fa fa-rocket"></i> <span>Logout</span></a>
@@ -85,8 +85,8 @@
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="/acount/update"><i class="lnr lnr-cog"></i> <span>회원수정</span></a></li>
-								<li><a href="/acount/delete"><i class="lnr lnr-trash"></i> <span>회원탈퇴</span></a></li>
+								<li><a href="/account/update"><i class="lnr lnr-cog"></i> <span>회원수정</span></a></li>
+								<li><a href="/account/delete"><i class="lnr lnr-trash"></i> <span>회원탈퇴</span></a></li>
 							</ul>
 						</li>
 						</c:if>

@@ -33,19 +33,28 @@
 						<div class="content">
 							<div class="header">
 								<div class="logo text-center"><img src="/resources/assets/img/logo-ojakgyo.png" alt="Klorofil Logo"></div>
-								<p class="lead">delete to your account</p>
+								<p class="lead">로그인</p>
 							</div>
 							<form class="form-auth-small" action="" method="post">
 								<div class="form-group">
-									<label for="userId" class="control-label sr-only">아이디</label>
-									<input type="text" class="form-control" id="userId" name="userId" value="${login.userId}" readonly/>
+									<label for="signin-userId" class="control-label sr-only">아이디</label>
+									<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요">
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">비밀번호</label>
-									<input type="password" class="form-control" id=userPw name="userPw" placeholder="비밀번호를 입력하세요">
+									<input type="password" class="form-control" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요">
 								</div>
-
-								<button type="submit" class="btn btn-primary btn-lg btn-block">Delete</button>
+								<div class="form-group clearfix">
+									<label class="fancy-checkbox element-left">
+										<input type="checkbox">
+										<span>Remember me</span>
+									</label>
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+								<div class="bottom">
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="/account/join">new Account</a></span>
+								</div>
 							</form>
 						</div>
 					</div>

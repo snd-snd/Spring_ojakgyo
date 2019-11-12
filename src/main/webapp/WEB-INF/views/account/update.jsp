@@ -24,8 +24,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
 	<!-- 사용자 작성 유효성 검증 -->
-	<script src="/resources/js/acount/update.js"></script>
-</head>
+	<script src="/resources/js/account/update.js"></script>
 </head>
 
 <body>
@@ -78,7 +77,7 @@
 									<small id="email" class="text-info"></small>
 								</div>
 								<button type="submit" class="btn btn-success btn-lg btn-block">회원수정</button>
-								<button type="reset" class="btn btn-Danger btn-lg btn-block">취소</button>
+								<button onclick="back();" class="btn btn-Danger btn-lg btn-block">취소</button>
 							</form>
 						</div>
 					</div>
@@ -96,5 +95,9 @@
 	</div>
 	<!-- END WRAPPER -->
 </body>
-
+<script>
+	function back(){
+		history.back();
+	}
+</script>
 </html>

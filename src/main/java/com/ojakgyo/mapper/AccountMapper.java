@@ -2,7 +2,7 @@ package com.ojakgyo.mapper;
 
 import com.ojakgyo.domain.MemberVO;
 
-public interface AcountMapper {
+public interface AccountMapper {
 	
 	//회원가입
 	public int MemberInsert(MemberVO vo);

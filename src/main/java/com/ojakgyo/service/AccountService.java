@@ -3,7 +3,7 @@ package com.ojakgyo.service;
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
 
-public interface AcountService {
+public interface AccountService {
 
 	//회원가입
 	public int Insert(MemberVO vo);
