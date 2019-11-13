@@ -5,6 +5,7 @@
 $(function(){
 	var modal = $("#myModal");	
 	var requestBtn = $("#request");
+	var myNickName = ${login.member.nickName};
 	
 	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
 	requestBtn.on("click", function() {
@@ -23,7 +24,6 @@ $(function(){
 		var inputValue;
 		var textareaValue;
 		var leader = 'hello';
-		var myNickName = '${login.nickName}';
 		var groupCode = $(this).data("code");
 					
 		/*groupRequest.read(groupCode, function(result) {
@@ -40,12 +40,13 @@ $(function(){
 	var modalModifyBtn = $("#modalModifyBtn");
 	var modalRemoveBtn = $("#modalRemoveBtn");
 
+	
 	// 그룹 신청
 	modalRegisterBtn.on("click", function(){		
 		var params = {
 			groupName : modal.find("input").val(),
 			content : modal.find("textarea").val(),
-			leader : '${login.nickName}'
+			leader : myNickName
 		};	
 		groupRequest.add(params, function(result){
 			if (result == 'success'){
@@ -106,8 +107,8 @@ $(function(){
 		
 		if (cf){
 			
-			var userId = '${login.userId}';
-			var nickName = '${login.nickName}';
+			var userId = '${login.member.userId}';
+			var nickName = '${login.member.nickName}';
 			
 			groupRequest.register({userId:userId, nickName:nickName, code:code}, function(result){
 				if (result == 'success'){

@@ -19,7 +19,6 @@ create table groups(
 	groupCode varchar2(100) constraint pk_groups primary key,
 	groupName varchar2(200) not null,
 	content varchar2(2000) not null,
-	content2 varchar2(2000) not null,
 	leader varchar2(50),
 	regDate date default sysdate,
 	status number default 2,

@@ -73,9 +73,11 @@ public class GroupServiceImpl implements GroupService {
 		if (result && group.getStatus() == 1) {
 			if (item_mapper.check_item(group.getGroupCode()) == 0) {
 				ProcedureVO procedure = new ProcedureVO();
-				procedure.setInput(group.getGroupCode());
+				procedure.setInput_data(group.getGroupCode());
+				System.out.println(procedure.getInput_data());
 				item_mapper.create_item(procedure);
-				if (procedure.getOutput() != null && procedure.getOutput().equals("success")) {
+				System.out.println(procedure.getOutput_data());
+				if (procedure.getOutput_data() != null && procedure.getOutput_data().equals("success")) {
 					//유저DB의 groupCode 중 빈곳을 찾아 넣어줘야함. (leader)
 					result = true;
 				} else {

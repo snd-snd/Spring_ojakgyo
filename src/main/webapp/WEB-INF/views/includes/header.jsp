@@ -142,7 +142,7 @@
 							<div id="manage" class="collapse">
 								<ul class="nav">				
 									<c:forEach items="${login.groups }" var="group">
-										<c:if test="${group.admin == 1 }">
+										<c:if test="${group.leader == login.member.nickName }">
 											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName }</a></li>
 										</c:if>	
 									</c:forEach>			

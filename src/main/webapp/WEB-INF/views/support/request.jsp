@@ -27,33 +27,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>GN13</td>
-										<td><a href="">김치에 대한 연구</a></td>
-										<td>kim123</td>
-										<td>2019-11-02</td>
-										<td><span class="label label-success">SUCCESS</span></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>GN302</td>
-										<td><a href="">책을 좋아하는 사람들</a></td>
-										<td>google9821</td>
-										<td>2019-11-05</td>
-										<td><span class="label label-danger">FAILED</span></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>GN0001</td>
-										<td><a href="">개발자 모임</a></td>
-										<td>laverth</td>
-										<td>2019-11-07</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
+									
 									<c:forEach items="${myGroups }" var="group" varStatus="status">
 									<tr>
-										<td>${status.current }</td>
+										<td>${status.index+1 }</td>
 										<td>${group.groupCode }</td>
 										<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
@@ -207,10 +184,6 @@
                 	<input class="form-control" name="groupName" placeholder="신청할 그룹의 이름을 작성해주세요.">
                 </div>
                 <div class="form-group">
-                	<label>신청 내용</label>
-                	<textarea class="form-control" name="groupContent" placeholder="신청 내용을 작성해주세요." rows="3"></textarea>
-                </div>
-                <div class="form-group">
                 	<label>소개 글</label>
                 	<textarea class="form-control" name="groupContent" placeholder="소개 내용을 작성해주세요." rows="4"></textarea>
                 </div>
@@ -227,5 +200,128 @@
 </div>
 <!-- END Modal -->
 <script src="/resources/js/support/group.js"></script>
-<script src="/resources/js/support/request.js"></script>
+<script>
+$(function(){
+	var modal = $("#myModal");	
+	var requestBtn = $("#request");
+	var myNickName = '${login.member.nickName}';
+	
+	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
+	requestBtn.on("click", function() {
+		modal.find("h4").html("그룹 신청");
+		modal.find("input").val("");
+		modal.find("textarea").val("");
+		modal.find("button").hide();
+		modal.find("button[id='modalRegisterBtn']").show();
+		modal.modal("show");
+	})
+	
+	// 그룹신청 내용에 대한 수정이나 철회가 있을 경우
+	$("table").on("click", "a", function(e){
+		e.preventDefault();
+		modal.find("h4").html("그룹 신청내역 수정");
+		var inputValue;
+		var textareaValue;
+		var leader = 'hello';
+		var groupCode = $(this).data("code");
+					
+		/*groupRequest.read(groupCode, function(result) {
+			modal.find("input").val(result.groupName);
+			modal.find("textarea").val(result.content);
+			modal.find("button").hide();
+			modal.find("button[id!='modalRegisterBtn']").show();
+		})*/	
+		modal.modal("show");			
+	})
+		
+	// 그룹 신청, 수정, 철회 등 버튼을 눌렀을 때 Ajax를 이용해 데이터 처리
+	var modalRegisterBtn = $("#modalRegisterBtn");
+	var modalModifyBtn = $("#modalModifyBtn");
+	var modalRemoveBtn = $("#modalRemoveBtn");
+
+	
+	// 그룹 신청
+	modalRegisterBtn.on("click", function(){		
+		var params = {
+			groupName : modal.find("input").val(),
+			content : modal.find("textarea").val(),
+			leader : myNickName
+		};	
+		groupRequest.add(params, function(result){
+			if (result == 'success'){
+				modal.modal("hide");
+				location.href='/support/request';
+			} else {
+				alert("뭔가 잘못됐나본데?");
+			}
+		});	
+	})
+	
+	// 그룹 신청 수정
+	modalModifyBtn.on("click", function(){
+		var params = {
+				groupName : modal.find("input").val(),
+				content : modal.find("textarea").val(),
+				groupCode : $(this).data("code")
+			};			
+		groupRequest.modify(params, function() {
+			if (result == 'success'){
+				modal.modal("hide");
+				location.href='support/request';
+			} else {
+				alert("뭔가 잘못됐나본데?");
+			}
+		})
+	})
+	
+	// 그룹 신청 철회
+	modalRemoveBtn.on("click", function(){
+		var groupCode = $(this).data("code");	
+		groupRequest.remove(groupCode, function() {
+			if (result == 'success'){
+				modal.modal("hide");
+				location.href='/support/request';
+			} else {
+				alert("뭔가 잘못됐나본데?");
+			}
+		})
+	})
+	
+	
+	var intro = $("#intro");
+	
+	intro.on("click", "div[class='col-md-3']", function(){
+		
+		var full = '${login.fullGroup}';
+		
+		if (full == true){
+			alert("더 이상 그룹에 가입할 수 없습니다.");
+			return;
+		}
+		
+		var code = $(this).data("code");
+		var name = $(this).data("name");
+		
+		var cf = confirm(name+"에 가입하시겠습니까?");
+		
+		if (cf){
+			
+			var userId = '${login.member.userId}';
+			var nickName = '${login.member.nickName}';
+			
+			groupRequest.register({userId:userId, nickName:nickName, code:code}, function(result){
+				if (result == 'success'){
+					alert(name+"에 가입되었습니다.");
+				} else {
+					alert("뭔가 잘못됐나본데?");
+				}
+			})
+			
+			
+		}
+	})
+	
+})
+</script>
+<!-- <script src="/resources/js/support/request.js"></script> -->
 <%@ include file="../includes/footer.jsp" %>
