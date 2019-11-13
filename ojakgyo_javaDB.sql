@@ -1,5 +1,5 @@
-<!-- javaDB -->
-<!-- 회원정보 -->
+-- javaDB --
+-- 회원정보 --
 create table members( 
 	userId varchar2(50) not null,
 	userPw varchar2(50) not null,
@@ -14,7 +14,7 @@ create table members(
 	constraint pk_members primary key (userId)
 );
 
-<!-- 그룹 생성시 저장되는 정보 -->
+-- 그룹 생성시 저장되는 정보 --
 create table groups( 
 	groupCode varchar2(100) constraint pk_groups primary key,
 	groupName varchar2(200) not null,
@@ -27,14 +27,15 @@ create table groups(
 	constraint fk_leader foreign key(leader) references members(nickName)
 );
 
-create sequence seq_groups; <!-- 그룹 테이블의 gno를 위한 시퀀스 -->
+create sequence seq_groups; -- 그룹 테이블의 gno를 위한 시퀀스 --
 
-<!--Review게시판  -->
+--=============================Review========================
+--Review게시판  --
 create table ReviewBoard( 
 	bno number(10) not null,
 	title varchar2(100) not null,
-	content varchar2(2000) not null,
-	writer varchar2(10) not null,
+	content varchar2(3000) not null,
+	writer varchar2(100) not null,
 	regDate date default sysdate,
 	xpos varchar2(50),
 	ypos varchar2(50),
@@ -42,5 +43,17 @@ create table ReviewBoard(
 	foreign key(writer) references members(nickName)
 )
 
-create sequence seq_review <!--리뷰테이블의 bno를 위한 시퀀스 -->
+create sequence seq_review --리뷰테이블의 bno를 위한 시퀀스 --
+
+--ReviewReply게시판
+create table ReviewReply(
+	rno number(10) constraint pk_reviewreplyboard primary key, -- 댓글 글 번호
+	bno number(10) not null, --원본 글 번호
+	reply varchar2(1000) not null, -- 댓글 내용
+	replyer varchar2(50) not null, -- 댓글 작성자
+	replydate date default sysdate, -- 댓글 작성 날짜
+	constraint fk_reviewreply foreign key(bno) references ReviewBoard(bno) -- 외래키
+)
+
+create sequence seq_reviewreply --리뷰댓글테이블의 rno를 위한 시퀀스
 

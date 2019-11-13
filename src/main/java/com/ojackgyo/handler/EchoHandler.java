@@ -13,7 +13,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
-
 public class EchoHandler extends TextWebSocketHandler{
 	
 	private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
@@ -30,7 +29,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
 				String senderId=session.getId();
 			for (WebSocketSession sess : sessionList) {		
-				sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
+				sess.sendMessage(new TextMessage(message.getPayload()));
 		}
 	}
 

@@ -214,15 +214,18 @@
 	<input type="hidden" name="keyword" value="${page.criteria.keyword }" />
 
 </form>
+
+
 <script src="/resources/js/board/like.js"></script>
 <script src="/resources/js/board/list.js"></script>
+
+<script src="/resources/js/alarm.js"></script>
 <!-- 채팅 구현 스크립트 -->	
- <script>		        
+<!--  <script>		        
 
        $(document).ready(function() {
            $("#btn-chat").click(function() {
                  sendMessage();
-
               	 $('#btn-input').val('')
            });
            $("#btn-input").keydown(function(key) {
@@ -235,21 +238,21 @@
     });
 
     // 웹소켓을 지정한 url로 연결한다.
-    
-	var ws =new WebSocket("ws://localhost:8083/echo");
-/*     let sock = new SockJS("<c:url value="/echo"/>"); */
-    ws.onmessage = onMessage;
-    ws.onclose = onClose;
+    var socket=null;
+    //let sock = new SockJS("<c:url value="/echo"/>"); 
+	var socket =new WebSocket("ws://localhost:8083/echo");  
+    socket.onmessage = onMessage;
+    socket.onclose = onClose;
     // 메시지 전송
     function sendMessage() {
-
-    	ws.send($("#btn-input").val());
+    	socket.send($("#btn-input").val());
 		console.log();
     }
   	
     // 서버로부터 메시지를 받았을 때
     function onMessage(msg) {
          var data = msg.data;
+         console.log("리스트"+data);
     	 var str="";
 			str +="<div class='row msg_container base_sent' id='message_send'";
 			str += "style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px'; >";
@@ -266,11 +269,8 @@
     }
    // 서버와 연결을 끊었을 때
     function onClose(evt) {
-
-	   
            $("#data").append("연결 끊김");
-
     }
-</script>
+</script> --> 
 
 <%@ include file="../includes/footer.jsp"%>

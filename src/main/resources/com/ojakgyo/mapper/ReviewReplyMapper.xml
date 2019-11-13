@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ojakgyo.mapper.ReviewReplyMapper">
+
+	<!--리뷰댓글리스트 -->
+	<select id="ReviewReplyList"
+		resultType="com.ojakgyo.domain.ReplyVO">
+		<!-- <![CDATA[ -->
+		select *
+		from ReviewReplyBoard
+		where bno > 0
+		order by bno desc, regDate
+		desc
+		<!-- ]]> -->
+	</select>
+
+	<!--리뷰댓글작성 -->
+	<insert id="ReviewReplyInsert">
+		insert into ReviewReplyBoard(bno, title, content,
+		writer)
+		values(seq_review.nextval, #{title}, #{content}, #{writer})
+	</insert>
+
+	<!--리뷰댓글삭제 -->
+	<delete id="ReviewReplyDelete">
+		delete from ReviewBoard where bno=#{bno}
+	</delete>
+
+
+</mapper>

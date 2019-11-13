@@ -24,6 +24,20 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="/resources/assets/img/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="/resources/ckeditor/ckeditor.js"></script>	
+
+
+<style>
+/*스크롤바에 대한 css시작  */
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background-color: white;}
+::-webkit-scrollbar-thumb{background-color: white; border-radius: 13px}
+::-webkit-scrollbar-thumb:hover{background-color: gray;}
+
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{width:10px;height:10px;background: gray; border-radius: 13px;}
+::-webkit-scrollbar{width:11px;}
+/*스크롤바에 대한 css끝*/		
+</style>	
+
 </head>
 
 <body>
@@ -32,6 +46,7 @@
 	<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
+		
 			<div class="brand">
 				<a href="/"><img src="/resources/assets/img/logo-ojakgyo.png" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
@@ -99,6 +114,7 @@
 		</nav>
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
+		
 		<div id="sidebar-nav" class="sidebar">
 			<div class="sidebar-scroll">
 				<nav>
@@ -119,7 +135,7 @@
 							<a href="/support/request" class=""><i class="lnr lnr-leaf"></i>Group Request</a>		
 						</li>
 						<li>
-							<a href="/review/review" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
+							<a href="/review/reviewlist" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
 						</li>
 						<li>
 							<a href="#manage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Manage</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -153,4 +169,67 @@
 				</nav>
 			</div>
 		</div>
+
 		<!-- END LEFT SIDEBAR -->
+		
+		
+		
+		
+		
+		
+<!-- 전체 알람을 위한 웹소켓 연결 -->
+		<!-- <script>
+		var socket=null;
+
+		$(document).ready(function(){
+			var ws=new WebSocket("ws://localhost:8083/echo");
+			socket=ws; 
+			connectWS();
+			
+		
+		 $("#btn-chat").click(function() {
+                sendMessage();
+             	 $('#btn-input').val('')
+          });
+          $("#btn-input").keydown(function(key) {
+                  if (key.keyCode == 13) {// 엔터
+                         sendMessage();
+                         $('#btn-input').val('');
+                  }
+          });
+			
+			
+			
+			
+		});
+		function connectWS(){
+			
+			socket.onopen = function(){
+				console.log("커넥션 완료");
+				
+			};
+			
+			socket.onmessage = function(event){
+				var msg=event.data;
+				console.log("받는 메세지 " , msg);
+				var msgSplit = msg.split(",");
+				
+				for (var i in msgSplit){
+					console.log(msgSplit[i]);
+				};
+
+			};
+			
+		}
+			function sendMessage() {
+		    	socket.send($("#btn-input").val());
+				console.log();
+		    };
+
+		
+		
+		
+		
+		</script> -->
+		
+		

@@ -2,6 +2,7 @@ package com.ojakgyo.service;
 
 import java.util.List;
 
+import com.ojakgyo.domain.GroupMemberVO;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.MemberVO;
 
@@ -19,5 +20,9 @@ public interface GroupService {
 	
 	List<GroupVO>myGroups (String leader);
 	boolean register(String groupCode, MemberVO member);
+	
+	List<GroupMemberVO> list(String groupCode);
+	boolean remove(String groupCode, int mno);
+	
 	
 }

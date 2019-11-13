@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojakgyo.domain.GroupMemberVO;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.domain.ProcedureVO;
@@ -116,4 +117,40 @@ public class GroupServiceImpl implements GroupService {
 		
 		return result;
 	}
+	
+	@Override
+	public List<GroupMemberVO> list(String groupCode) {
+		return mapper.list(groupCode);
+	}
+	
+	@Transactional
+	@Override
+	public boolean remove(String groupCode, int mno) {
+		
+		GroupMemberVO vo = mapper.read(groupCode, mno);
+		MemberVO member = account_mapper.read(vo.getUserId());
+		
+		if (member.getGroupCode1() != null) {
+			if (member.getGroupCode1().equals(groupCode))
+				member.setGroupCode1(null);
+		} 
+		if (member.getGroupCode1() != null) {
+			if (member.getGroupCode2().equals(groupCode))
+				member.setGroupCode2(null);	
+		}  
+		if (member.getGroupCode3() != null) {
+			if (member.getGroupCode3().equals(groupCode))
+				member.setGroupCode3(null);	
+		}  
+		if (member.getGroupCode4() != null) {
+			if (member.getGroupCode4().equals(groupCode))
+				member.setGroupCode4(null);	
+		}  
+		
+		account_mapper.modify(member);
+		
+		return mapper.remove(groupCode, mno);
+	}
+	
+
 }
