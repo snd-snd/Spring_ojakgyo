@@ -127,13 +127,11 @@
 								<ul class="nav">				
 									<c:forEach items="${login.groups }" var="group">
 										<c:if test="${group.admin == 1 }">
-											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName }</a></li>
+											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName } 관리</a></li>
 										</c:if>	
 									</c:forEach>			
-									<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>회원 관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>머머 관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>댕댕 관리</a></li>
-									<li><a href="#" class=""><i class="lnr lnr-layers"></i>냥냥 관리</a></li>
+									<li><a href="/manage/12133" class=""><i class="lnr lnr-users"></i>흥신소 관리</a></li>
+									
 								</ul>						
 							</div>
 						</li>
