@@ -3,17 +3,7 @@
     
     
     
-	<div class="alert alert-success" role="alert" style="display: block" id="alarm">
-	  A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+	<div class="alert alert-success" role="alert" style="display: None" id="alarm">
+	 <a id="chageUrl">게시글 확인하러가기!</a>
 	</div>
 	
-	
-	<script>
-	$(function (){
-		$("#alarm").css("display", "None");
-		
-	});
-	
-	
-	
-	</script>

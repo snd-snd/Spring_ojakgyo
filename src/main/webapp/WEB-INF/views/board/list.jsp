@@ -3,8 +3,8 @@
 <%@ include file="../includes/header.jsp"%>
 
  
-	 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="/resources/js/board/sockjs-0.3.4.js"></script>
@@ -214,12 +214,14 @@
 	<input type="hidden" name="keyword" value="${page.criteria.keyword }" />
 
 </form>
-
-
+<script src="/resources/js/alarm.js"></script>
 <script src="/resources/js/board/like.js"></script>
 <script src="/resources/js/board/list.js"></script>
 
-<script src="/resources/js/alarm.js"></script>
+
+
+
+
 <!-- 채팅 구현 스크립트 -->	
 <!--  <script>		        
 
@@ -272,5 +274,6 @@
            $("#data").append("연결 끊김");
     }
 </script> --> 
+
 
 <%@ include file="../includes/footer.jsp"%>

@@ -8,10 +8,13 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=61dcffc5bf38f384dfccc9f574ec205b"></script>
 
+
+
+
 <!-- MAIN -->
 <div class="main">
 	<!--알람을 위한 div  -->
-	<%@ include file="../includes/alarm.jsp"%>
+	 <%@ include file="../includes/alarm.jsp"%>
 		<!-- MAIN CONTENT -->
 		<div class="main-content">
 			<div class="container-fluid">
@@ -27,10 +30,10 @@
 							<div class="panel-body">
 								<form id="formObj2">
 									<p>Title</p>
-									<input class="form-control" name="title" value="${vo.title}"
+									<input class="form-control" name="title" value="${vo.title}" id="title"
 										disabled="disabled" style="background-color: white;"> <br>
 									<p>Writer</p>
-									<input class="form-control" name="writer" value="${vo.writer}"
+									<input class="form-control" name="writer" value="${vo.writer}" id="writer"
 										disabled="disabled" style="background-color: white;"> <br>
 									<p>Content</p>
 									<textarea class="form-control" name="content" rows="9"
@@ -116,15 +119,31 @@
 
 <!--ReviewUpdate시 보낼폼   -->
 <form action="" id="operform">
-	<input type="hidden" name="bno" value="${vo.bno}" /> 
-	<input type="hidden" name="pageNum" value="${cri.pageNum}" /> 
-	<input type="hidden" name="amount" value="${cri.amount}" /> 
-	<input type="hidden" name="type" value="${cri.type}" /> 
-	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="bno" id="bno" value="${vo.bno}" /> 
+	<input type="hidden" name="pageNum" id="pageNum" value="${cri.pageNum}" /> 
+	<input type="hidden" name="amount" id="amount" value="${cri.amount}" /> 
+	<input type="hidden" name="type" id="type" value="${cri.type}" /> 
+	<input type="hidden" name="keyword" id="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="userid" id="userid" value="${login.member.userId}" />
 </form>
 
 
+<!-- 테스트 버튼이 눌리면 게시글 당사자에게 알람이 가도록 만든 스크립트 테스트버전. -->
+<script>
+	var userid=$("#userid").val();
+	var bno = $("#bno").val();
+	var title= $("#title").val();
+	var writer= $("#writer").val();
+$("#test").click(function(e) {
+	
+	//리뷰 게시판 알람을 동작하는 함수 (alaram.js)
+	if(userid!=""){
+		alert(userid);
+	ReviewReplySend();
+	}
+})
 
+</script>
 <script>
 	$(function() {
 		/*update*/
@@ -136,23 +155,25 @@
 
 </script>
 
-<script>
+
+
+<!-- <script>
 	$(function() {
 		//remove와 list 버튼이 눌러지면 새로 만든 폼 보내고
 		//update 버튼이 눌러지면 원래의 폼 보내기
 		
-		
+	
 		var formObj = $("#operform");
-		var formObj2 = $("#formObj2");
-
-		$("button").click(function(e) {
+		var formObj2 = $("#formObj2"); 
+ 
+		 $("button").click(function(e) {
 
 			//submit 막기
 			e.preventDefault();
 
 			var oper = $(this).data("oper");
 
-			/*게시글삭제  */
+			//게시글삭제  
 			if (oper == 'delete') {
 				var deleteconfirm = confirm("게시글을 정말로 삭제하시겠습니까?");
 				if (deleteconfirm == true) {
@@ -160,22 +181,25 @@
 					formObj.attr('method', 'post');
 				} else {
 				}
-				/*게시글리스트  */
+				// 게시글리스트  
 			} else if (oper == 'list') {
 				formObj.attr('action', 'reviewlist');
 				formObj.attr('method', 'get');
-				/*게시글수정  */
+				//게시글수정  
 			} else if (oper == 'update') { //oper== update
 				formObj = $("form[role='form']");
 				formObj.attr('method', 'post');
 				// 만약에 업데이트를 했을 경우에 알람을 보내기 위한 스크립트 
 			}
 			formObj.submit();
-		})
-	});
-</script>
-
+		}) 
+	}); 
+</script> -->
+<script src="/resources/js/alarm.js"></script>
 <!--지도에 대한 스크립트시작  -->
+
+
+
 <script>
 	var xpos = $("#xpos").val();
 	var ypos = $("#ypos").val();

@@ -184,4 +184,5 @@ tr th, td {
 
 	})
 </script>
+<script src="/resources/js/alarm.js"></script>
 <%@include file="../includes/footer.jsp"%>
