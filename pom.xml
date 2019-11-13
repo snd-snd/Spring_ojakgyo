@@ -174,7 +174,14 @@
 		        <artifactId>spring-websocket</artifactId>
 		        <version>4.2.4.RELEASE</version>
 		</dependency>
-		
+		<!-- 웹 소켓 api -->
+		<!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+		<dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		    <!-- <scope>provided</scope> -->
+		</dependency>
 
 
 	</dependencies>

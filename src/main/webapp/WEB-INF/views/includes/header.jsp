@@ -23,7 +23,7 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="/resources/assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/resources/assets/img/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="/resources/ckeditor/ckeditor.js"></script>
+	<script src="/resources/ckeditor/ckeditor.js"></script>	
 </head>
 
 <body>

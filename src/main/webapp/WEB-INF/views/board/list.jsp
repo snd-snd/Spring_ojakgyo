@@ -3,14 +3,11 @@
 <%@ include file="../includes/header.jsp"%>
 
  
- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<script src="/resources/js/board/sockjs-0.3.4.js"></script>
+	 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="/resources/js/board/sockjs-0.3.4.js"></script>
  
 <!-- MAIN -->
 <div class="main">
@@ -238,15 +235,15 @@
     });
 
     // 웹소켓을 지정한 url로 연결한다.
-
-    let sock = new SockJS("<c:url value="/echo"/>");
-    sock.onmessage = onMessage;
-    sock.onclose = onClose;
+    
+	var ws =new WebSocket("ws://localhost:8083/echo");
+/*     let sock = new SockJS("<c:url value="/echo"/>"); */
+    ws.onmessage = onMessage;
+    ws.onclose = onClose;
     // 메시지 전송
     function sendMessage() {
 
-        sock.send($("#btn-input").val());
-        sock.get
+    	ws.send($("#btn-input").val());
 		console.log();
     }
   	

@@ -32,8 +32,11 @@
 	
 	<beans:bean id="GroupChating" class="com.ojackgyo.handler.EchoHandler"/>
 	<websocket:handlers>
-		<websocket:mapping handler="GroupChating" path="/echo"/>			
-		<websocket:sockjs/>
+		<websocket:mapping handler="GroupChating" path="/echo"/>
+			<websocket:handshake-interceptors>
+				<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+			</websocket:handshake-interceptors>
+<!-- 		<websocket:sockjs/> -->
 	</websocket:handlers> 
 	
 	
