@@ -25,4 +25,9 @@ public class CriteriaVO {
 	public List<String> getTypeList() {
 		return Arrays.asList(type.split(""));
 	}
+	
+	// 검색조건을 배열로 만들기
+		public String[] getTypeArr() {
+			return type == null ? new String[] {} : type.split("");
+		}
 }

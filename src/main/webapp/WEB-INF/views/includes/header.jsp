@@ -24,6 +24,19 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="/resources/assets/img/favicon.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="/resources/ckeditor/ckeditor.js"></script>
+
+<style>
+/*스크롤바에 대한 css시작  */
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background-color: white;}
+::-webkit-scrollbar-thumb{background-color: white; border-radius: 13px}
+::-webkit-scrollbar-thumb:hover{background-color: gray;}
+
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{width:10px;height:10px;background: gray; border-radius: 13px;}
+::-webkit-scrollbar{width:11px;}
+/*스크롤바에 대한 css끝*/		
+</style>	
+
 </head>
 
 <body>
@@ -119,7 +132,7 @@
 							<a href="/support/request" class=""><i class="lnr lnr-leaf"></i>Group Request</a>		
 						</li>
 						<li>
-							<a href="/review/review" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
+							<a href="/review/reviewlist" class=""><i class="lnr lnr-heart"></i> <span>Review</span></a>
 						</li>
 						<li>
 							<a href="#manage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Manage</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -130,8 +143,7 @@
 											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName } 관리</a></li>
 										</c:if>	
 									</c:forEach>			
-									<li><a href="/manage/12133" class=""><i class="lnr lnr-users"></i>흥신소 관리</a></li>
-									
+									<li><a href="/manage/12133" class=""><i class="lnr lnr-users"></i>흥신소 관리</a></li>									
 								</ul>						
 							</div>
 						</li>
