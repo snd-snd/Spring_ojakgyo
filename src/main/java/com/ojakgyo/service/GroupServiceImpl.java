@@ -73,12 +73,32 @@ public class GroupServiceImpl implements GroupService {
 		if (result && group.getStatus() == 1) {
 			if (item_mapper.check_item(group.getGroupCode()) == 0) {
 				ProcedureVO procedure = new ProcedureVO();
-				procedure.setInput_data(group.getGroupCode());
-				System.out.println(procedure.getInput_data());
+				procedure.setIndata(group.getGroupCode());
+				System.out.println(procedure.getIndata());
 				item_mapper.create_item(procedure);
-				System.out.println(procedure.getOutput_data());
-				if (procedure.getOutput_data() != null && procedure.getOutput_data().equals("success")) {
+				System.out.println(procedure.getOutdata());
+				if (procedure.getOutdata() != null && procedure.getOutdata().equals("success")) {
 					//유저DB의 groupCode 중 빈곳을 찾아 넣어줘야함. (leader)
+					
+					GroupVO temp = mapper.groupRead(group.getGroupCode());
+					MemberVO member = account_mapper.MemberNickNameCheck(temp.getLeader());
+					
+					System.out.println(member);
+					
+					if (member.getGroupCode1() == null) {
+						member.setGroupCode1(group.getGroupCode());
+					} else if (member.getGroupCode2() == null) {
+						member.setGroupCode2(group.getGroupCode());
+					} else if (member.getGroupCode3() == null) {
+						member.setGroupCode3(group.getGroupCode());
+					} else if (member.getGroupCode4() == null) {
+						member.setGroupCode4(group.getGroupCode());
+					}
+					
+					System.out.println(member);
+					
+					account_mapper.modify(member);
+					
 					result = true;
 				} else {
 					result = false;

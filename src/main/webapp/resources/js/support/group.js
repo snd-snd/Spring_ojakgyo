@@ -32,7 +32,7 @@ var groupRequest = (function(){
 	function modify(params, callback){
 		$.ajax({
 			type : 'put',
-			url : '/groups',
+			url : '/groups/'+params.groupCode,
 			contentType : 'application/json;charset=utf-8',
 			data : JSON.stringify(params),
 			success : function(result){

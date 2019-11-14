@@ -46,7 +46,7 @@ public class GroupController {
 		return new ResponseEntity<GroupVO>(group, HttpStatus.OK);
 	}
 	
-	@PutMapping("/")
+	@PutMapping("/{groupCode}")
 	public ResponseEntity<String> groupModify(@RequestBody GroupVO group) {
 		log.info("GroupController => 그룹 신청 내역 변경");
 		

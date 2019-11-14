@@ -15,14 +15,14 @@ public class ItemServiceImple implements ItemService {
 	
 	// 관리자에게 그룹 생성을 요청하고 승인됐을 때 실행되는 프로시저
 	@Override
-	public ProcedureVO create_item(ProcedureVO procedure) {
-		return mapper.create_item(procedure);
+	public void create_item(ProcedureVO procedure) {
+		mapper.create_item(procedure);
 	}
 
 	// 그룹을 제거할 때 실행되는 프로시저
 	@Override
-	public ProcedureVO remove_item(ProcedureVO procedure) {
-		return mapper.remove_item(procedure);
+	public void remove_item(ProcedureVO procedure) {
+		mapper.remove_item(procedure);
 	}
 	
 	// 그룹아이디로 사용할 아이디로 만들어진 테이블이 있는지 여부(없어야 함)

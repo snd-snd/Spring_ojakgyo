@@ -21,23 +21,23 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional
 	@Override
-	public BoardInfoVO list(String groupCode, CriteriaVO criteria) {
+	public BoardInfoVO list(CriteriaVO criteria) {
 		BoardInfoVO info = new BoardInfoVO();
-		info.setBoards(board_mapper.list(groupCode, criteria));
-		info.setGroup(group_mapper.groupRead(groupCode));	
+		info.setBoards(board_mapper.list(criteria));
+		info.setGroup(group_mapper.groupRead(criteria.getGroupCode()));	
 		return info;
 	}
 	
 	@Transactional
 	@Override
-	public BoardVO read(String groupCode, int bno) {
-		board_mapper.readUp(groupCode, bno);
-		return board_mapper.read(groupCode, bno);
+	public BoardVO read(int bno, CriteriaVO criteria) {
+		board_mapper.readUp(criteria.getGroupCode(), bno);
+		return board_mapper.read(bno, criteria);
 	}
 	
 	@Override
-	public boolean register(String groupCode, BoardVO board) {
-		return board_mapper.register(groupCode, board);
+	public boolean register(BoardVO board) {
+		return board_mapper.register(board);
 	}
 	
 	@Override

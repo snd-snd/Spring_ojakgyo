@@ -4,8 +4,13 @@
 
 $(function(){
 	var modal = $("#myModal");	
+<<<<<<< HEAD
 /*	var requestBtn = $("#request");
 	var myNickName =${login.member.nickName};*/
+=======
+//	var requestBtn = $("#request");
+//	var myNickName = ${login.member.nickName};
+>>>>>>> branch 'master' of https://github.com/hojin-Lee-0907/Ojakgyo.git
 	
 	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
 	requestBtn.on("click", function() {

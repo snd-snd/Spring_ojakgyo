@@ -5,9 +5,9 @@
 	<!-- 페이지 단위로 끊어서 리스트 가져오기 -->
 	<select id="list" resultType="com.ojakgyo.domain.BoardVO">
 		<![CDATA[
-			select bno, title, content, writer, regDate, readCount, goodCount
+			select bno, title, content, writer, regDate, readCount, likeCount
 			from (select /*+INDEX_DESC(board_${groupCode} pk_board_${groupCode})*/
-        		rownum rn, bno, title, content, writer, regdate, readCount, goodCount
+        		rownum rn, bno, title, content, writer, regdate, readCount, likeCount
         		from board_${groupCode}
         		where
         ]]>
@@ -19,10 +19,8 @@
 	</select>
 	
 	<!-- 하나의 게시물에 대한 정보 가져오기 -->	
-	<select id="read" resultType="com.ojakgyo.domain.BoardVO">
-		<![CDATA[
-		select * from board_${groupCode} where bno = #{bno}
-		]]>
+	<select id="read" resultType="com.ojakgyo.domain.BoardVO">		
+		select * from board_${criteria.groupCode} where bno = #{bno}		
 	</select>
 	
 	<!-- 게시물 작성 -->
@@ -63,7 +61,7 @@
 	<!-- 검색조건에 맞게 테이블을 가져오기 위한 작업 -->
 	<sql id="typeSplit">
 		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
-			<foreach collection="typeList" item="type">
+			<foreach collection="typeArr" item="type">
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
@@ -80,9 +78,10 @@
 			</foreach>
 		</trim>
 	</sql>
+		
 	
 	<update id="readUp">
-		update board_${groupCode} set readCount = readCount+1 where bno = #{bno}
+		update board_${criteria.groupCode} set readCount = readCount+1 where bno = #{bno}
 	</update>
 	
 	<!-- 좋아요,싫어요  -->

@@ -25,7 +25,7 @@
 									<label for="edit"></label>
 									<textarea class="form-control" id="edit" name="content"></textarea>
 								</div>
-								<input type="hidden" name="writer" value="${login.nickName }"/>
+								<input type="hidden" name="writer" value="${login.member.nickName }"/>
 							</form>
 						</div>
 						<div class="panel-body">
@@ -50,10 +50,11 @@
 	</div>
 </footer>
 <script>
-	$(function(){
+	$(function(){	
 		CKEDITOR.replace('edit', {
 			height: 500
 		});	
+			
 			
 		$("#register").on("click",function(){				
 			var content = CKEDITOR.instances.edit.getData();
