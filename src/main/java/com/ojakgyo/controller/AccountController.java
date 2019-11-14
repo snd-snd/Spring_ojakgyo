@@ -1,29 +1,32 @@
 package com.ojakgyo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.service.AccountService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @SessionAttributes("login")
 @Controller
 @Slf4j
 public class AccountController {
-
+	
 	@Autowired
 	private AccountService accountservice;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
 	// 로그인 폼 요청
 	@GetMapping("/account/login")
@@ -34,22 +37,24 @@ public class AccountController {
 	@PostMapping("/account/login")
 // login.jsp에서 넘긴 값 가지고 오기
 	public String loginPost(MemberVO vo, Model model) {
-		log.info("로그인 요청...");
-		// accountservice.Login() => MemberInfoVO 가 널이 아니라면
-		LoginVO login = accountservice.Login(vo);
+		log.info("로그인 요청...");		
+		
+		MemberVO vo2 = accountservice.read(vo.getUserId());
+		String encPassword = vo2.getUserPw();
 
-		if (login != null) // 로그인 성공(세션 처리 HttpSession, @SessionAttributes)
-		{
-			model.addAttribute("login", login);
-			// 홈이 보여지게 만들어 주고
-			return "redirect:/";
-		} else {
+		if (!passwordEncoder.matches(vo.getUserPw(), encPassword)) {
 			// rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
-			// LoginVO가 널이라면 로그인창으로 돌아가기
-			return "redirect:/account/login"; // forward(데이터를 살릴수있다) or sendRedirect
-		}
+	    	// LoginVO가 널이라면 로그인창으로 돌아가기
+			return "redirect:/account/login";// forward(데이터를 살릴수있다) or sendRedirect
+	    } else {
+	    	LoginVO login = accountservice.Login(vo2);
+	    	// accountservice.Login() => MemberVO 가 널이 아니라면
+	    	model.addAttribute("login", login);
+	    		// 홈이 보여지게 만들어 주고
+	    	return "redirect:/";	    	
+	    }
 	}
-
+	
 // 로그아웃
 	@GetMapping("/logout")
 	public String logout(SessionStatus session) {
@@ -97,14 +102,16 @@ public class AccountController {
 		log.info("join 폼에서 넘긴 값 가져오기" + vo);
 
 		if (vo.isPasswordEqualConfirmPassword()) {
+			String encPassword = passwordEncoder.encode(vo.getUserPw());
+			vo.setUserPw(encPassword);
 			// 제대로 맞다면
 			// ~님 회원 가입을 완료했습니다. 메시지 보여주기
 			int result = accountservice.Insert(vo);
 			if (result > 0)
 				return "redirect:/account/login";
 		}
-		// 비밀번호와 confirm_password가 다르면 회원가입 페이지로 돌려보냄
-		return "forward:/account/join";
+		// 비밀번호와 confirm_password가 다르면 index 페이지로 돌려보냄
+		return "redirect:/";
 	}
 
 //중복아이디 검사
@@ -145,8 +152,15 @@ public class AccountController {
 	public String update(Model model, MemberVO vo) {
 		log.info("update 폼에서 넘긴 값 가져오기.." + vo);
 		
-		if (accountservice.Update(vo)) {
-			LoginVO login = accountservice.Login(vo);		
+		String encPassword = passwordEncoder.encode(vo.getConfirm_password());
+		vo.setConfirm_password(encPassword);
+		
+		System.out.println(vo);
+		boolean result = accountservice.Update(vo);
+		if (result == true) {
+			vo.setUserPw(vo.getConfirm_password());
+			System.out.println(vo);
+			LoginVO login = accountservice.Login(vo);
 			model.addAttribute("login", login);
 		}
 		

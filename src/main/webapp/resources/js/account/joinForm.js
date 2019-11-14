@@ -27,8 +27,8 @@ $(function(){
 			//confirm_password : password 검증규칙과 동일, password 입력값과 동일한지 검증
 			confirm_password:{
 				required: true,
-				validPwd : true			
-				//equalTo: "#password"
+				validPwd : true,			
+				equalTo: "#userPw"
 			},
 			//name : 필수요소, 2~4자리 허용
 			userName:{
