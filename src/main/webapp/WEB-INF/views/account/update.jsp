@@ -43,17 +43,17 @@
 							<form id="update" class="form-auth-small" action="" method="post">
 								<div class="form-group">
 									<label for="userId" class="control-label sr-only">아이디</label>
-									<input type="hidden" class="form-control" id="userId" name="userId"  value="${login.member.userId}" readonly="readonly">
+									<input type="hidden" class="form-control" id="userId" name="userId">
 									<small id="userId" class="text-info"></small>
 								</div>
 								<div class="form-group">
-									<label for="userPw" class="control-label sr-only">이름</label>
-									<input type="hidden" class="form-control" id="userName" name="userName" value="${login.member.userName}" readonly="readonly">
+									<label for="userName" class="control-label sr-only">이름</label>
+									<input type="hidden" class="form-control" id="userName" name="userName">
 									<small id="userName" class="text-info"></small>
 								</div>
 								<div class="form-group">
 									<label for="userPw" class="control-label sr-only">현재비밀번호</label>
-									<input type="hidden" class="form-control" id="userPw" name="userPw" value="${login.member.userPw}" readonly="readonly">
+									<input type="hidden" class="form-control" id="userPw" name="userPw">
 									<small id="userPw" class="text-info"></small>
 								</div>
 								<div class="form-group">
