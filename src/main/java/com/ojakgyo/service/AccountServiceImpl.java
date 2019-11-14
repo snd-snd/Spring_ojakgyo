@@ -64,5 +64,8 @@ public class AccountServiceImpl implements AccountService {
 		return mapper.MemberUpdate(vo) == 1 ? true : false;
 	}
 	
-	
+	@Override
+	public MemberVO read(String userId) {
+		return mapper.read(userId);
+	}
 }

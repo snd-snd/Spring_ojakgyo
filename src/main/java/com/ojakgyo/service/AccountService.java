@@ -18,5 +18,6 @@ public interface AccountService {
 	//회원수정
 	public boolean Update(MemberVO vo);
 	
+	MemberVO read(String userId);
 
 }

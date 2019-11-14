@@ -2,7 +2,7 @@
 -- 회원정보 --
 create table members( 
 	userId varchar2(50) not null,
-	userPw varchar2(50) not null,
+	userPw varchar2(100) not null,
 	userName varchar2(50) not null,
 	nickName varchar2(50) not null unique,
 	email varchar2(100) not null,
