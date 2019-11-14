@@ -44,7 +44,7 @@ public class BoardController {
 			CriteriaVO criteria, Model model) {
 		log.info("BoardController => 요청한 글 읽기");
 		
-		BoardVO board = service.read(groupCode, bno);
+		BoardVO board = service.read(bno, new CriteriaVO());
 		board.setGroupCode(groupCode);
 		
 		if (board != null) {
