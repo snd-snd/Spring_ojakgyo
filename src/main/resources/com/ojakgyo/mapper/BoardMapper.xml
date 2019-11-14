@@ -20,7 +20,7 @@
 	
 	<!-- 하나의 게시물에 대한 정보 가져오기 -->	
 	<select id="read" resultType="com.ojakgyo.domain.BoardVO">		
-		select * from board_${criteria.groupCode} where bno = #{bno}		
+		select * from board_${groupCode} where bno = #{bno}		
 	</select>
 	
 	<!-- 게시물 작성 -->
@@ -81,7 +81,7 @@
 		
 	
 	<update id="readUp">
-		update board_${criteria.groupCode} set readCount = readCount+1 where bno = #{bno}
+		update board_${groupCode} set readCount = readCount+1 where bno = #{bno}
 	</update>
 	
 	<!-- 좋아요,싫어요  -->
@@ -91,7 +91,7 @@
 	
 	<!-- 댓글 추가, 제거시 카운트 -->
 	<update id="replyUpDown">
-		update board_${groupCode} set replyCount = replyCount+#{amount} where bno = #{bno}
+		update board_${groupCode} set readCount = readCount+#{amount} where bno = #{bno}
 	</update>
 	
 

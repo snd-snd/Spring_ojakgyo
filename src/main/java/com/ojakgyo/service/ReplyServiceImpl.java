@@ -36,9 +36,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional
 	@Override
-	public boolean register(String groupCode, ReplyVO reply) {
-		board_mapper.replyUpDown(groupCode, reply.getBno(), 1);
-		return reply_mapper.register(groupCode, reply);
+	public boolean register(ReplyVO reply) {
+		board_mapper.replyUpDown(reply.getGroupCode(), reply.getBno(), 1);
+		return reply_mapper.register(reply);
 	}
 
 	@Override

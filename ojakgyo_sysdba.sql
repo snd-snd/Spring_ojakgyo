@@ -1,5 +1,5 @@
 <!-- sysdba -->
-grant connect, resource, dba, create sequence to javaDB; <!-- javaDB 계정에 권한 부여 -->
+grant connect, resource, dba, create sequence, create table to javaDB; <!-- javaDB 계정에 권한 부여 -->
 
 <!-- 관리자가 그룹생성 요청을 수락할 시 테이블 생성을 위한 프로시저 -->
 CREATE OR REPLACE PROCEDURE create_item(indata IN VARCHAR, outdata OUT VARCHAR)
@@ -22,8 +22,8 @@ sql1 := 'CREATE TABLE ' || indata || ' (
     nickName VARCHAR2(50),
     score NUMBER,
     regDate DATE DEFAULT SYSDATE,
-    CONSTRAINT fk_userId_' || indata || ' FOREIGN KEY (userId) REFERENCES members (userId),
-    CONSTRAINT fk_nickName_' || indata || ' FOREIGN KEY (nickName) REFERENCES members (nickName))';
+    CONSTRAINT fk_userId_' || indata || ' FOREIGN KEY (userId) REFERENCES members (userId) ON DELETE CASCADE,
+    CONSTRAINT fk_nickName_' || indata || ' FOREIGN KEY (nickName) REFERENCES members (nickName) ON DELETE CASCADE)';
 
 sql2 := 'CREATE TABLE board_' || indata || ' (
     bno NUMBER CONSTRAINT pk_board_' || indata || ' PRIMARY KEY,
@@ -41,14 +41,14 @@ sql3 := 'CREATE TABLE reply_' || indata || ' (
 	reply VARCHAR2(1000) not null,
 	replyer VARCHAR2(50) not null,
 	replyDate DATE DEFAULT SYSDATE, 
-	CONSTRAINT fk_reply_bno_' || indata || ' FOREIGN KEY (bno) REFERENCES board_' || indata || ' (bno)
+	CONSTRAINT fk_reply_bno_' || indata || ' FOREIGN KEY (bno) REFERENCES board_' || indata || ' (bno) ON DELETE CASCADE
 )';
 sql4 := 'CREATE TABLE like_' || indata || ' (
 	lno NUMBER CONSTRAINT pk_like_' || indata || ' primary key,
 	bno NUMBER,
 	nickName VARCHAR2(50),
-	CONSTRAINT fk_like_bno_' || indata || ' FOREIGN KEY (bno) REFERENCES board_' || indata || ' (bno),
-	CONSTRAINT fk_like_nickName_' || indata || ' FOREIGN KEY (nickName) REFERENCES members (nickName)
+	CONSTRAINT fk_like_bno_' || indata || ' FOREIGN KEY (bno) REFERENCES board_' || indata || ' (bno) ON DELETE CASCADE,
+	CONSTRAINT fk_like_nickName_' || indata || ' FOREIGN KEY (nickName) REFERENCES members (nickName) ON DELETE CASCADE
 )';
 sql5 := 'CREATE SEQUENCE seq_'|| indata;
 sql6 := 'CREATE SEQUENCE seq_board_'|| indata;

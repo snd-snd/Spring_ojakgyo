@@ -12,5 +12,6 @@ public class ReplyVO {
 	private String reply; 
 	private String replyer; // 닉네임
 	private Date replyDate;
+	private String groupCode;
 	
 }

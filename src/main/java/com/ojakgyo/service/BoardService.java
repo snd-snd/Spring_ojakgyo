@@ -7,10 +7,10 @@ import com.ojakgyo.domain.CriteriaVO;
 public interface BoardService {
 
 	BoardInfoVO list(CriteriaVO criteria);
-	BoardVO read(int bno, CriteriaVO criteria);
+	BoardVO read(String groupCode, int bno);
 	boolean register(BoardVO board);
 	boolean modify(String groupCode, BoardVO board);
 	boolean readCount(String groupCode, int bno);
 	boolean remove(String groupCode, int bno);
-	int totalCount(String groupCode, CriteriaVO criteria);
+	int totalCount(CriteriaVO criteria);
 }

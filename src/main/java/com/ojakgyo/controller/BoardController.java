@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.ojakgyo.domain.BoardInfoVO;
 import com.ojakgyo.domain.BoardVO;
 import com.ojakgyo.domain.CriteriaVO;
 import com.ojakgyo.domain.GroupVO;
+import com.ojakgyo.domain.PageVO;
 import com.ojakgyo.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +35,7 @@ public class BoardController {
 			
 		if (info != null) {
 			model.addAttribute("info", info);
-			//model.addAttribute("page", new PageVO(criteria, service.totalCount(groupCode, criteria)));		
+			model.addAttribute("page", new PageVO(criteria, service.totalCount(criteria)));		
 		}
 				
 		return "/board/list";
@@ -41,10 +43,10 @@ public class BoardController {
 
 	@GetMapping("/read/{bno}")
 	public String read(@PathVariable("groupCode") String groupCode, @PathVariable("bno") int bno,
-			CriteriaVO criteria, Model model) {
+			@ModelAttribute("criteria") CriteriaVO criteria, Model model) {
 		log.info("BoardController => 요청한 글 읽기");
 		
-		BoardVO board = service.read(bno, new CriteriaVO());
+		BoardVO board = service.read(groupCode, bno);
 		board.setGroupCode(groupCode);
 		
 		if (board != null) {
@@ -117,18 +119,17 @@ public class BoardController {
 		return "redirect:/"+groupCode+"/board/list";
 	}
 	
-	@GetMapping("/remove")
+	@PostMapping("/remove")
 	public String getRemove(@PathVariable("groupCode") String groupCode, int bno,
-			CriteriaVO criteria, RedirectAttributes rttr) {
+			@ModelAttribute("criteria") CriteriaVO criteria, RedirectAttributes rttr) {
 		log.info("BoardController => 게시물 삭제");
 		
-//		if (service.remove(groupCode, bno)) {
-//			
-//		}	
-//		rttr.addAttribute("pageNum", criteria.getPageNum());
-//		rttr.addAttribute("amount", criteria.getAmount());
-//		rttr.addAttribute("type", criteria.getType());
-//		rttr.addAttribute("keyword", criteria.getKeyword());
+		service.remove(groupCode, bno);
+					
+		rttr.addAttribute("pageNum", criteria.getPageNum());
+		rttr.addAttribute("amount", criteria.getAmount());
+		rttr.addAttribute("type", criteria.getType());
+		rttr.addAttribute("keyword", criteria.getKeyword());
 		
 		return "redirect:/"+groupCode+"/board/list";
 	}

@@ -30,9 +30,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Transactional
 	@Override
-	public BoardVO read(int bno, CriteriaVO criteria) {
-		board_mapper.readUp(criteria.getGroupCode(), bno);
-		return board_mapper.read(bno, criteria);
+	public BoardVO read(String groupCode, int bno) {
+		board_mapper.readUp(groupCode, bno);
+		return board_mapper.read(groupCode, bno);
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int totalCount(String groupCode, CriteriaVO criteria) {
-		return board_mapper.totalCount(groupCode, criteria);
+	public int totalCount(CriteriaVO criteria) {
+		return board_mapper.totalCount(criteria);
 	}
 }

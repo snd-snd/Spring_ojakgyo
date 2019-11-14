@@ -16,7 +16,7 @@ var replySerivce = (function(){
 			url : '/'+code+'/reply/pages/'+bno+'/'+page,
 			success : function(data){
 				if(callback){
-					callback(data.list);
+					callback(data.totalCount, data.replys);
 				}
 			}
 		});		
@@ -60,7 +60,7 @@ var replySerivce = (function(){
 		
 		$.ajax({
 			type : 'put',
-			url : '/'+code+'reply/'+rno,
+			url : '/'+code+'/reply/'+rno,
 			contentType : 'application/json;charset=utf-8',
 			data : JSON.stringify(params),
 			success : function(data){
@@ -75,7 +75,7 @@ var replySerivce = (function(){
 	function read(params, callback){
 		var rno = params.rno
 		var code = params.code
-		$.getJSON("/"+code+"reply/"+rno, function(data){
+		$.getJSON("/"+code+"/reply/"+rno, function(data){
 			if (callback){
 				callback(data);
 			}

@@ -59,8 +59,8 @@
 		$("#register").on("click",function(){				
 			var content = CKEDITOR.instances.edit.getData();
 			console.log(content);
-			//$("#edit").val(content);		
-			//$("#form").submit();
+			$("#edit").val(content);		
+			$("#form").submit();
 		})
 		
 		

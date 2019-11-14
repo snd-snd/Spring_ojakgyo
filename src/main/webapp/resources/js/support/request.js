@@ -2,11 +2,11 @@
  * 그룹 신청과 관련된 스크립트
  */
 
-$(function(){
+/*$(function(){
 	var modal = $("#myModal");	
 <<<<<<< HEAD
-/*	var requestBtn = $("#request");
-	var myNickName =${login.member.nickName};*/
+	var requestBtn = $("#request");
+	var myNickName =${login.member.nickName};
 =======
 //	var requestBtn = $("#request");
 //	var myNickName = ${login.member.nickName};
@@ -31,12 +31,12 @@ $(function(){
 		var leader = 'hello';
 		var groupCode = $(this).data("code");
 					
-		/*groupRequest.read(groupCode, function(result) {
+		groupRequest.read(groupCode, function(result) {
 			modal.find("input").val(result.groupName);
 			modal.find("textarea").val(result.content);
 			modal.find("button").hide();
 			modal.find("button[id!='modalRegisterBtn']").show();
-		})*/	
+		})	
 		modal.modal("show");			
 	})
 		
@@ -127,4 +127,4 @@ $(function(){
 		}
 	})
 	
-})
+})*/
