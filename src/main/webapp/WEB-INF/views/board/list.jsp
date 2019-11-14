@@ -8,9 +8,11 @@
 	 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="/resources/js/board/sockjs-0.3.4.js"></script>
- 
+ 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+ 		<link rel="stylesheet" href="/resources/assets/css/chat.css">
 <!-- MAIN -->
 <div class="main">
+<%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
@@ -137,7 +139,7 @@
 
 				<div class="col-sm-4">
 					<div class="chatbody">
-						<div class="panel panel-primary" >
+						<div class="panel panel-primary" ">
 							<div class="panel-heading top-bar">
 								<div class="col-md-8 col-xs-8">
 									<h3 class="panel-title">
@@ -147,11 +149,11 @@
 							</div>
 						
 							
-							<div class="panel-body msg_container_base" id="message_send">
+							<div class="panel-body msg_container_base" id="message_send"  style="font-family: 'Jua', sans-serif; font-size: 20px; overflow-y: scroll;"> 
 								<!-- 보내는 메세지 생성 -->
-<!-- 								<div class="row msg_container base_sent"
+							 <div class="row msg_container base_sent"
 									style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";  >
-									<div class="col-md-10 col-xs-10">
+									<div class="col-md-10 col-xs-10" >
 										<div class="messages msg_sent" id=message_send>
 										</div>
 									</div>
@@ -160,11 +162,10 @@
 											src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
 											class=" img-responsive ">
 									</div>
-								</div> -->
+								</div>  
 								<div id="message_receive">	
-								<!-- 받은 메세지 div 생성 -->
-																
-<!-- 									 <div class="row msg_container base_receive"
+								<!-- 받은 메세지 div 생성 -->																
+ 									 <div class="row msg_container base_receive"
 										style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";>
 										<div class="col-md-2 col-xs-2 avatar">
 											<img
@@ -173,9 +174,10 @@
 										</div>
 										<div class="col-md-10 col-xs-10">
 											<div class="messages msg_receive">
+											<p>메세지</p>
 											</div>
 										</div>
-									</div> -->
+									</div> 
 								</div>
 							</div>
 							<div class="panel-footer">
@@ -214,66 +216,9 @@
 	<input type="hidden" name="keyword" value="${page.criteria.keyword }" />
 
 </form>
-<script src="/resources/js/alarm.js"></script>
 <script src="/resources/js/board/like.js"></script>
 <script src="/resources/js/board/list.js"></script>
 
-
-
-
-
-<!-- 채팅 구현 스크립트 -->	
-<!--  <script>		        
-
-       $(document).ready(function() {
-           $("#btn-chat").click(function() {
-                 sendMessage();
-              	 $('#btn-input').val('')
-           });
-           $("#btn-input").keydown(function(key) {
-                   if (key.keyCode == 13) {// 엔터
-                          sendMessage();
-                          $('#btn-input').val('');
-                   }
-           });
-
-    });
-
-    // 웹소켓을 지정한 url로 연결한다.
-    var socket=null;
-    //let sock = new SockJS("<c:url value="/echo"/>"); 
-	var socket =new WebSocket("ws://localhost:8083/echo");  
-    socket.onmessage = onMessage;
-    socket.onclose = onClose;
-    // 메시지 전송
-    function sendMessage() {
-    	socket.send($("#btn-input").val());
-		console.log();
-    }
-  	
-    // 서버로부터 메시지를 받았을 때
-    function onMessage(msg) {
-         var data = msg.data;
-         console.log("리스트"+data);
-    	 var str="";
-			str +="<div class='row msg_container base_sent' id='message_send'";
-			str += "style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px'; >";
-			str += "<div class='col-md-10 col-xs-10'>";
-			str += "<div class='messages msg_sent'>";
-			str += data;
-			str += "</div></div> "
-			str +="<div class='col-md-2 col-xs-2 avatar'>";		
-			str += "<img src='http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg' class=' img-responsive '>";
-			str +="</div></div>"
-         $("#message_send").append(str);
-	     $('#message_send').scrollTop($('#message_send').prop('scrollHeight'));
-	     $('#message_send').focus();
-    }
-   // 서버와 연결을 끊었을 때
-    function onClose(evt) {
-           $("#data").append("연결 끊김");
-    }
-</script> --> 
 
 
 <%@ include file="../includes/footer.jsp"%>

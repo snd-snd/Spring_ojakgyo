@@ -11,6 +11,8 @@
 
 <!-- MAIN -->
 <div class="main">
+  <!--알람을 위한 div  -->
+  <%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">

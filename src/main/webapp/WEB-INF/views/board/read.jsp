@@ -5,6 +5,7 @@
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
+	<%@ include file="../includes/alarm.jsp"%>
 		<div class="container-fluid">
 			<h3 class="page-title">Read</h3>
 			<div class="row">

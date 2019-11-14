@@ -5,6 +5,7 @@
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
+	<%@ include file="../includes/alarm.jsp"%>
 		<div class="container-fluid">
 			<h3 class="page-title">Posting</h3>
 			<div class="row">
@@ -51,25 +52,8 @@
 <script>
 	$(function(){
 		CKEDITOR.replace('edit', {
-			height: 500,
-			filebrowserUploadUrl: '/file/fileupload'
-			
-
-		});
-		
-		
-		  CKEDITOR.on('dialogDefinition', function( ev ){
-		        var dialogName = ev.data.name;
-		        var dialogDefinition = ev.data.definition;
-
-		        switch (dialogName) {
-		            case 'image': //Image Properties dialog
-		            //dialogDefinition.removeContents('info');
-		            dialogDefinition.removeContents('Link');
-		            dialogDefinition.removeContents('advanced');
-		            break;
-		        }
-		    });
+			height: 500
+		});	
 			
 		$("#register").on("click",function(){				
 			var content = CKEDITOR.instances.edit.getData();

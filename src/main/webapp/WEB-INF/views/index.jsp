@@ -5,6 +5,7 @@
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
+	<%@ include file="includes/alarm.jsp"%>
 		<div class="container-fluid">
 			<!-- OVERVIEW -->
 			<div class="panel panel-headline">
@@ -369,3 +370,4 @@
 	</div>
 </footer>
 <%@ include file="includes/footer.jsp"%>
+

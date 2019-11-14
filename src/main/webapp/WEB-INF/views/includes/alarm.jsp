@@ -3,7 +3,9 @@
     
     
     
-	<div class="alert alert-success" role="alert" style="display: None" id="alarm">
-	 <a id="chageUrl">게시글 확인하러가기!</a>
+	<div id="alarm" style="display: none;">
+	
 	</div>
 	
+	<input type="hidden" id="SessionUserid" name="SessionUserid" value="${login.member.userId}" />
+	<input type="hidden" id="SessionNickname" name="SessionNickname" value="${login.member.nickName}" />

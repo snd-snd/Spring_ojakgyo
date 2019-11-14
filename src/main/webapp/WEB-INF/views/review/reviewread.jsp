@@ -40,15 +40,15 @@
 										disabled="disabled" style="background-color: white;">${vo.content}</textarea>
 									<br>
 									<p class="demo-button">
-										<button type="button" class="btn btn-warning" id="update"
+										<button type="button" class="btn btn-warning bb1" id="update"
 											data-oper='update'>
 											<i class="fa fa-refresh fa-spin"></i> Update
 										</button>
-										<button type="button" class="btn btn-danger" id="delete"
+										<button type="button" class="btn btn-danger bb1" id="delete"
 											data-oper='delete'>
 											<i class="fa fa-trash-o"></i> Delete
 										</button>
-										<button type="button" class="btn btn-info" id="list"
+										<button type="button" class="btn btn-info bb1" id="list"
 											data-oper='list'>
 											<i class="fa fa-info-circle"></i> List
 										</button>
@@ -157,7 +157,7 @@ $("#test").click(function(e) {
 
 
 
-<!-- <script>
+< <script>
 	$(function() {
 		//remove와 list 버튼이 눌러지면 새로 만든 폼 보내고
 		//update 버튼이 눌러지면 원래의 폼 보내기
@@ -166,7 +166,7 @@ $("#test").click(function(e) {
 		var formObj = $("#operform");
 		var formObj2 = $("#formObj2"); 
  
-		 $("button").click(function(e) {
+		 $(".bb1").click(function(e) {
 
 			//submit 막기
 			e.preventDefault();
@@ -194,8 +194,7 @@ $("#test").click(function(e) {
 			formObj.submit();
 		}) 
 	}); 
-</script> -->
-<script src="/resources/js/alarm.js"></script>
+</script> 
 <!--지도에 대한 스크립트시작  -->
 
 

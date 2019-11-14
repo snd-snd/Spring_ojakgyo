@@ -14,6 +14,8 @@ tr th, td {
 </style>
 <!-- MAIN -->
 <div class="main">
+  <!--알람을 위한 div  -->
+  <%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
@@ -184,5 +186,4 @@ tr th, td {
 
 	})
 </script>
-<script src="/resources/js/alarm.js"></script>
 <%@include file="../includes/footer.jsp"%>
