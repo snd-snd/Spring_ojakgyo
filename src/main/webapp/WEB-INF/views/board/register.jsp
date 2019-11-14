@@ -24,7 +24,7 @@
 									<label for="edit"></label>
 									<textarea class="form-control" id="edit" name="content"></textarea>
 								</div>
-								<input type="hidden" name="writer" value="${login.nickName }"/>
+								<input type="hidden" name="writer" value="${login.member.nickName }"/>
 							</form>
 						</div>
 						<div class="panel-body">
@@ -51,31 +51,15 @@
 <script>
 	$(function(){
 		CKEDITOR.replace('edit', {
-			height: 500,
-			filebrowserUploadUrl: '/file/fileupload'
-			
-
+			height: 500
 		});
 		
 		
-		  CKEDITOR.on('dialogDefinition', function( ev ){
-		        var dialogName = ev.data.name;
-		        var dialogDefinition = ev.data.definition;
-
-		        switch (dialogName) {
-		            case 'image': //Image Properties dialog
-		            //dialogDefinition.removeContents('info');
-		            dialogDefinition.removeContents('Link');
-		            dialogDefinition.removeContents('advanced');
-		            break;
-		        }
-		    });
-			
 		$("#register").on("click",function(){				
 			var content = CKEDITOR.instances.edit.getData();
 			console.log(content);
-			//$("#edit").val(content);		
-			//$("#form").submit();
+			$("#edit").val(content);		
+			$("#form").submit();
 		})
 		
 		

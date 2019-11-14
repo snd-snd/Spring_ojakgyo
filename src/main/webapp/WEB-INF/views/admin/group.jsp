@@ -34,7 +34,7 @@
 										<td>${group.groupCode }</td>
 										<td><a href="#" data-code="${group.groupCode }" class="mo">${group.groupName }</a></td>
 										<td>${group.leader }</td>
-										<td>${group.regDate }</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<td><span class="label label-warning">PENDING</span></td>
 									</tr>
 									</c:forEach>
@@ -70,7 +70,7 @@
 										<td>${group.groupCode }</td>
 										<td><a href="${group.groupCode }/board/list" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
-										<td>${group.regDate }</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<td><span class="label label-success">SUCCESS</span></td>
 									</tr>
 									</c:forEach>
@@ -104,9 +104,9 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
-										<td>>${group.groupName }</td>
+										<td>${group.groupName }</td>
 										<td>${group.leader }</td>
-										<td>${group.regDate }</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<td><span class="label label-danger">FAILED</span></td>
 									</tr>
 									</c:forEach>

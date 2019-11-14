@@ -9,9 +9,9 @@ import com.ojakgyo.domain.CriteriaVO;
 
 public interface BoardMapper {
 
-	List<BoardVO> list(@Param("groupCode") String groupCode, @Param("criteria") CriteriaVO criteria);
-	BoardVO read(@Param("groupCode") String groupCode, @Param("bno") int bno);
-	boolean register(@Param("groupCode") String groupCode, @Param("board") BoardVO board);
+	List<BoardVO> list(CriteriaVO criteria);
+	BoardVO read(@Param("bno") int bno, @Param("criteria") CriteriaVO criteria);
+	boolean register(BoardVO board);
 	boolean modify(@Param("groupCode") String groupCode, @Param("board") BoardVO board);
 	boolean readCount(@Param("groupCode") String groupCode, @Param("board") int bno);
 	boolean remove(@Param("groupCode") String groupCode, @Param("bno") int bno);

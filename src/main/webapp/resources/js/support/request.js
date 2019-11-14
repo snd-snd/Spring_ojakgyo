@@ -4,8 +4,8 @@
 
 $(function(){
 	var modal = $("#myModal");	
-	var requestBtn = $("#request");
-	var myNickName = ${login.member.nickName};
+//	var requestBtn = $("#request");
+//	var myNickName = ${login.member.nickName};
 	
 	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
 	requestBtn.on("click", function() {

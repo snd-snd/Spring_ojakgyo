@@ -10,7 +10,7 @@ public class GroupMemberVO {
 	private int mno;
 	private String userId;
 	private String nickName;
-	private int level;
+	private int score;
 	private Date regDate;
 	private int admin;
 	

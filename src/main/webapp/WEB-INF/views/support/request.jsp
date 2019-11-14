@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ include file="../includes/header.jsp" %>
+
 <!-- MAIN -->
 <div class="main">
 	<!-- MAIN CONTENT -->
@@ -34,7 +36,7 @@
 										<td>${group.groupCode }</td>
 										<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
-										<td>${group.regDate }</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<c:if test="${group.status == 1}">
 										<td><span class="label label-success">SUCCESS</span></td>
 										</c:if>
@@ -61,6 +63,7 @@
 			
 			
 			<div class="row" id="intro">
+				
 				<c:forEach items="${groups }" var="group">
 					<div class="col-md-3" data-code="${group.groupCode }", data-name="${group.groupName }">
 						<div class="panel">
@@ -68,7 +71,7 @@
 								<h3 class="panel-title">${group.groupName }</h3>
 							</div>
 							<div class="panel-body">
-								<p>${group.content2 }</p>
+								<p>${group.content }</p>
 							</div>
 						</div>
 					</div>
@@ -225,12 +228,12 @@ $(function(){
 		var leader = 'hello';
 		var groupCode = $(this).data("code");
 					
-		/*groupRequest.read(groupCode, function(result) {
-			modal.find("input").val(result.groupName);
+		groupRequest.read(groupCode, function(result) {
+			modal.find("input").val(result.groupName).attr("data-code", groupCode);
 			modal.find("textarea").val(result.content);
 			modal.find("button").hide();
 			modal.find("button[id!='modalRegisterBtn']").show();
-		})*/	
+		})	
 		modal.modal("show");			
 	})
 		
@@ -262,12 +265,12 @@ $(function(){
 		var params = {
 				groupName : modal.find("input").val(),
 				content : modal.find("textarea").val(),
-				groupCode : $(this).data("code")
+				groupCode : modal.find("input").data("code")
 			};			
-		groupRequest.modify(params, function() {
+		groupRequest.modify(params, function(result) {
 			if (result == 'success'){
 				modal.modal("hide");
-				location.href='support/request';
+				location.href='/support/request';
 			} else {
 				alert("뭔가 잘못됐나본데?");
 			}
@@ -276,8 +279,8 @@ $(function(){
 	
 	// 그룹 신청 철회
 	modalRemoveBtn.on("click", function(){
-		var groupCode = $(this).data("code");	
-		groupRequest.remove(groupCode, function() {
+		var groupCode = modal.find("input").data("code");	
+		groupRequest.remove(groupCode, function(result) {
 			if (result == 'success'){
 				modal.modal("hide");
 				location.href='/support/request';
@@ -292,7 +295,7 @@ $(function(){
 	
 	intro.on("click", "div[class='col-md-3']", function(){
 		
-		var full = '${login.fullGroup}';
+ 		var full = '${login.fullGroup}';
 		
 		if (full == true){
 			alert("더 이상 그룹에 가입할 수 없습니다.");

@@ -28,26 +28,9 @@ public class BoardController {
 	@GetMapping("/list")
 	public String board(@PathVariable("groupCode") String groupCode, CriteriaVO criteria, Model model) {
 		log.info("BoardController => 그룹별 게시판 리스트 요청");
-		
-		//BoardInfoVO info = service.list(groupCode, criteria);
-		BoardInfoVO info = new BoardInfoVO();
-		
-				
-		GroupVO group = new GroupVO();		
-		if (groupCode.equals("11")) {
-			group.setGroupName("복덕방");
-			group.setGroupCode("11");	
-		} else if (groupCode.equals("22")) {
-			group.setGroupCode("22");
-			group.setGroupName("개발자 모임");
-		} else if (groupCode.equals("33")) {
-			group.setGroupCode("33");
-			group.setGroupName("호구조사");
-		}
-		info.setGroup(group);;
-		
-
-		
+		criteria.setGroupCode(groupCode);
+		BoardInfoVO info = service.list(criteria);
+			
 		if (info != null) {
 			model.addAttribute("info", info);
 			//model.addAttribute("page", new PageVO(criteria, service.totalCount(groupCode, criteria)));		
@@ -61,11 +44,12 @@ public class BoardController {
 			CriteriaVO criteria, Model model) {
 		log.info("BoardController => 요청한 글 읽기");
 		
-//		BoardVO board = service.read(groupCode, bno);
-//		
-//		if (board != null) {
-//			model.addAttribute("board", board);
-//		}
+		BoardVO board = service.read(groupCode, bno);
+		board.setGroupCode(groupCode);
+		
+		if (board != null) {
+			model.addAttribute("board", board);
+		}
 		
 		GroupVO group = new GroupVO();
 		group.setGroupCode(groupCode);
@@ -88,8 +72,10 @@ public class BoardController {
 	@PostMapping("/register")
 	public String register(@PathVariable("groupCode") String groupCode, BoardVO board, RedirectAttributes rttr) {
 		log.info("BoardController => 게시물 삽입");
-				
-		if(service.register(groupCode, board)) {
+
+		board.setGroupCode(groupCode);
+		
+		if(service.register(board)) {
 			rttr.addFlashAttribute("result", board.getBno());
 		}	
 		

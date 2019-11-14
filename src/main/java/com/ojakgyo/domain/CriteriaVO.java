@@ -12,6 +12,7 @@ public class CriteriaVO {
 	private int amount;
 	private String type;
 	private String keyword;
+	private String groupCode;
 	
 	public CriteriaVO() {
 		this(1,20);
@@ -27,7 +28,7 @@ public class CriteriaVO {
 	}
 	
 	// 검색조건을 배열로 만들기
-		public String[] getTypeArr() {
-			return type == null ? new String[] {} : type.split("");
-		}
+	public String[] getTypeArr() {
+		return type == null ? new String[] {} : type.split("");
+	}
 }

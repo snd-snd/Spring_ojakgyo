@@ -34,8 +34,8 @@ public class SupportController {
 	public void request(Model model, @SessionAttribute("login") LoginVO login) {
 		log.info("SupportController => 요청 게시판으로 이동");
 		
-		List<GroupVO> groups = service.listStatus(1);
 		List<GroupVO> myGroups = service.myGroups(login.getMember().getNickName());
+		List<GroupVO> groups = service.listStatus(1);
 		
 		model.addAttribute("myGroups", myGroups);		
 		model.addAttribute("groups", groups);

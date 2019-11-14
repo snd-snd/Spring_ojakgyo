@@ -1,5 +1,7 @@
 package com.ojakgyo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -17,7 +18,7 @@ import com.ojakgyo.service.AccountService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes("login")
+//@SessionAttributes("login")
 @Controller
 @Slf4j
 public class AccountController {
@@ -33,14 +34,16 @@ public class AccountController {
 
 	@PostMapping("/account/login")
 // login.jsp에서 넘긴 값 가지고 오기
-	public String loginPost(MemberVO vo, Model model) {
+	public String loginPost(MemberVO vo, Model model, HttpSession session) {
 		log.info("로그인 요청...");
 		// accountservice.Login() => MemberInfoVO 가 널이 아니라면
 		LoginVO login = accountservice.Login(vo);
 
 		if (login != null) // 로그인 성공(세션 처리 HttpSession, @SessionAttributes)
 		{
-			model.addAttribute("login", login);
+			session.setMaxInactiveInterval(1000*60*60*24*10);
+			session.setAttribute("login", login);
+			//model.addAttribute("login", login);
 			// 홈이 보여지게 만들어 주고
 			return "redirect:/";
 		} else {
@@ -52,10 +55,11 @@ public class AccountController {
 
 // 로그아웃
 	@GetMapping("/logout")
-	public String logout(SessionStatus session) {
+	public String logout(SessionStatus session, HttpSession session2) {
 		log.info("로그아웃 처리...");
 		// 세션삭제
 		// 세션이 있다면 세션삭제
+		session2.invalidate();
 		if (!session.isComplete()) {
 			// 세션이 존재하면 false 존재하지 않으면 true
 			session.setComplete();
@@ -142,12 +146,13 @@ public class AccountController {
 	}
 
 	@PostMapping("/account/update")
-	public String update(Model model, MemberVO vo) {
+	public String update(Model model, MemberVO vo, HttpSession session) {
 		log.info("update 폼에서 넘긴 값 가져오기.." + vo);
 		
 		if (accountservice.Update(vo)) {
-			LoginVO login = accountservice.Login(vo);		
-			model.addAttribute("login", login);
+			LoginVO login = accountservice.Login(vo);	
+			session.setAttribute("login", login);
+			//model.addAttribute("login", login);
 		}
 		
 		return "redirect:/";
