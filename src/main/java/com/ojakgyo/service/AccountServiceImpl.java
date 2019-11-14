@@ -45,9 +45,7 @@ public class AccountServiceImpl implements AccountService {
 			login = new LoginVO();
 			login.setGroups(groups);
 			login.setMember(member);
-			
 		}
-		System.out.println(login);
 		return login;
 	}
 
@@ -61,5 +59,9 @@ public class AccountServiceImpl implements AccountService {
 		return mapper.MemberUpdate(vo) == 1 ? true : false;
 	}
 	
+	@Override
+	public MemberVO read(String userId) {
+		return mapper.read(userId);
+	}
 	
 }
