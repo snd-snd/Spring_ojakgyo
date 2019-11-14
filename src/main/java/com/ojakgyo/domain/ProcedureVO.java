@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ProcedureVO {
 
-	private String input;
-	private String output;
+	private String input_data;
+	private String output_data;
 }

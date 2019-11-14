@@ -57,4 +57,18 @@
 		insert into ${groupCode} (userId, nickName) values(#{userId}, #{nickName})
 	</insert>
 	
+	<select id="list" resultType="com.ojakgyo.domain.GroupMemberVO">
+		select * from ${groupCode}
+	</select>
+	
+	<select id="read" resultType="com.ojakgyo.domain.GroupMemberVO">
+		select * from ${groupCode} where where mno = #{mno}
+	</select>
+	
+	<delete id="remove">
+		delete from ${groupCode} where mno = #{mno}
+	</delete>
+	
+	
+	
 </mapper>

@@ -27,57 +27,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>GN13</td>
-										<td><a href="" class="mo">잠꾸러기들</a></td>
-										<td>kim123</td>
-										<td>2019-11-02</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>GN302</td>
-										<td><a href="" class="mo">인형놀이</a></td>
-										<td>google9821</td>
-										<td>2019-11-05</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>GN0001</td>
-										<td><a href="" class="mo">행복을 추구하자</a></td>
-										<td>laverth</td>
-										<td>2019-11-07</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>GN13</td>
-										<td><a href="" class="mo">글짓기와 독서</a></td>
-										<td>kim123</td>
-										<td>2019-11-02</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>GN302</td>
-										<td><a href="" class="mo">전국 떡볶이 탐구</a></td>
-										<td>google9821</td>
-										<td>2019-11-05</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>GN0001</td>
-										<td><a href="" class="mo">아몬드 수집가</a></td>
-										<td>laverth</td>
-										<td>2019-11-07</td>
-										<td><span class="label label-warning">PENDING</span></td>
-									</tr>
+									
 									<c:forEach items="${groups_pending }" var="group" varStatus="status">
 									<tr>
-										<td>${status.current }</td>
+										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
 										<td><a href="#" data-code="${group.groupCode }" class="mo">${group.groupName }</a></td>
 										<td>${group.leader }</td>
@@ -110,33 +63,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>GN13</td>
-										<td><a href="">김치에 대한 연구</a></td>
-										<td>kim123</td>
-										<td>2019-11-02</td>
-										<td><span class="label label-success">SUCCESS</span></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>GN302</td>
-										<td><a href="">책을 좋아하는 사람들</a></td>
-										<td>google9821</td>
-										<td>2019-11-05</td>
-										<td><span class="label label-success">SUCCESS</span></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>GN0001</td>
-										<td><a href="">개발자 모임</a></td>
-										<td>laverth</td>
-										<td>2019-11-07</td>
-										<td><span class="label label-success">SUCCESS</span></td>
-									</tr>
+									
 									<c:forEach items="${groups_success }" var="group" varStatus="status">
 									<tr>
-										<td>${status.current }</td>
+										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
 										<td><a href="${group.groupCode }/board/list" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
@@ -169,33 +99,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>GN13</td>
-										<td>사기꾼이 되는법</td>
-										<td>kim123</td>
-										<td>2019-11-02</td>
-										<td><span class="label label-danger">FAILED</span></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>GN302</td>
-										<td>운영자는 못됐어</td>
-										<td>google9821</td>
-										<td>2019-11-05</td>
-										<td><span class="label label-danger">FAILED</span></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>GN0001</td>
-										<td>괴씸한 사람들</td>
-										<td>laverth</td>
-										<td>2019-11-07</td>
-										<td><span class="label label-danger">FAILED</span></td>
-									</tr>
+									
 									<c:forEach items="${groups_failed }" var="group" varStatus="status">
 									<tr>
-										<td>${status.current }</td>
+										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
 										<td>>${group.groupName }</td>
 										<td>${group.leader }</td>
@@ -234,15 +141,15 @@
             <div class="modal-body">
                 <div class="form-group">
                 	<label>그룹 이름</label>
-                	<input class="form-control" name="groupName" readonly="readonly" value="dfsdkfjsdlfkjksldf">
+                	<input class="form-control" name="groupName" id="groupName" readonly="readonly" value="">
                 </div>
                 <div class="form-group">
                 	<label>신청인</label>
-                	<input class="form-control" name="leader" readonly="readonly" value="dsfdjflksdjfasdhfjshfkwfd">
+                	<input class="form-control" name="leader" id="leader" readonly="readonly" value="">
                 </div>
                 <div class="form-group">
                 	<label>신청 내용</label>
-                	<textarea class="form-control" name="groupContent" readonly="readonly" rows="6">dfsdfdsfsfd</textarea>
+                	<textarea class="form-control" name="groupContent" id="groupContent" readonly="readonly" rows="6"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -269,9 +176,10 @@ $(function(){
 		var code = $(this).data("code");
 		modal.attr("data-code", code);	
 		groupRequest.read(code, function(result){
+			console.log(result);
 			$("#groupName").val(result.groupName);
 			$("#leader").val(result.leader);
-			$("#groupContent").val(result.Content);
+			$("#groupContent").val(result.content);
 		})	
 		modal.modal("show");
 	})

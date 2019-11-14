@@ -1,6 +1,5 @@
 package com.ojakgyo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ojakgyo.domain.GroupVO;
+import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.service.GroupService;
 
@@ -30,15 +31,14 @@ public class SupportController {
 	GroupService service;
 	
 	@GetMapping("/request")
-	public void request(Model model, String nickName) {
+	public void request(Model model, @SessionAttribute("login") LoginVO login) {
 		log.info("SupportController => 요청 게시판으로 이동");
 		
-//		List<GroupVO> groups = service.myGroups(nickName);
-//		model.addAttribute("groups", groups);
-		
-		List<GroupVO> myGroups = new ArrayList<GroupVO>();
+		List<GroupVO> groups = service.listStatus(1);
+		List<GroupVO> myGroups = service.myGroups(login.getMember().getNickName());
 		
 		model.addAttribute("myGroups", myGroups);		
+		model.addAttribute("groups", groups);
 	}
 	
 	@ResponseBody

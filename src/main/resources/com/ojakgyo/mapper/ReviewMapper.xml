@@ -2,31 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ojakgyo.mapper.ReviewMapper">
 
-<!--리스트 출력  -->
-<select id="ReviewList" resultType="com.ojakgyo.domain.BoardVO">
-	<!-- 	<![CDATA[ -->
-			select *
-			from ReviewBoard
-			where bno > 0
-			order by bno desc, regDate desc	
-	<!-- 	]]> -->
-</select>
+	<!--리스트 출력 -->
+	<select id="ReviewList" resultType="com.ojakgyo.domain.BoardVO">
+		select *
+		from ReviewBoard
+		where bno > 0
+		order by bno desc, regDate desc
+	</select>
 
-<!--글 내용보기(글한개출력)  -->
-<insert id="ReviewInsert">
-	insert into ReviewBoard(bno, title, content, writer, xpos, ypos) 
-					values(seq_review.nextval, #{title}, #{content}, #{writer}, #{xpos}, #{ypos})
-</insert>
+	<!--글 내용보기(글한개출력) -->
+	<select id="ReviewReadOne"
+		resultType="com.ojakgyo.domain.BoardVO">
+		select * from ReviewBoard
+		where bno=#{bno}
+	</select>
 
-<!--글작성  -->
+	<!--글작성 -->
+	<insert id="ReviewInsert">
+		insert into ReviewBoard(bno, title, content, writer,
+		xpos, ypos)
+		values(seq_review.nextval, #{title}, #{content}, #{writer},
+		#{xpos, jdbcType=VARCHAR}, #{ypos, jdbcType=VARCHAR})
+	</insert>
 
-<!--글 수정  -->
+	<!--글 수정 -->
+	<update id="ReviewUpdate">
+		update ReviewBoard set title=#{title,
+		jdbcType=VARCHAR},
+		content=#{content, jdbcType=VARCHAR}, xpos=#{xpos,
+		jdbcType=VARCHAR}, ypos=#{ypos, jdbcType=VARCHAR}
+		where bno=#{bno}
+	</update>
 
-<!--글 삭제  -->
+	<!--글 삭제 -->
+	<delete id="ReviewDelete">
+		delete from ReviewBoard where bno=#{bno}
+	</delete>
 
+	<!--전체게시물수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from ReviewBoard
+		where
+		<include refid="criteria" />
+		bno>0
+	</select>
 
-
-
+	<!-- 동적 sql 문 : 재사용 가능 -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='Title'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='Content'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='Writer'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
 
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojakgyo.domain.GroupMemberVO;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.domain.ProcedureVO;
@@ -72,9 +73,11 @@ public class GroupServiceImpl implements GroupService {
 		if (result && group.getStatus() == 1) {
 			if (item_mapper.check_item(group.getGroupCode()) == 0) {
 				ProcedureVO procedure = new ProcedureVO();
-				procedure.setInput(group.getGroupCode());
+				procedure.setInput_data(group.getGroupCode());
+				System.out.println(procedure.getInput_data());
 				item_mapper.create_item(procedure);
-				if (procedure.getOutput() != null && procedure.getOutput().equals("success")) {
+				System.out.println(procedure.getOutput_data());
+				if (procedure.getOutput_data() != null && procedure.getOutput_data().equals("success")) {
 					//유저DB의 groupCode 중 빈곳을 찾아 넣어줘야함. (leader)
 					result = true;
 				} else {
@@ -116,4 +119,40 @@ public class GroupServiceImpl implements GroupService {
 		
 		return result;
 	}
+	
+	@Override
+	public List<GroupMemberVO> list(String groupCode) {
+		return mapper.list(groupCode);
+	}
+	
+	@Transactional
+	@Override
+	public boolean remove(String groupCode, int mno) {
+		
+		GroupMemberVO vo = mapper.read(groupCode, mno);
+		MemberVO member = account_mapper.read(vo.getUserId());
+		
+		if (member.getGroupCode1() != null) {
+			if (member.getGroupCode1().equals(groupCode))
+				member.setGroupCode1(null);
+		} 
+		if (member.getGroupCode1() != null) {
+			if (member.getGroupCode2().equals(groupCode))
+				member.setGroupCode2(null);	
+		}  
+		if (member.getGroupCode3() != null) {
+			if (member.getGroupCode3().equals(groupCode))
+				member.setGroupCode3(null);	
+		}  
+		if (member.getGroupCode4() != null) {
+			if (member.getGroupCode4().equals(groupCode))
+				member.setGroupCode4(null);	
+		}  
+		
+		account_mapper.modify(member);
+		
+		return mapper.remove(groupCode, mno);
+	}
+	
+
 }
