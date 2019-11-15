@@ -6,7 +6,7 @@ import com.ojakgyo.domain.CriteriaVO;
 import com.ojakgyo.domain.ReplyPageVO;
 import com.ojakgyo.domain.ReplyVO;
 
-public interface ReviewReplyService {
+public interface ReviewReplyService{
 
 	public ReplyPageVO ReviewReplyList(@Param("bno") int bno, @Param("cri") CriteriaVO cri);
 
@@ -14,4 +14,7 @@ public interface ReviewReplyService {
 
 	public int ReviewReplyDelete(int rno);
 
+	public boolean ReviewReplyUpdate(ReplyVO vo);
+	
+	public ReplyVO ReviewReplyRead(int rno);
 }

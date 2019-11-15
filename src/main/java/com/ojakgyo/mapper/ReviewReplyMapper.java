@@ -15,6 +15,10 @@ public interface ReviewReplyMapper {
 
 	public int ReviewReplyDelete(int rno);
 	
+	public ReplyVO ReviewReplyRead(int rno);
+	
+	public int ReviewReplyUpdate(ReplyVO vo);
+	
 	public int BnoCnt(int bno);
 
 }

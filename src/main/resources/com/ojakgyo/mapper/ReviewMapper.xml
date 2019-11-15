@@ -4,10 +4,17 @@
 
 	<!--리스트 출력 -->
 	<select id="ReviewList" resultType="com.ojakgyo.domain.BoardVO">
-		select *
-		from ReviewBoard
-		where bno > 0
-		order by bno desc, regDate desc
+		<![CDATA[
+			select * from
+			(select /*+INDEX_DESC(ReviewBoard pk_reviewboard)*/
+			rownum rn,bno,title,content,writer,regDate,replyCnt,readCount
+			from ReviewBoard where 
+		]]>
+		<include refid="criteria" />
+		<![CDATA[	
+			rownum<= #{pageNum} * #{amount})
+			where rn> (#{pageNum}-1)*#{amount}
+		]]>
 	</select>
 
 	<!--글 내용보기(글한개출력) -->
@@ -19,16 +26,14 @@
 
 	<!--글작성 -->
 	<insert id="ReviewInsert">
-		insert into ReviewBoard(bno, title, content, writer,
-		xpos, ypos)
+		insert into ReviewBoard(bno, title, content, writer, xpos, ypos)
 		values(seq_review.nextval, #{title}, #{content}, #{writer},
 		#{xpos, jdbcType=VARCHAR}, #{ypos, jdbcType=VARCHAR})
 	</insert>
 
 	<!--글 수정 -->
 	<update id="ReviewUpdate">
-		update ReviewBoard set title=#{title,
-		jdbcType=VARCHAR},
+		update ReviewBoard set title=#{title, jdbcType=VARCHAR},
 		content=#{content, jdbcType=VARCHAR}, xpos=#{xpos,
 		jdbcType=VARCHAR}, ypos=#{ypos, jdbcType=VARCHAR}
 		where bno=#{bno}
@@ -39,6 +44,13 @@
 		delete from ReviewBoard where bno=#{bno}
 	</delete>
 
+	<!-- 댓글 추가시 replycnt 변경하기 -->
+	<update id="updateReplyCnt">
+		update ReviewBoard
+		set replyCnt=replyCnt+#{amount}
+		where bno=#{bno}
+	</update>
+
 	<!--전체게시물수 -->
 	<select id="totalCnt" resultType="int">
 		select count(*) from ReviewBoard
@@ -47,19 +59,26 @@
 		bno>0
 	</select>
 
+	<!--글조회수 변경  -->
+	<update id="updateReviewCount">
+		update ReviewBoard
+		set readCount=readCount+1
+		where bno=#{bno}
+	</update>
+
 	<!-- 동적 sql 문 : 재사용 가능 -->
 	<sql id="criteria">
 		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
 			<foreach collection="typeArr" item='type'>
 				<trim prefix="OR">
 					<choose>
-						<when test="type=='Title'.toString()">
+						<when test="type=='T'.toString()">
 							title like '%'||#{keyword}||'%'
 						</when>
-						<when test="type=='Content'.toString()">
+						<when test="type=='C'.toString()">
 							content like '%'||#{keyword}||'%'
 						</when>
-						<when test="type=='Writer'.toString()">
+						<when test="type=='W'.toString()">
 							writer like '%'||#{keyword}||'%'
 						</when>
 					</choose>

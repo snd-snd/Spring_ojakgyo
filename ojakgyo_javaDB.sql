@@ -35,12 +35,18 @@ create table ReviewBoard(
 	title varchar2(100) not null,
 	content varchar2(3000) not null,
 	writer varchar2(100) not null,
+	readCount number default 0,
+	replyCnt number default 0,
 	regDate date default sysdate,
 	xpos varchar2(50),
 	ypos varchar2(50),
 	constraint pk_reviewboard primary key(bno),
 	foreign key(writer) references members(nickName)
 )
+
+--댓글수 업데이트
+update ReviewBoard set replyCnt=(
+	select count(rno) from ReviewReply where ReviewBoard.bno=ReviewReply.bno);
 
 create sequence seq_review --리뷰테이블의 bno를 위한 시퀀스 --
 
@@ -51,8 +57,11 @@ create table ReviewReply(
 	reply varchar2(1000) not null, -- 댓글 내용
 	replyer varchar2(50) not null, -- 댓글 작성자
 	replydate date default sysdate, -- 댓글 작성 날짜
+	updateDate date default sysdate, -- 댓글 수정 날짜
 	constraint fk_reviewreply foreign key(bno) references ReviewBoard(bno) -- 외래키
 )
 
 create sequence seq_reviewreply --리뷰댓글테이블의 rno를 위한 시퀀스
+
+create index idx_reviewreply on ReviewReply(bno desc, rno asc);
 

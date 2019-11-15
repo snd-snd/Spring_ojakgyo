@@ -40,12 +40,19 @@ public class ReviewController {
 		}
 	}
 
+	// 조회수 업데이트 컨트롤러 생성
+	// 조회수 업데이트 후 redirect bno값 보내기
+	public void ReviewReadCount() {
+		log.info("조회수");
+	}
+
 	// 리뷰글 한개읽어오기, reviewupdate폼불러오기
 	@GetMapping(value = { "reviewread", "reviewupdate" })
 	public void ReviewReadOne(@RequestParam int bno, Model model, @ModelAttribute("cri") CriteriaVO cri) {
 		log.info("ReviewReadOne요청 " + ", bno : " + bno + ", cri : " + cri);
 		BoardVO vo = reviewservice.ReviewReadOne(bno);
 		model.addAttribute("vo", vo);
+		model.addAttribute("readcount", reviewservice.updateReviewCount(bno));
 	}
 
 	// 리뷰글 등록폼불러오기
@@ -68,8 +75,8 @@ public class ReviewController {
 
 	// 리뷰글 수정
 	@PostMapping("reviewupdate")
-	public String ReviewUpdate(BoardVO vo, CriteriaVO cri,RedirectAttributes rttr) {
-		log.info("리뷰글수정"+cri);
+	public String ReviewUpdate(BoardVO vo, CriteriaVO cri, RedirectAttributes rttr) {
+		log.info("리뷰글수정" + cri);
 		reviewservice.ReviewUpdate(vo);
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
@@ -80,7 +87,7 @@ public class ReviewController {
 
 	// 리뷰글 삭제
 	@PostMapping("reviewdelete")
-	public String ReviewDelete(int bno, CriteriaVO cri,RedirectAttributes rttr) {
+	public String ReviewDelete(int bno, CriteriaVO cri, RedirectAttributes rttr) {
 		log.info("리뷰글삭제");
 		reviewservice.ReviewDelete(bno);
 		rttr.addAttribute("pageNum", cri.getPageNum());

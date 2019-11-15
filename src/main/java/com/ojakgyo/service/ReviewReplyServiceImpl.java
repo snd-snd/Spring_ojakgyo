@@ -30,4 +30,14 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 		return reviewreplymapper.ReviewReplyDelete(rno);
 	}
 
+	@Override
+	public boolean ReviewReplyUpdate(ReplyVO vo) {
+		return reviewreplymapper.ReviewReplyUpdate(vo)==1?true:false;
+	}
+
+	@Override
+	public ReplyVO ReviewReplyRead(int rno) {
+		return reviewreplymapper.ReviewReplyRead(rno);
+	}
+
 }
