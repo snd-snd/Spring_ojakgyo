@@ -30,13 +30,13 @@ public class BoardController {
 	@GetMapping("/list")
 	public String board(@PathVariable("groupCode") String groupCode, CriteriaVO criteria, Model model) {
 		log.info("BoardController => 그룹별 게시판 리스트 요청");
-		criteria.setGroupCode(groupCode);
-		BoardInfoVO info = service.list(criteria);
-			
-		if (info != null) {
-			model.addAttribute("info", info);
-			model.addAttribute("page", new PageVO(criteria, service.totalCount(criteria)));		
-		}
+		
+		  criteria.setGroupCode(groupCode); BoardInfoVO info = service.list(criteria);
+		  
+		  if (info != null) { model.addAttribute("info", info);
+		  model.addAttribute("page", new PageVO(criteria,
+		  service.totalCount(criteria))); }
+		 
 				
 		return "/board/list";
 	}

@@ -47,7 +47,7 @@
 				$('#message_send').scrollTop($('#message_send').prop('scrollHeight'));
 			}
 			//ReviewReply라면 ->리뷰게시판 댓글
-			if(msgSplit[0]=="ReviewReply"){
+			else if(msgSplit[0]=="ReviewReply"){
 				ReviewReplyRecive(msgSplit);
 			}
 			
@@ -74,10 +74,10 @@
 					str +=" style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px; '>";
 					str +="<div class='col-md-10 col-xs-10'>";
 					str +="<div class='messages msg_sent'> ";
-					str += msg[3]+"</div></div><br>";
+					str += msg[3]+"</div></div>";
 					str +="<div class='col-md-2 col-xs-2 avatar'>";
 					str += "<img src='http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg' class=' img-responsive '>"
-					str += "</div><br>";
+					str += "</div>";
 					$("#message_send").append(str);
 				}else if(msg[3] =="" ){
 					console.log("채팅에 공백만 넣지마라");
@@ -90,9 +90,9 @@
 					str +="<div class='col-md-10 col-xs-10'>";
 					str +="<div class='messages msg_receive'>";
 					if(msg[4]===""){
-						str += msg[2]+" : "+msg[3]+"</div></div></div><br>";
+						str += msg[2]+" : "+msg[3]+"</div></div></div>";
 					}else{
-						str += msg[4]+" : "+msg[3]+"</div></div></div><br>";
+						str += msg[4]+" : "+msg[3]+"</div></div></div>";
 					}
 					$("#message_send").append(str);	
 				}	
@@ -106,7 +106,7 @@
 			//ReviewReply,userid,bno,title,writer 순서
 			console.log("현재 세션아이디와 writer가 같은지 : "+SessionUserid==msg[4]);
 			//메세지의 writer와 현재 존재하는 세션의 userid가 같다면
-			if(msg[4]==SessionUserid){
+			if(msg[4]==SessionNickname){
 				var str="";
 				str +=	"<div class='alert alert-success' role='alert' id='alarmDiv'>" ;			
 				str +="<p>리뷰 게시판 "+msg[3]+"게시글에 댓글이 생성되었습니다.  <a id='chageUrl'>게시글 확인하러가기</a>";

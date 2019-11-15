@@ -4,8 +4,8 @@
 <!-- MAIN -->
 <div class="main">
 	<!-- MAIN CONTENT -->
-	<div class="main-content">
 	<%@ include file="../includes/alarm.jsp"%>
+	<div class="main-content">
 		<div class="container-fluid">
 			<h3 class="page-title">Posting</h3>
 			<div class="row">

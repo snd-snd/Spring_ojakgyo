@@ -138,7 +138,6 @@ $("#test").click(function(e) {
 	
 	//리뷰 게시판 알람을 동작하는 함수 (alaram.js)
 	if(userid!=""){
-		alert(userid);
 	ReviewReplySend();
 	}
 })

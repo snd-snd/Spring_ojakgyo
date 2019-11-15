@@ -151,7 +151,7 @@
 							
 							<div class="panel-body msg_container_base" id="message_send"  style="font-family: 'Jua', sans-serif; font-size: 20px; overflow-y: scroll;"> 
 								<!-- 보내는 메세지 생성 -->
-							 <div class="row msg_container base_sent"
+							<!--  <div class="row msg_container base_sent"
 									style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";  >
 									<div class="col-md-10 col-xs-10" >
 										<div class="messages msg_sent" id=message_send>
@@ -162,10 +162,10 @@
 											src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
 											class=" img-responsive ">
 									</div>
-								</div>  
+								</div>   -->
 								<div id="message_receive">	
 								<!-- 받은 메세지 div 생성 -->																
- 									 <div class="row msg_container base_receive"
+ 									 <!-- <div class="row msg_container base_receive"
 										style="margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px";>
 										<div class="col-md-2 col-xs-2 avatar">
 											<img
@@ -177,7 +177,7 @@
 											<p>메세지</p>
 											</div>
 										</div>
-									</div> 
+									</div>  -->
 								</div>
 							</div>
 							<div class="panel-footer">

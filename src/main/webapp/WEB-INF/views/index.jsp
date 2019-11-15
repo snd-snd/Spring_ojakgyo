@@ -3,9 +3,9 @@
 <%@ include file="includes/header.jsp" %>		
 <!-- MAIN -->
 <div class="main">
+	<%@ include file="includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
-	<%@ include file="includes/alarm.jsp"%>
 		<div class="container-fluid">
 			<!-- OVERVIEW -->
 			<div class="panel panel-headline">
