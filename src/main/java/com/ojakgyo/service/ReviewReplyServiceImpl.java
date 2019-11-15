@@ -1,18 +1,21 @@
 package com.ojakgyo.service;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ojakgyo.domain.CriteriaVO;
 import com.ojakgyo.domain.ReplyPageVO;
 import com.ojakgyo.domain.ReplyVO;
+import com.ojakgyo.mapper.ReviewMapper;
 import com.ojakgyo.mapper.ReviewReplyMapper;
 
 @Service("reviewReplyService")
 public class ReviewReplyServiceImpl implements ReviewReplyService {
 
-	@Inject
+	@Autowired
+	private ReviewMapper reviewmapper;
+
+	@Autowired
 	private ReviewReplyMapper reviewreplymapper;
 
 	@Override
@@ -22,6 +25,7 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	@Override
 	public boolean ReviewReplyInsert(ReplyVO vo) {
+		reviewmapper.updateReplyCnt(1, vo.getBno());
 		return reviewreplymapper.ReviewReplyInsert(vo);
 	}
 
@@ -32,7 +36,7 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	@Override
 	public boolean ReviewReplyUpdate(ReplyVO vo) {
-		return reviewreplymapper.ReviewReplyUpdate(vo)==1?true:false;
+		return reviewreplymapper.ReviewReplyUpdate(vo) == 1 ? true : false;
 	}
 
 	@Override

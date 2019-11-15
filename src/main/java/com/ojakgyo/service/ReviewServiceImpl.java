@@ -34,12 +34,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public boolean ReviewUpdate(BoardVO vo) {
-		return reviewmapper.ReviewUpdate(vo)==1?true:false;
+		return reviewmapper.ReviewUpdate(vo) == 1 ? true : false;
 	}
 
 	@Override
 	public boolean ReviewDelete(int bno) {
-		return reviewmapper.ReviewDelete(bno)==1?true:false;
+		return reviewmapper.ReviewDelete(bno) == 1 ? true : false;
 	}
 
 	@Override

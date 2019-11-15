@@ -21,5 +21,5 @@ public interface ReviewService {
 
 	public int totalCnt(CriteriaVO cri);
 
-	public int updateReviewCount(int bno);
+	public int updateReviewCount(int bno);// 조회수
 }

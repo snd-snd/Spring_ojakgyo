@@ -14,11 +14,11 @@ public interface ReviewReplyMapper {
 	public boolean ReviewReplyInsert(ReplyVO vo);
 
 	public int ReviewReplyDelete(int rno);
-	
+
 	public ReplyVO ReviewReplyRead(int rno);
-	
+
 	public int ReviewReplyUpdate(ReplyVO vo);
-	
+
 	public int BnoCnt(int bno);
 
 }
