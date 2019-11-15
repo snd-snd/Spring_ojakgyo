@@ -44,11 +44,11 @@ tr th, td {
 										<tr>
 											<td>${vo.bno}</td>
 											<td><a href="<c:out value='reviewread?bno=${vo.bno}'/>"
-												class="reviewread">${vo.title}</a></td>
+												class="reviewread">${vo.title}</a>[${vo.replyCnt}]</td>
 											<td>${vo.writer}</td>
 											<td><fmt:formatDate pattern="yyyy.MM.dd HH:mm"
 													value="${vo.regDate}" /></td>
-											<td>100</td>
+											<td>${vo.readCount}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
