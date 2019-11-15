@@ -61,25 +61,23 @@ tr th, td {
 							</p>
 							<form action="" id="searchform" method="get">
 								<!--분류선택  -->
-								<select class="form-control">
-									<option value="Title"
-										<c:out value="${pageVO.criteria.type eq 'Title'?'selected':''}"/>>제목</option>
-									<option value="Content"
-										<c:out value="${pageVO.criteria.type eq 'Content'?'selected':''}"/>>내용</option>
-									<option value="TitleContent"
-										<c:out value="${pageVO.criteria.type eq 'TitleContent'?'selected':''}"/>>제목
+								<select class="form-control" name="type">
+									<option value="T"
+										<c:out value="${pageVO.criteria.type eq 'T'?'selected':''}"/>>제목</option>
+									<option value="C"
+										<c:out value="${pageVO.criteria.type eq 'C'?'selected':''}"/>>내용</option>
+									<option value="TC"
+										<c:out value="${pageVO.criteria.type eq 'TC'?'selected':''}"/>>제목
 										+내용</option>
-									<option value="Writer"
-										<c:out value="${pageVO.criteria.type eq 'Writer'?'selected':''}"/>>작성자</option>
+									<option value="W"
+										<c:out value="${pageVO.criteria.type eq 'W'?'selected':''}"/>>작성자</option>
 								</select> <br>
 								<!--검색버튼  -->
 								<div class="input-group">
-									<input class="form-control" type="text" name="keyword"
-										value="${pageVO.criteria.keyword}" /> <input type="hidden"
-										name="pageNum" value="${pageVO.criteria.pageNum}" /> <input
-										type="hidden" name="amount" value="${pageVO.criteria.amount}" />
-									<span class="input-group-btn"><button
-											class="btn btn-primary">Search</button></span>
+									<input class="form-control" type="text" name="keyword" value="${pageVO.criteria.keyword}" /> 
+									<input type="hidden" name="pageNum" value="${pageVO.criteria.pageNum}" /> 
+									<input type="hidden" name="amount" value="${pageVO.criteria.amount}" />
+									<span class="input-group-btn"><button class="btn btn-light">Search</button></span>
 								</div>
 							</form>
 						</div>
@@ -172,7 +170,7 @@ tr th, td {
 				})
 
 		//검색시 실행
-		$(".btn-primary").click(function() {
+		$(".btn-light").click(function() {
 			var searchform = $("#searchform");
 
 			if (!searchform.find("input[name='keyword']").val()) {

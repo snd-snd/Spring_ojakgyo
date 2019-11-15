@@ -16,5 +16,6 @@ public class BoardVO {
 	private int likeCount;
 	private String xpos;//지도x좌표값
 	private String ypos;//지도y좌표값
+	private int replyCnt; //게시물 당 댓글수
 	private String groupCode;
 }

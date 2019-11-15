@@ -18,6 +18,8 @@ public interface ReviewService {
 	public boolean ReviewUpdate(BoardVO vo);
 
 	public boolean ReviewDelete(int bno);
-	
+
 	public int totalCnt(CriteriaVO cri);
+
+	public int updateReviewCount(int bno);
 }

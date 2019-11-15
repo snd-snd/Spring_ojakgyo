@@ -18,7 +18,6 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<BoardVO> ReviewList(CriteriaVO cri) {
-
 		return reviewmapper.ReviewList(cri);
 	}
 
@@ -46,6 +45,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int totalCnt(CriteriaVO cri) {
 		return reviewmapper.totalCnt(cri);
+	}
+
+	@Override
+	public int updateReviewCount(int bno) {
+		return reviewmapper.updateReviewCount(bno);
 	}
 
 }

@@ -11,7 +11,7 @@
 		SessionNickname=$("#SessionNickname").val();
 		console.log("현재 세션에 연결된 아이디 : "+SessionUserid);
 		console.log("현재 세션에 연결된 닉네임 : "+SessionNickname);
-		var ws=new WebSocket("ws://192.168.0.34:8083/echo");
+		var ws=new WebSocket("ws://localhost:8090/echo");
 		socket=ws; 
 		connectWS();
 		

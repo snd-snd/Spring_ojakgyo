@@ -21,4 +21,10 @@ public interface ReviewMapper {
 
 	public int totalCnt(CriteriaVO cri);
 
+	// 댓글 갯수 변경하기
+	public int updateReplyCnt(@Param("amount") int amount, @Param("bno") int bno);
+
+	// 조회수
+	public int updateReviewCount(int bno);
+
 }
