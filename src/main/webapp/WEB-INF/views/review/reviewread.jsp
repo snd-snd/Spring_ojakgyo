@@ -86,7 +86,6 @@
 				<p class="demo-button">
 					<button type="button" class="btn btn-success btn-xs bb2">Review
 						Register</button>
-					<button type="button" class="btn btn-danger btn-xs" id="test">Test</button>
 				</p>
 				<!-- 댓글 영역 -->
 				<div class="row">
@@ -181,20 +180,19 @@
 			value="${login.member.userId}" />
 	</form>
 
-	<!-- 테스트 버튼이 눌리면 게시글 당사자에게 알람이 가도록 만든 스크립트 테스트버전. -->
-	<script>
-		var userid = $("#userid").val();
+	<!-- 리뷰 작성 버튼이 눌리면 게시글 당사자에게 알람이 가도록 만든 스크립트 테스트버전. -->
+ 	<script>
+ 		var userid = $("#userid").val();
 		var bno = $("#bno").val();
 		var title = $("#title").val();
 		var writer = $("#writer").val();
-		$("#test").click(function(e) {
-
+		
+		$("#modalRegisterBtn").click(function(e) {
 			//리뷰 게시판 알람을 동작하는 함수 (alaram.js)
 			if (userid != "") {
-				alert(userid);
 				ReviewReplySend();
-			}
-		})
+			}; 
+		}) 
 	</script>
 
 	<script>
@@ -287,13 +285,12 @@
 			})
 
 			$("#modalRegisterBtn").click(function() {
-
+				
 				var reply = {
 					bno : bno,
 					reply : modalInputReply.val(),
 					replyer : modalInputReplyer.val()
 				};
-
 				ReviewReplyService.ReviewReplyInsert(reply, function(result) {
 					if (result) {
 						//댓글 작성이 성공되면
@@ -468,6 +465,7 @@
 		var ypos = $("#ypos").val();
 
 		$(document).ready(
+				
 				function() {
 					//좌표값이 없는 경우 대한민국지도출력
 					if (xpos == "") {

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
@@ -10,6 +9,8 @@
 	<script src="/resources/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 	<script src="/resources/assets/vendor/chartist/js/chartist.min.js"></script>
 	<script src="/resources/assets/scripts/klorofil-common.js"></script>
+
+
 <!-- 	<script>
 	$(function() {
 		var data, options;

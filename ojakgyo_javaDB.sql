@@ -58,10 +58,17 @@ create table ReviewReply(
 	replyer varchar2(50) not null, -- 댓글 작성자
 	replydate date default sysdate, -- 댓글 작성 날짜
 	updateDate date default sysdate, -- 댓글 수정 날짜
-	constraint fk_reviewreply foreign key(bno) references ReviewBoard(bno) -- 외래키
+	constraint fk_reviewreply foreign key(bno) references ReviewBoard(bno), -- 외래키
+	constraint fk_reviewreplyreplyer foreign key(replyer) references members(nickName)
 )
+
 
 create sequence seq_reviewreply --리뷰댓글테이블의 rno를 위한 시퀀스
 
 create index idx_reviewreply on ReviewReply(bno desc, rno asc);
 
+
+drop table members
+drop table groups
+drop table ReviewBoard
+drop table ReviewReply
