@@ -24,7 +24,7 @@
 									<button type="button" class="btn btn-default" id="like"><i class="fa fa-thumbs-up"></i><span>&ensp;</span>좋아요</button>
 								</div>
 								<div class="col-md-9 text-right">
-									<button type="button" class="btn btn-warning" id="modify" onclick="location.href='/${board.groupCode}/board/modify?bno=${board.bno }'"><i class="fa fa-edit"></i><span>&ensp;</span>수정</button>
+									<button type="button" class="btn btn-warning" id="modify""><i class="fa fa-edit"></i><span>&ensp;</span>수정</button>
 									<button type="button" class="btn btn-danger" id="remove" ><i class="fa fa-trash"></i><span>&ensp;</span>삭제</button>
 									<button type="button" class="btn btn-info" id="list"><i class="fa fa-list"></i><span>&ensp;</span>목록</button>
 								</div>
@@ -36,6 +36,12 @@
 						<div class="panel-footer">
 							<div class="row" id="replyContent">		          		  
 							</div>
+							<!-- 댓글 페이징 처리 -->
+							<div class="row">
+								<div class="text-center" id="paging">
+								</div>
+							</div>
+							
 							<div class="row">
 								<nav class="panel">
 									<div class="panel-heading">
@@ -73,6 +79,7 @@
 	<input type="hidden" name="keyword" value="${criteria.keyword }" />	
 </form>
 <script src="/resources/js/board/reply.js"></script>
+<script src="/resources/js/board/like.js"></script>
 <script>
 $(function(){
 	
@@ -91,6 +98,14 @@ $(function(){
 			
 	showList(1); //댓글 목록가져오기
 	
+	likeService.likeCheck({code:code, bno:bno, nickName:nickName}, function(result){
+		if(result){
+			likeBtn.attr("class", "btn btn-success");			
+		} else {
+			likeBtn.attr("class", "btn btn-default");		
+		}
+	});
+	
 	$("#buttons").find("button").hide();	
 	if (nickName == wirter){
 		modifyBtn.show();
@@ -106,6 +121,12 @@ $(function(){
 		if(removeConfirm){
 			form.attr("method", "post").submit();			
 		}
+	})
+	
+	modifyBtn.on("click", function(){
+		var uri = "/"+code+"/board/modify/"+bno;
+		form.attr("action", uri);
+		form.attr("method", "get").submit();	
 	})
 
 	listBtn.on("click", function(){
@@ -132,8 +153,7 @@ $(function(){
  		replySerivce.add(params, function(result){
 			if(result == "success"){
 				$("#replyText").val("");
-				console.log("성공");
-				showList(1);
+				showList(-1);
 			} else {
 				alert("뭔가 잘못됐나본데?")
 			}
@@ -160,7 +180,6 @@ $(function(){
 		var me = $(this);
 		
 			replySerivce.read({code:code, rno:$(this).data("rno")}, function(result){
-			console.log(result);
 			
 			me.closest("div[class='panel-heading']").siblings("div[class='panel-body']").hide();
 			me.closest("div[class='panel-heading']").hide();
@@ -205,25 +224,20 @@ $(function(){
 			
 	// 좋아요 관련 기능	
 	likeBtn.on("click", function(){
+		var btn = $(this);;
 		likeService.likeCheck({code:code, bno:bno, nickName:nickName}, function(result){
 			if(result){
-				$(this).attr("class", "btn btn-default");
 				likeService.cancel({code:code, bno:bno, nickName:nickName}, function(result){
 					if(result == 'success'){
-						alert("데헷");
-					} else {
-						alert("뭔가 잘못됐나본데?");
-					}
+						btn.attr("class", "btn btn-default");
+					} 
 				})
 				
 			} else {
-				$(this).attr("class", "btn btn-success");
 				likeService.action({code:code, bno:bno, nickName:nickName}, function(result){
 					if(result == 'success'){
-						alert("데헷");
-					} else {
-						alert("뭔가 잘못됐나본데?");
-					}
+						btn.attr("class", "btn btn-success");
+					} 
 				})
 			}
 		})
@@ -231,7 +245,6 @@ $(function(){
 	
 	function showList(page){ //Read에 들어오면 글번호에 해당하는 댓글들을 가져와 뿌려줌
 		replySerivce.getList({code:code,bno:bno,page:page||1}, function(total,replys){
-			console.log("list-length : " + replys.length);	
 		
 			replyContent.html("");
 			if (list == null || replys.length == 0){
@@ -243,7 +256,7 @@ $(function(){
 				showList(pageNum)
 				return;
 			}
-			
+
 			var str = "";
 			for (var i=0, len=replys.length||0; i<len; i++){	
 				
@@ -262,10 +275,56 @@ $(function(){
 				str += "</div>";
 				str += "</nav>";
 			}
-			replyContent.prepend(str);
+			replyContent.html(str);
+			showReplyPage(total);
 			
 		}); // END getList
 	}
+	
+	
+	
+	// 댓글 페이지 영역
+	var replyPageFooter = $("#paging");
+	var pageNum = 1;
+	
+	function showReplyPage(total){
+		
+		var endPage = Math.ceil(pageNum / 10.0)*10; //마지막 페이지 계산
+		var startPage = endPage-9; //시작 페이지
+		var prev = startPage != 1; //이전 버튼
+		var next = false; //다음 버튼
+		
+		if (endPage*10 >= total){
+			endPage = Math.ceil(total/10.0);
+		}
+		if (endPage*10 < total){
+			next = true;
+		}
+		
+		var str = "<ul class='pagination'>";
+		if (prev){
+			str += "<li class='page-item'><a class='paginate_button previous' href='"+(startPage-1)+"'>Prev</a></li>";		
+		}		
+		for (var i=startPage; i<=endPage; i++){
+			var active = pageNum == i? "active":"";
+			str += "<li class='paginate_button "+active+"'>";
+			str += "<a class='paginate_button' href='"+i+"'>"+i+"</a></li>";
+		}	
+		if (next){
+			str += "<li class='paginate_button'><a class='paginate_button' href='"+(endPage+1)+"'>Next</a></li>";
+		}	
+		str += "</ul></div>";
+			
+		replyPageFooter.html(str);
+	}
+	
+	//페이지 번호를 클릭하면 동작할 스크립트
+	replyPageFooter.on("click", "li a", function(e){
+		e.preventDefault(); // a태그 동작을 막기
+		
+		pageNum = $(this).attr("href");
+		showList(pageNum);
+	})
 	
 })
 </script>

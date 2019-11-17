@@ -10,10 +10,8 @@ public class LoginVO {
 	private MemberVO member;
 	private List<GroupVO> groups;
 	
-	
-	public boolean isFullGroup() {
-		long count = groups.stream().filter(g -> g != null).count();
-		return count == 4 ? true : false;
+	public int getGroupSize() {
+		return groups.size();
 	}
 	
 }

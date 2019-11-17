@@ -8,4 +8,5 @@ public class LikeVO {
 	private int lno;
 	private int bno;
 	private String nickName;
+	private String groupCode;
 }

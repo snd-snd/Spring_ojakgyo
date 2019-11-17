@@ -22,7 +22,13 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="/resources/assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="/resources/assets/img/favicon.png">
 </head>
-
+<script>
+	var message = '${message}';
+	
+	if (message != '' && message.length != 0){
+		alert(message);
+	}
+</script>
 <body>
 	<!-- WRAPPER -->
 	<div id="wrapper">

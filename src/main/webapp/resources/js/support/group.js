@@ -89,12 +89,23 @@ var groupRequest = (function(){
 	} // END function register
 	
 	
+	//현재 가입된 그룹 개수 확인
+	function check(nickName, callback){	
+		$.getJSON("/support/check/"+nickName, function(result){
+			if (callback){
+				callback(result);
+			}
+		});	
+	} // END function check
+	
+	
 	return{
 		add : add,
 		read : read,
 		modify : modify,
 		remove : remove,
 		update : update,
-		register : register
+		register : register,
+		check : check
 	};
 })();

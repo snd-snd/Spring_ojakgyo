@@ -6,12 +6,12 @@ var manage = (function(){
 	
 
 	function remove(params, callback){
-		var mno = params.mno;
-		var code = params.code;
-		
+
 		$.ajax({
-			url : '/manage/'+code+"/"+mno,
+			url : '/manage/delete',
 			type : 'delete',
+			contentType : 'application/json;charset=utf-8',
+			data : JSON.stringify(params),
 			success : function(result){
 				if(callback){
 					callback(result);
@@ -21,9 +21,25 @@ var manage = (function(){
 	} // END function remove
 	
 	
+	function modify(params, callback){
+
+		$.ajax({
+			url : '/manage/modify',
+			type : 'put',
+			contentType : 'application/json;charset=utf-8',
+			data : JSON.stringify(params),
+			success : function(result){
+				if(callback){
+					callback(result);
+				}
+			}
+		});		
+	} // END function modify
+	
 	
 	
 	return{
-		remove:remove
+		remove:remove,
+		modify:modify
 	};
 })();

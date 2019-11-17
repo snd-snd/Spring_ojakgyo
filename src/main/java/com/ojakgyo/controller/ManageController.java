@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ojakgyo.domain.GroupMemberVO;
 import com.ojakgyo.service.GroupService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +37,21 @@ public class ManageController {
 	}
 	
 	@ResponseBody
-	@DeleteMapping("{code}/{mno}")
-	public ResponseEntity<String> remove(@PathVariable("code") String code, @PathVariable("mno") int mno){
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> remove(@RequestBody GroupMemberVO gMember){
 		
-		return service.remove(code, mno) 
+		return service.remove(gMember) 
+				? new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	
+	@ResponseBody
+	@DeleteMapping("/modify")
+	public ResponseEntity<String> modfiy(@RequestBody GroupMemberVO gMember){
+		
+		return service.modify(gMember) 
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 		

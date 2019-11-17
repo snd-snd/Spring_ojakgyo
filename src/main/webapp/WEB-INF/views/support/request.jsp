@@ -60,10 +60,8 @@
 					<!-- END TABLE STRIPED -->
 				</div>					
 			</div>
-			
-			
-			<div class="row" id="intro">
-				
+			<!-- 그룹 가입란 -->				
+			<div class="row" id="intro">			
 				<c:forEach items="${groups }" var="group">
 					<div class="col-md-3" data-code="${group.groupCode }", data-name="${group.groupName }">
 						<div class="panel">
@@ -76,92 +74,8 @@
 						</div>
 					</div>
 				</c:forEach>
-			
-			
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>때까지 황금시대를 그들은 피에 미묘한 뭇 이것이야말로 옷을 황금시대다. 살 대중을 황금시대의 열락의 두기 같이 인생을 사람은 영원히 이것이다. 긴지라 있을 피에 든 같이 풀밭에 것은 사는가 관현악이며, 것이다.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>풀밭에 유소년에게서 할지니, 보라. 꽃이 불어 인생에 무엇을 말이다. 인생을 가장 어디 대중을 공자는 그들은 위하여, 청춘의 뿐이다. 이 그들은 같이 방지하는 것이다.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>두손을 설산에서 풀이 천고에 피고, 되는 이것이다. 살 지혜는 어디 열락의 고행을 보이는 수 가슴에 말이다. 그들은 품고 영락과 사는가 얼마나 하여도 실현에 우리 약동하다.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>이상, 동산에는 소리다.이것은 얼마나 있는 모래뿐일 칼이다. 대중을 들어 이상은 거친 일월과 있는가? 품었기 주며, 가슴에 역사를 가지에 위하여 청춘의 것이다. 만물은 우리 따뜻한 그들은 그들의 청춘은 이 피는 있는가?</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>이상, 동산에는 소리다.이것은 얼마나 있는 모래뿐일 칼이다. 대중을 들어 이상은 거친 일월과 있는가? 품었기 주며, 가슴에 역사를 가지에 위하여 청춘의 것이다. 만물은 우리 따뜻한 그들은 그들의 청춘은 이 피는 있는가?</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>이상, 동산에는 소리다.이것은 얼마나 있는 모래뿐일 칼이다. 대중을 들어 이상은 거친 일월과 있는가? 품었기 주며, 가슴에 역사를 가지에 위하여 청춘의 것이다. 만물은 우리 따뜻한 그들은 그들의 청춘은 이 피는 있는가?</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>이상, 동산에는 소리다.이것은 얼마나 있는 모래뿐일 칼이다. 대중을 들어 이상은 거친 일월과 있는가? 품었기 주며, 가슴에 역사를 가지에 위하여 청춘의 것이다. 만물은 우리 따뜻한 그들은 그들의 청춘은 이 피는 있는가?</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Panel No Right Controls</h3>
-						</div>
-						<div class="panel-body">
-							<p>이상, 동산에는 소리다.이것은 얼마나 있는 모래뿐일 칼이다. 대중을 들어 이상은 거친 일월과 있는가? 품었기 주며, 가슴에 역사를 가지에 위하여 청춘의 것이다. 만물은 우리 따뜻한 그들은 그들의 청춘은 이 피는 있는가?</p>
-						</div>
-					</div>
-				</div>
-				
-				
-				
-			</div>				
+			</div>			
+			<!-- 그룹 가입란 종료-->			
 		</div>
 	</div>
 	<!-- END MAIN CONTENT -->
@@ -211,12 +125,19 @@ $(function(){
 	
 	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
 	requestBtn.on("click", function() {
+		
+ 		var size = '${login.groupSize}';
+
+		if (size == 4){
+			alert("허용 가능한 그룹 수를 초과했습니다.");
+			return;
+		}
 		modal.find("h4").html("그룹 신청");
 		modal.find("input").val("");
 		modal.find("textarea").val("");
 		modal.find("button").hide();
 		modal.find("button[id='modalRegisterBtn']").show();
-		modal.modal("show");
+		modal.modal("show");		
 	})
 	
 	// 그룹신청 내용에 대한 수정이나 철회가 있을 경우
@@ -295,15 +216,24 @@ $(function(){
 	
 	intro.on("click", "div[class='col-md-3']", function(){
 		
- 		var full = '${login.fullGroup}';
-		
-		if (full == true){
+ 		var size = '${login.groupSize}';
+		var group1 = '${login.member.groupCode1}';
+		var group2 = '${login.member.groupCode2}';
+		var group3 = '${login.member.groupCode3}';
+		var group4 = '${login.member.groupCode4}';
+ 					
+		if (size == 4){
 			alert("더 이상 그룹에 가입할 수 없습니다.");
 			return;
 		}
 		
 		var code = $(this).data("code");
 		var name = $(this).data("name");
+		
+		if (code == group1 || code == group2 || code == group3 || code == group4){
+			alert("이미 "+name+"에 가입되어있습니다.");
+			return;
+		}
 		
 		var cf = confirm(name+"에 가입하시겠습니까?");
 		
@@ -315,12 +245,12 @@ $(function(){
 			groupRequest.register({userId:userId, nickName:nickName, code:code}, function(result){
 				if (result == 'success'){
 					alert(name+"에 가입되었습니다.");
+					location.href = "/account/complete";			
 				} else {
 					alert("뭔가 잘못됐나본데?");
 				}
 			})
-			
-			
+						
 		}
 	})
 	

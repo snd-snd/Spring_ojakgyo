@@ -30,14 +30,14 @@ public class BoardController {
 	@GetMapping("/list")
 	public String board(@PathVariable("groupCode") String groupCode, CriteriaVO criteria, Model model) {
 		log.info("BoardController => 그룹별 게시판 리스트 요청");
-		/*
-		 * criteria.setGroupCode(groupCode); BoardInfoVO info = service.list(criteria);
-		 * 
-		 * if (info != null) { model.addAttribute("info", info);
-		 * model.addAttribute("page", new PageVO(criteria,
-		 * service.totalCount(criteria))); }
-		 * 
-		 */
+	
+		criteria.setGroupCode(groupCode);
+		BoardInfoVO info = service.list(criteria);
+	  
+		if (info != null) {
+			model.addAttribute("info", info);
+			model.addAttribute("page", new PageVO(criteria, service.totalCount(criteria)));
+		}	 
 		return "/board/list";
 	}
 
@@ -47,16 +47,12 @@ public class BoardController {
 		log.info("BoardController => 요청한 글 읽기");
 		
 		BoardVO board = service.read(groupCode, bno);
-		board.setGroupCode(groupCode);
 		
 		if (board != null) {
+			board.setGroupCode(groupCode);
 			model.addAttribute("board", board);
 		}
-		
-		GroupVO group = new GroupVO();
-		group.setGroupCode(groupCode);
-		model.addAttribute("group", group);
-		
+			
 		return "/board/read";
 	}
 	
@@ -87,19 +83,21 @@ public class BoardController {
 	
 	@GetMapping("/modify/{bno}")
 	public String modify(@PathVariable("groupCode") String groupCode, @PathVariable("bno") int bno,
-			CriteriaVO criteria, Model model) {
+			@ModelAttribute("criteria") CriteriaVO criteria, Model model) {
 		log.info("BoardController => 요청한 글 수정");
 
-//		BoardVO board = service.read(groupCode, bno);
-//		
-//		if (board != null) {
-//			model.addAttribute("board", board);
-//		}		
+		BoardVO board = service.read(groupCode, bno);
 		
-		GroupVO group = new GroupVO();
-		group.setGroupCode(groupCode);
-		model.addAttribute("group", group);
-		
+		if (board != null) {
+			board.setGroupCode(groupCode);
+			String temp = board.getContent();
+			temp = temp.replace("\n","");//공백제거 
+			temp = temp.replace("\r","");//공백제거 
+			
+			board.setContent(temp);
+			model.addAttribute("board", board);
+		}		
+
 		return "/board/modify";
 	}
 	
@@ -107,14 +105,14 @@ public class BoardController {
 	public String modify(@PathVariable("groupCode") String groupCode, BoardVO board
 			,CriteriaVO criteria, RedirectAttributes rttr) {
 		log.info("BoardController => 요청한 글 수정");
-		
-//		if (service.modify(groupCode, board)) {
-//			
-//		}	
-//		rttr.addAttribute("pageNum", criteria.getPageNum());
-//		rttr.addAttribute("amount", criteria.getAmount());
-//		rttr.addAttribute("type", criteria.getType());
-//		rttr.addAttribute("keyword", criteria.getKeyword());
+
+		board.setGroupCode(groupCode);		
+		if (service.modify(board)) {
+			rttr.addAttribute("pageNum", criteria.getPageNum());
+			rttr.addAttribute("amount", criteria.getAmount());
+			rttr.addAttribute("type", criteria.getType());
+			rttr.addAttribute("keyword", criteria.getKeyword());
+		}	
 						
 		return "redirect:/"+groupCode+"/board/list";
 	}

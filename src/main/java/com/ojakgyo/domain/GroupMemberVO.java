@@ -12,6 +12,6 @@ public class GroupMemberVO {
 	private String nickName;
 	private int score;
 	private Date regDate;
-	private int admin;
+	private String groupCode;
 	
 }

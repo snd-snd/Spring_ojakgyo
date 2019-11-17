@@ -1,5 +1,6 @@
 package com.ojakgyo.mapper;
 
+import com.ojakgyo.domain.ItemVO;
 import com.ojakgyo.domain.ProcedureVO;
 
 public interface ItemMapper {

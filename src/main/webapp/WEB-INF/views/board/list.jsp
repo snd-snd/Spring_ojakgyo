@@ -46,34 +46,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>자바 시큐어코딩</td>
-										<td>김영숙</td>
-										<td>2019-10-10</td>
-										<td>239</td>
-										<td>10</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>이것이 자바다</td>
-										<td>신용권</td>
-										<td>2019-10-10</td>
-										<td>539</td>
-										<td>30</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>정보처리기사 실기</td>
-										<td>시나공</td>
-										<td>2019-12-05</td>
-										<td>30</td>
-										<td>9</td>
-									</tr>
+									
 									<c:forEach items="${info.boards }" var="board">
 										<tr>
 											<td>${board.bno }</td>
-											<td><a href="${board.bno }" class="move">${board.title }</a></td>
+											<td><a href="${board.bno }" class="move">${board.title }</a><span>&ensp;[${board.replyCnt }]</span></td>
 											<td>${board.writer }</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate }"/></td>
 											<td>${board.readCount }</td>
@@ -115,8 +92,7 @@
 										</select>
 									</div>
 									<div class="pull-left col-md-4">
-										<input type="text" value="" class="form-control"
-											placeholder="Search...">
+										<input type="text" class="form-control" name="keyword" placeholder="Search...">
 									</div>
 									<div class="pull-left col-md-1">
 										<button type="button" class="btn btn-primary">
@@ -243,7 +219,7 @@ $(function(){
 	var type = '${page.criteria.type}';
 	var keyword = '${page.criteria.keyword}';
 	
-	$("#type").val(type).attr('selected', true);
+	$("#type").val(type||'TCW').attr('selected', true);
 	search.find("input[name='keyword']").val(keyword);
 	
 	search.find("button").click(function(e){

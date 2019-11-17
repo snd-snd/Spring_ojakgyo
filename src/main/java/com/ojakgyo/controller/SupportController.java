@@ -2,6 +2,8 @@ package com.ojakgyo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.ojakgyo.domain.GroupVO;
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
+import com.ojakgyo.service.AccountService;
 import com.ojakgyo.service.GroupService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +33,13 @@ public class SupportController {
 	@Autowired
 	GroupService service;
 	
+	@Autowired
+	AccountService account_service;
+	
 	@GetMapping("/request")
 	public void request(Model model, @SessionAttribute("login") LoginVO login) {
 		log.info("SupportController => 요청 게시판으로 이동");
-		
+
 		List<GroupVO> myGroups = service.myGroups(login.getMember().getNickName());
 		List<GroupVO> groups = service.listStatus(1);
 		
@@ -41,6 +47,7 @@ public class SupportController {
 		model.addAttribute("groups", groups);
 	}
 	
+
 	@ResponseBody
 	@PostMapping("/new/{groupCode}")
 	public ResponseEntity<String> register(@PathVariable("groupCode") String groupCode, @RequestBody MemberVO member){

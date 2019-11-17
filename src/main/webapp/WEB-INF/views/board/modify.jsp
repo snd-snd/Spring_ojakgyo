@@ -21,7 +21,7 @@
 								<input type="text" class="form-control input-lg" value="${board.title }" id="title">
 							</div>						
 							<div>
-								<label for=""></label>
+								<label for="edit"></label>
 								<textarea class="form-control" id="edit"></textarea>
 							</div>
 						</div>
@@ -40,11 +40,15 @@
 	<!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<form action="/${group.groupCode }board/modify/" method="post">
+<form action="/${board.groupCode }/board/modify/" method="post">
 	<input type="hidden" name="bno" value="${board.bno }">
 	<input type="hidden" name="title">
 	<input type="hidden" name="content">
 	<input type="hidden" name="writer" value="${board.writer }">
+	<input type="hidden" name="pageNum" value="${criteria.pageNum }"/>
+	<input type="hidden" name="amount" value="${criteria.amount }"/>
+	<input type="hidden" name="type" value="${criteria.type }" />
+	<input type="hidden" name="keyword" value="${criteria.keyword }" />	
 </form>
 <div class="clearfix"></div>
 <footer>
@@ -54,9 +58,13 @@
 </footer>
 <script>
 	$(function(){
+	
 		var content = '${board.content}';
 		
-		CKEDITOR.replace('edit', {height: 500});
+		CKEDITOR.replace('edit', {
+			height: 500
+		});
+		
 		CKEDITOR.instances.edit.setData(content);
 		
 		var btnModify = $("#modify");
@@ -70,7 +78,7 @@
 			$("input[name='title']").val(title);
 			$("input[name='content']").val(modify_content);
 			
-			//form.submit();
+			form.submit();
 		})
 	})
 </script>

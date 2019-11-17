@@ -3,6 +3,7 @@ package com.ojakgyo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ojakgyo.domain.ItemVO;
 import com.ojakgyo.domain.ProcedureVO;
 import com.ojakgyo.mapper.ItemMapper;
 

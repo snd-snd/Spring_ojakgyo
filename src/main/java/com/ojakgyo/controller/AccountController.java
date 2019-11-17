@@ -1,5 +1,7 @@
 package com.ojakgyo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,15 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.service.AccountService;
+
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes("login")
 @Controller
 @Slf4j
 public class AccountController {
@@ -33,10 +36,18 @@ public class AccountController {
 	public void loginGet() {
 		log.info("로그인 폼 요청...");
 	}
+	
+	@GetMapping("/account/needLogin")
+	public String needLoginGet(RedirectAttributes rttr) {
+		log.info("로그인 후 이용 요청...");
+		rttr.addFlashAttribute("message", "로그인 후 이용가능합니다.");
+		
+		return "redirect:/account/login";
+	}
 
 	@PostMapping("/account/login")
 // login.jsp에서 넘긴 값 가지고 오기
-	public String loginPost(MemberVO vo, Model model) {
+	public String loginPost(MemberVO vo, HttpSession session) {
 		log.info("로그인 요청...");		
 		
 		MemberVO vo2 = accountservice.read(vo.getUserId());
@@ -49,7 +60,9 @@ public class AccountController {
 	    } else {
 	    	LoginVO login = accountservice.Login(vo2);
 	    	// accountservice.Login() => MemberVO 가 널이 아니라면
-	    	model.addAttribute("login", login);
+
+	    	session.setMaxInactiveInterval(1000*60*60*24*10);
+	    	session.setAttribute("login", login);
 	    		// 홈이 보여지게 만들어 주고
 	    	return "redirect:/";	    	
 	    }
@@ -149,7 +162,7 @@ public class AccountController {
 	}
 
 	@PostMapping("/account/update")
-	public String update(Model model, MemberVO vo) {
+	public String update(MemberVO vo, HttpSession session) {
 		log.info("update 폼에서 넘긴 값 가져오기.." + vo);
 		
 		String encPassword = passwordEncoder.encode(vo.getConfirm_password());
@@ -161,9 +174,21 @@ public class AccountController {
 			vo.setUserPw(vo.getConfirm_password());
 			System.out.println(vo);
 			LoginVO login = accountservice.Login(vo);
-			model.addAttribute("login", login);
+	    	session.setAttribute("login", login);
 		}
 		
+		return "redirect:/";
+	}
+	
+	
+	@GetMapping("/account/complete")
+	public String complete(@SessionAttribute("login") LoginVO login, HttpSession session) {	
+		log.info("HomeController => 그룹가입 후 인덱스페이지로 이동");
+
+		MemberVO member = accountservice.CheckId(login.getMember().getUserId());
+		login.setMember(member);
+    	session.setAttribute("login", login);
+
 		return "redirect:/";
 	}
 }

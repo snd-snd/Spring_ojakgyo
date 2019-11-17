@@ -23,7 +23,8 @@ public interface GroupMapper {
 	boolean register(@Param("groupCode") String groupCode,@Param("member") MemberVO member);
 	
 	List<GroupMemberVO> list(String groupCode);
-	boolean remove(@Param("groupCode") String groupCode,@Param("mno") int mno);
-	GroupMemberVO read(@Param("groupCode") String groupCode,@Param("mno") int mno);
+	boolean remove(GroupMemberVO member);
+	GroupMemberVO read(GroupMemberVO member);
+	boolean modify(GroupMemberVO member);
 	
 }

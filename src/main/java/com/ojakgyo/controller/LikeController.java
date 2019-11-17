@@ -31,11 +31,12 @@ public class LikeController {
 		return new ResponseEntity<Integer>(service.likeTotal(groupCode, bno), HttpStatus.OK);
 	}
 	
-	@GetMapping("/likeCheck")
+	@PostMapping("/likeCheck")
 	public ResponseEntity<Boolean> search(@PathVariable("groupCode") String groupCode, @RequestBody LikeVO like) {
 		log.info("LikeController => 좋아요 체크여부");
-				
-		return service.likeCheck(groupCode, like) == 1
+		like.setGroupCode(groupCode);
+		
+		return service.likeCheck(like) == 1
 				? new ResponseEntity<>(true, HttpStatus.OK)
 				: new ResponseEntity<>(false, HttpStatus.OK);
 	}
@@ -43,8 +44,9 @@ public class LikeController {
 	@PostMapping("/action")
 	public ResponseEntity<String> action(@PathVariable("groupCode") String groupCode, @RequestBody LikeVO like) {
 		log.info("LikeController => 게시글 좋아요");
-				
-		return service.action(groupCode, like)
+		like.setGroupCode(groupCode);
+		
+		return service.action(like)
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 	}
@@ -52,8 +54,9 @@ public class LikeController {
 	@DeleteMapping("/cancel")
 	public ResponseEntity<String> cancel(@PathVariable("groupCode") String groupCode, @RequestBody LikeVO like) {
 		log.info("LikeController => 게시글 좋아요 취소");
-				
-		return service.cancel(groupCode, like)
+		like.setGroupCode(groupCode);
+		
+		return service.cancel(like)
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 	}

@@ -22,7 +22,9 @@ public interface GroupService {
 	boolean register(String groupCode, MemberVO member);
 	
 	List<GroupMemberVO> list(String groupCode);
-	boolean remove(String groupCode, int mno);
+	boolean remove(GroupMemberVO member);
+	boolean modify(GroupMemberVO member);
+	
 	
 	
 }

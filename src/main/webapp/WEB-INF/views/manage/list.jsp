@@ -9,78 +9,113 @@
 		<div class="container-fluid">
 			<h3 class="page-title">Admin</h3>
 			<div class="row">
-											
-				<!-- TABLE STRIPED -->
-				<div class="panel">
-					<div class="panel-heading">
-						<h3 class="panel-title"># 회원 관리</h3>
-					</div>
-					<div class="panel-body">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>아이디</th>
-									<th>닉네임</th>
-									<th>등급</th>
-									<th>가입일</th>
-									<th>추방?</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>kim123</td>
-									<td>Laverth</td>
-									<td>1</td>
-									<td>2010-12-12</td>
-									<td><button class="btn btn-danger">추방</button></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>lee212</td>
-									<td>마징가</td>
-									<td>2</td>
-									<td>2010-12-24</td>
-									<td><button class="btn btn-danger">추방</button></td>
-								</tr>
-								<c:forEach items="${list }" var="member">
+				<div class="col-md-8">							
+					<!-- TABLE STRIPED -->
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title"># 회원 관리</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table table-striped">
+								<thead>
 									<tr>
-										<td>${member.mno }</td>
-										<td>${member.userId }</td>
-										<td>${member.nickName }</td>
-										<td>${member.level }</td>
-										<td><fmt:parseDate pattern="yyyy-MM-dd" value="${member.regDate }"/></td>
-										<td><button class="btn btn-danger" data-mno="${member.mno }">추방</button></td>
+										<th>번호</th>
+										<th>아이디</th>
+										<th>닉네임</th>
+										<th>등급</th>
+										<th>가입일</th>
+										<th>설정</th>
 									</tr>
-								</c:forEach>															
-							</tbody>
-						</table>
-					</div>				
+								</thead>
+								<tbody>
+	
+									<c:forEach items="${list }" var="member">
+										<tr>
+											<td>${member.mno }</td>
+											<td>${member.userId }</td>
+											<td>${member.nickName }</td>
+											<td>${member.score }</td>
+											<td><fmt:parseDate pattern="yyyy-MM-dd" value="${member.regDate }"/></td>
+											<td><button class="btn btn-info" data-name="${member.nickName }">설정</button></td>
+										</tr>
+									</c:forEach>
+																								
+								</tbody>
+							</table>
+						</div>				
+					</div>
 				</div>												
 			</div>		
 		</div>
 	</div>
 	<!-- END MAIN CONTENT -->
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">설정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="expulsion">추방</button>
+        <button type="button" class="btn btn-primary" id="delegation">권한위임</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+
 <!-- END MAIN -->
 <div class="clearfix"></div>
 <script src="/resources/js/manage/manage.js"></script>
 <script>
 $(function(){
 	
-	$("table").on("click", "button", function(){
-		var mno = $(this).data("mno");
-		var code = '${code}';
-		
-		manage.remove({mno:mno, code:code}, function(result){
-			if (result == "success"){
-				location.herf="/manage/"+code;
-			}
-		})
-		
-		
+	var groupCode = '${code}';
+	var modal = $(".modal");
+	var expulsion = $("#expulsion");
+	var delegation = $("#delegation");
+	
+	$("table").on("click", "button", function(){	
+		modal.modal("show");
+		$(".modal-body").html($(this).data("name"));		
 	})
+	
+	expulsion.click(function(){
+		var nickName = $(".modal-body").html();
+		console.log(nickName);
+		
+		manage.remove({nickName:nickName, groupCode:groupCode}, function(result){
+			if (result == "success"){
+				modal.modal("hide");
+				location.herf="/manage/"+groupCode;
+			}
+		}) 
+	})
+	
+	delegation.click(function(){
+		var check = confirm("그룹을 정말 위임하시겠습니까?");
+		if (check){
+			manage.modify({nickName:nickName, groupCode:groupCode}, function(result){
+				if (result == "success"){
+					modal.modal("hide");
+					location.herf="/";
+				}
+			}) 		
+		}
+	})
+	
+	
+	
 })
 </script>
 <footer>

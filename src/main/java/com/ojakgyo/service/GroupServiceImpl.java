@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ojakgyo.domain.GroupMemberVO;
 import com.ojakgyo.domain.GroupVO;
+import com.ojakgyo.domain.ItemVO;
 import com.ojakgyo.domain.MemberVO;
 import com.ojakgyo.domain.ProcedureVO;
 import com.ojakgyo.mapper.AccountMapper;
@@ -69,21 +70,23 @@ public class GroupServiceImpl implements GroupService {
 	@Transactional
 	@Override
 	public boolean changeStatus(GroupVO group) {
+		
+		GroupVO temp = mapper.groupRead(group.getGroupCode());
+		MemberVO member = account_mapper.MemberNickNameCheck(temp.getLeader());
+		
+		if (member.getGroupCodes().size() == 4)
+			return false;
+		
 		boolean result = mapper.changeStatus(group);
 		if (result && group.getStatus() == 1) {
-			if (item_mapper.check_item(group.getGroupCode()) == 0) {
+			if (item_mapper.check_item(group.getGroupCode()) != 0) {
 				ProcedureVO procedure = new ProcedureVO();
 				procedure.setIndata(group.getGroupCode());
 				System.out.println(procedure.getIndata());
 				item_mapper.create_item(procedure);
 				System.out.println(procedure.getOutdata());
 				if (procedure.getOutdata() != null && procedure.getOutdata().equals("success")) {
-					//유저DB의 groupCode 중 빈곳을 찾아 넣어줘야함. (leader)
-					
-					GroupVO temp = mapper.groupRead(group.getGroupCode());
-					MemberVO member = account_mapper.MemberNickNameCheck(temp.getLeader());
-					
-					System.out.println(member);
+					//유저DB의 groupCode 중 빈곳을 찾아 넣어줘야함. (leader)				
 					
 					if (member.getGroupCode1() == null) {
 						member.setGroupCode1(group.getGroupCode());
@@ -93,13 +96,9 @@ public class GroupServiceImpl implements GroupService {
 						member.setGroupCode3(group.getGroupCode());
 					} else if (member.getGroupCode4() == null) {
 						member.setGroupCode4(group.getGroupCode());
-					}
+					}									
+					result = account_mapper.modify(member);
 					
-					System.out.println(member);
-					
-					account_mapper.modify(member);
-					
-					result = true;
 				} else {
 					result = false;
 				}
@@ -120,23 +119,20 @@ public class GroupServiceImpl implements GroupService {
 	public boolean register(String groupCode, MemberVO member) {
 		
 		boolean result = mapper.register(groupCode, member);
-		if (result) {
-			MemberVO member2 = account_mapper.read(member.getUserId());
+		MemberVO member2 = account_mapper.read(member.getUserId());	
+		if (member2.getGroupCodes().size() != 4) {
 			
-			if (member2.getGroupCodes().size() != 4) {
-				
-				if (member2.getGroupCode1() == null) {
-					member2.setGroupCode1(groupCode);
-				} else if (member2.getGroupCode2() == null) {
-					member2.setGroupCode2(groupCode);
-				} else if (member2.getGroupCode3() == null) {
-					member2.setGroupCode3(groupCode);
-				} else if (member2.getGroupCode4() == null) {
-					member2.setGroupCode4(groupCode);
-				}
+			if (member2.getGroupCode1() == null) {
+				member2.setGroupCode1(groupCode);
+			} else if (member2.getGroupCode2() == null) {
+				member2.setGroupCode2(groupCode);
+			} else if (member2.getGroupCode3() == null) {
+				member2.setGroupCode3(groupCode);
+			} else if (member2.getGroupCode4() == null) {
+				member2.setGroupCode4(groupCode);
 			}
 		}
-		
+		result = account_mapper.modify(member2);
 		return result;
 	}
 	
@@ -147,16 +143,16 @@ public class GroupServiceImpl implements GroupService {
 	
 	@Transactional
 	@Override
-	public boolean remove(String groupCode, int mno) {
+	public boolean remove(GroupMemberVO gMember) {
 		
-		GroupMemberVO vo = mapper.read(groupCode, mno);
-		MemberVO member = account_mapper.read(vo.getUserId());
+		MemberVO member = account_mapper.MemberNickNameCheck(gMember.getNickName());
+		String groupCode = gMember.getGroupCode();
 		
 		if (member.getGroupCode1() != null) {
 			if (member.getGroupCode1().equals(groupCode))
 				member.setGroupCode1(null);
 		} 
-		if (member.getGroupCode1() != null) {
+		if (member.getGroupCode2() != null) {
 			if (member.getGroupCode2().equals(groupCode))
 				member.setGroupCode2(null);	
 		}  
@@ -167,12 +163,16 @@ public class GroupServiceImpl implements GroupService {
 		if (member.getGroupCode4() != null) {
 			if (member.getGroupCode4().equals(groupCode))
 				member.setGroupCode4(null);	
-		}  
-		
+		}  		
 		account_mapper.modify(member);
 		
-		return mapper.remove(groupCode, mno);
+		return mapper.remove(gMember);
 	}
 	
+	
+	@Override
+	public boolean modify(GroupMemberVO member) {
+		return mapper.modify(member);
+	}
 
 }

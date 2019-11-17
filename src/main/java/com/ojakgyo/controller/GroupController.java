@@ -32,7 +32,7 @@ public class GroupController {
 	@PostMapping("/new")
 	public ResponseEntity<String> groupRegister(@RequestBody GroupVO group) {
 		log.info("GroupController => 그룹 신청 요청으로 DB에 신청 내역을 저장");
-		System.out.println(group);
+
 		return service.groupRegister(group)
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
@@ -88,5 +88,6 @@ public class GroupController {
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 	}
+	
 	
 }

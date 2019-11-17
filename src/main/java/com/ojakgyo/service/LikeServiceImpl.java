@@ -22,16 +22,16 @@ public class LikeServiceImpl implements LikeService {
 	}
 
 	@Override
-	public int likeCheck(String groupCode, LikeVO like) {
-		return like_mapper.likeCheck(groupCode, like);
+	public int likeCheck(LikeVO like) {
+		return like_mapper.likeCheck(like);
 	}
 
 	@Transactional
 	@Override
-	public boolean action(String groupCode, LikeVO like) {		
+	public boolean action(LikeVO like) {		
 		boolean result = false;		
-		if (like_mapper.action(groupCode, like)) {
-			if (board_mapper.likeUpDown(groupCode, like.getBno(), 1))
+		if (like_mapper.action(like)) {
+			if (board_mapper.likeUpDown(like.getGroupCode(), like.getBno(), 1))
 				result = true;		
 		}
 		return result;
@@ -39,10 +39,10 @@ public class LikeServiceImpl implements LikeService {
 
 	@Transactional
 	@Override
-	public boolean cancel(String groupCode, LikeVO like) {
+	public boolean cancel(LikeVO like) {
 		boolean result = false;		
-		if (like_mapper.cancel(groupCode, like)) {
-			if (board_mapper.likeUpDown(groupCode, like.getBno(), -1))
+		if (like_mapper.cancel(like)) {
+			if (board_mapper.likeUpDown(like.getGroupCode(), like.getBno(), -1))
 				result = true;		
 		}
 		return result;		

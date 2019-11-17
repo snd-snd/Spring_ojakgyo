@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public BoardVO read(String groupCode, int bno) {
-		board_mapper.readUp(groupCode, bno);
+		System.out.println(board_mapper.readUp(groupCode, bno));		
 		return board_mapper.read(groupCode, bno);
 	}
 	
@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public boolean modify(String groupCode, BoardVO board) {
-		return board_mapper.modify(groupCode, board);
+	public boolean modify(BoardVO board) {
+		return board_mapper.modify(board);
 	}
 	
 	@Override

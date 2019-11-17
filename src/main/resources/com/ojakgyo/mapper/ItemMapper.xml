@@ -17,7 +17,8 @@
 	
 	<!-- 그룹아이디로 사용할 아이디로 만들어진 테이블이 있는지 여부(없어야 함) -->
 	<select id="check_item" resultType="int">
-		select count(*) from user_tables where table_name = #{groupCode}
+		select NVL(count(*), 0) from user_tables where table_name = #{groupCode}
 	</select>
+	
 	
 </mapper>

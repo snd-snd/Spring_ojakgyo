@@ -21,7 +21,6 @@ var likeService = (function(){
 	
 	function likeCheck(params, callback){
 		var code = params.code;
-		
 		$.ajax({
 			type : 'post',
 			url : '/'+code+'/like/likeCheck',

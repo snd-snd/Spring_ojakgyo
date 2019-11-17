@@ -30,7 +30,7 @@
 		<beans:property name="maxUploadSize" value="104857600"/>
 	</beans:bean>
 	
-	<beans:bean id="GroupChating" class="com.ojackgyo.handler.EchoHandler"/>
+	<beans:bean id="GroupChating" class="com.ojakgyo.handler.EchoHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="GroupChating" path="/echo"/>
 			<websocket:handshake-interceptors>
@@ -38,6 +38,24 @@
 			</websocket:handshake-interceptors>
 <!-- 		<websocket:sockjs/> -->
 	</websocket:handlers> 
+	
+	<!-- interceptor 설정 -->
+		<beans:bean id="loginInterceptor" class="com.ojakgyo.handler.LoginHandler"/>
+		<interceptors>
+			<interceptor>
+				<mapping path="/**"/> <!-- 위와 같은 URL 요청이 있을 경우 인터셉터가 가로챔 -->
+				
+				<exclude-mapping path="/"/>
+				<exclude-mapping path="/resources/**"/>
+				<exclude-mapping path="/account/login"/>
+				<exclude-mapping path="/account/needLogin"/>
+				<exclude-mapping path="/account/join"/>
+				<exclude-mapping path="/notGroupMember"/>
+				<beans:ref bean="loginInterceptor"/>
+			</interceptor>
+		</interceptors>
+		
+		<context:component-scan base-package="com.ojakgyo.handler" />
 	
 	
 </beans:beans>

@@ -19,8 +19,8 @@ BEGIN
 sql1 := 'CREATE TABLE ' || indata || ' (
     mno NUMBER CONSTRAINT pk_' || indata || ' PRIMARY KEY,
     userId VARCHAR2(50),
-    nickName VARCHAR2(50),
-    score NUMBER,
+    nickName VARCHAR2(50) UNIQUE,
+    score NUMBER DEFAULT 0,
     regDate DATE DEFAULT SYSDATE,
     CONSTRAINT fk_userId_' || indata || ' FOREIGN KEY (userId) REFERENCES members (userId) ON DELETE CASCADE,
     CONSTRAINT fk_nickName_' || indata || ' FOREIGN KEY (nickName) REFERENCES members (nickName) ON DELETE CASCADE)';
@@ -31,8 +31,9 @@ sql2 := 'CREATE TABLE board_' || indata || ' (
 	content VARCHAR2(3000) not null,
     writer VARCHAR2(50) not null,
     regDate DATE DEFAULT SYSDATE,
-    readCount NUMBER,
-	likeCount NUMBER
+    readCount NUMBER DEFAULT 0,
+	likeCount NUMBER DEFAULT 0,
+	replyCnt NUMBER DEFAULT 0
 )';
 
 sql3 := 'CREATE TABLE reply_' || indata || ' (

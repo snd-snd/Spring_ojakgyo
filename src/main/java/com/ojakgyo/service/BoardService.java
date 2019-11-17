@@ -9,7 +9,7 @@ public interface BoardService {
 	BoardInfoVO list(CriteriaVO criteria);
 	BoardVO read(String groupCode, int bno);
 	boolean register(BoardVO board);
-	boolean modify(String groupCode, BoardVO board);
+	boolean modify(BoardVO board);
 	boolean readCount(String groupCode, int bno);
 	boolean remove(String groupCode, int bno);
 	int totalCount(CriteriaVO criteria);

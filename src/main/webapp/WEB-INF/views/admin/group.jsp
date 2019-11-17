@@ -188,8 +188,11 @@ $(function(){
 	acceptBtn.on("click", function(){
 		var code = modal.data("code");
 		groupRequest.update({groupCode:code, status:1}, function(result){
-			modal.modal("hide");
-			location.href="/admin/group";
+			if (result == "success"){
+				modal.modal("hide");
+				alert("승인완료");
+				location.href="/admin/group";
+			}
 		})
 	})
 	

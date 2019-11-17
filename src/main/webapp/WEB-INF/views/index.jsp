@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="includes/header.jsp" %>		
+<%@ include file="includes/header.jsp" %>
+<script>
+	var message = '${message}';
+	
+	if (message != '' && message.length != 0){
+		alert(message);
+	}
+</script>		
 <!-- MAIN -->
 <div class="main">
 	<%@ include file="includes/alarm.jsp"%>

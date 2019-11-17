@@ -33,9 +33,8 @@ public class ReplyController {
 	public ResponseEntity<ReplyPageVO> getList(@PathVariable("groupCode") String groupCode,
 			@PathVariable("bno") int bno,@PathVariable("page") int page){
 		log.info("ReplyController => 댓글 리스트 요청");
-		CriteriaVO criteria = new CriteriaVO(page, 10);
+		CriteriaVO criteria = new CriteriaVO(page, 5);
 		
-			
 		return new ResponseEntity<>(service.list(groupCode, criteria, bno), HttpStatus.OK);
 	}
 	
@@ -59,7 +58,7 @@ public class ReplyController {
 	@PutMapping(value = "/{rno}")
 	public ResponseEntity<String> modify(@PathVariable("groupCode") String groupCode, @PathVariable("rno") int rno, @RequestBody ReplyVO reply){
 		log.info("ReplyController => 댓글 수정");
-		System.out.println(reply);
+		
 		return service.modify(groupCode, reply)
 				? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST); 
