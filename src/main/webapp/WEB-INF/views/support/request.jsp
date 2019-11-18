@@ -32,7 +32,8 @@
 									
 									<c:forEach items="${myGroups }" var="group" varStatus="status">
 									<tr>
-										<td>${status.index+1 }</td>
+
+										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
 										<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
 										<td>${group.leader }</td>
@@ -46,6 +47,7 @@
 										<c:if test="${group.status == 3}">
 										<td><span class="label label-danger">FAILED</span></td>
 										</c:if>
+										
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -63,16 +65,18 @@
 			<!-- 그룹 가입란 -->				
 			<div class="row" id="intro">			
 				<c:forEach items="${groups }" var="group">
-					<div class="col-md-3" data-code="${group.groupCode }", data-name="${group.groupName }">
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">${group.groupName }</h3>
-							</div>
-							<div class="panel-body">
-								<p>${group.content }</p>
+					<c:if test="${group.groupCode != 'GN1000' }">
+						<div class="col-md-3" data-code="${group.groupCode }", data-name="${group.groupName }">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">${group.groupName }</h3>
+								</div>
+								<div class="panel-body">
+									<p>${group.content }</p>
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:if>
 				</c:forEach>
 			</div>			
 			<!-- 그룹 가입란 종료-->			

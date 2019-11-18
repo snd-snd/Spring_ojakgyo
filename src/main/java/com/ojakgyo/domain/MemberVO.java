@@ -16,6 +16,7 @@ public class MemberVO {
 	private String userName;
 	private String nickName;
 	private String email;
+	private int admin;
 	
 	private String groupCode1;
 	private String groupCode2;

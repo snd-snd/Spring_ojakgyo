@@ -68,4 +68,9 @@ public class AccountServiceImpl implements AccountService {
 	public MemberVO read(String userId) {
 		return mapper.read(userId);
 	}
+	
+	@Override
+	public List<MemberVO> listAll() {
+		return mapper.listAll();
+	}
 }

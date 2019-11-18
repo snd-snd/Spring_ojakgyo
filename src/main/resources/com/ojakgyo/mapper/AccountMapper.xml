@@ -41,4 +41,8 @@
 		groupCode3 = #{groupCode3, jdbcType=VARCHAR}, groupCode4 = #{groupCode4, jdbcType=VARCHAR} where userId = #{userId}
 	</update>
 	
+	<select id="listAll" resultType="com.ojakgyo.domain.MemberVO">
+		select * from members
+	</select>
+	
 </mapper>

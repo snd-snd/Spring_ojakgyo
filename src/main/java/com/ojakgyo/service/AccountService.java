@@ -1,5 +1,7 @@
 package com.ojakgyo.service;
 
+import java.util.List;
+
 import com.ojakgyo.domain.LoginVO;
 import com.ojakgyo.domain.MemberVO;
 
@@ -19,5 +21,6 @@ public interface AccountService {
 	public boolean Update(MemberVO vo);
 	
 	MemberVO read(String userId);
+	List<MemberVO> listAll();
 
 }

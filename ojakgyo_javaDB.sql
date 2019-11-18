@@ -22,7 +22,7 @@ create table groups(
 	leader varchar2(50),
 	regDate date default sysdate,
 	status number default 2,
-	headCount number(10,0),
+	headCount number default 0,
 	constraint fk_leader foreign key(leader) references members(nickName)
 );
 

@@ -28,17 +28,22 @@
 									</tr>
 								</thead>
 								<tbody>
-	
-									<c:forEach items="${list }" var="member">
-										<tr>
-											<td>${member.mno }</td>
-											<td>${member.userId }</td>
-											<td>${member.nickName }</td>
-											<td>${member.score }</td>
-											<td><fmt:parseDate pattern="yyyy-MM-dd" value="${member.regDate }"/></td>
-											<td><button class="btn btn-info" data-name="${member.nickName }">설정</button></td>
-										</tr>
-									</c:forEach>
+								
+								<c:forEach items="${list }" var="member">
+									<tr>
+										<td>${member.mno }</td>
+										<td>${member.userId }</td>
+										<td>${member.nickName }</td>
+										<td>${member.score }</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.regDate }"/></td>
+										<c:if test="${member.nickName != login.member.nickName }">
+										<td><button class="btn btn-info" data-name="${member.nickName }">설정</button></td>
+										</c:if>
+										<c:if test="${member.nickName == login.member.nickName }">
+										<td></td>
+										</c:if>
+									</tr>
+								</c:forEach>
 																								
 								</tbody>
 							</table>
@@ -91,25 +96,28 @@ $(function(){
 	})
 	
 	expulsion.click(function(){
+		var check = confirm("정말 추방하시겠습니까?");
 		var nickName = $(".modal-body").html();
-		console.log(nickName);
 		
-		manage.remove({nickName:nickName, groupCode:groupCode}, function(result){
-			if (result == "success"){
-				modal.modal("hide");
-				location.herf="/manage/"+groupCode;
-			}
-		}) 
+		if (check){
+			manage.remove({nickName:nickName, groupCode:groupCode}, function(result){
+				if (result == "success"){
+					modal.modal("hide");
+					location.href="/manage/"+groupCode;
+				}
+			}) 
+		}
+	
 	})
 	
 	delegation.click(function(){
 		var check = confirm("그룹을 정말 위임하시겠습니까?");
+		var nickName = $(".modal-body").html();
 		if (check){
 			manage.modify({nickName:nickName, groupCode:groupCode}, function(result){
-				if (result == "success"){
-					modal.modal("hide");
-					location.herf="/";
-				}
+				modal.modal("hide");
+				location.href="/";
+				
 			}) 		
 		}
 	})

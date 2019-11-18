@@ -43,14 +43,43 @@
 		<beans:bean id="loginInterceptor" class="com.ojakgyo.handler.LoginHandler"/>
 		<interceptors>
 			<interceptor>
-				<mapping path="/**"/> <!-- 위와 같은 URL 요청이 있을 경우 인터셉터가 가로챔 -->
+				<!-- <mapping path="/**"/> --> <!-- 위와 같은 URL 요청이 있을 경우 인터셉터가 가로챔 -->
+				<mapping path="/account/delete"/>
+				<mapping path="/account/update"/>
+				<mapping path="/account/complete"/>
 				
-				<exclude-mapping path="/"/>
+				<mapping path="/admin/group"/>
+				<mapping path="/admin/member"/>
+				
+				<mapping path="/{groupCode}/board/list"/>
+				<mapping path="/{groupCode}/board/read/{bno}"/>
+				<mapping path="/{groupCode}/board/register"/>
+				<mapping path="/{groupCode}/board/modify/{bno}"/>
+				<mapping path="/{groupCode}/board/modify"/>
+				<mapping path="/{groupCode}/board/remove"/>
+				
+				<mapping path="/manage/{groupCode}"/>
+
+				<mapping path="/review/reviewlist"/>
+				<mapping path="/review/reviewread"/>
+				<mapping path="/review/reviewupdate"/>
+				<mapping path="/review/reviewinsert"/>
+				<mapping path="/review/reviewdelete"/>
+
+				<mapping path="/support/request"/>
+
+								
+				
+				
+<!-- 				<exclude-mapping path="/"/>
 				<exclude-mapping path="/resources/**"/>
 				<exclude-mapping path="/account/login"/>
 				<exclude-mapping path="/account/needLogin"/>
 				<exclude-mapping path="/account/join"/>
-				<exclude-mapping path="/notGroupMember"/>
+				<exclude-mapping path="//checkId"/>
+				<exclude-mapping path="//checkNickName"/>
+				<exclude-mapping path="/notGroupMember"/> -->
+				
 				<beans:ref bean="loginInterceptor"/>
 			</interceptor>
 		</interceptors>

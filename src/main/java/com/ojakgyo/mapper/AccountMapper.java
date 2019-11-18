@@ -1,5 +1,7 @@
 package com.ojakgyo.mapper;
 
+import java.util.List;
+
 import com.ojakgyo.domain.MemberVO;
 
 public interface AccountMapper {
@@ -19,4 +21,6 @@ public interface AccountMapper {
 	
 	MemberVO read(String userId);
 	boolean modify(MemberVO member);
+	
+	List<MemberVO> listAll();
 }

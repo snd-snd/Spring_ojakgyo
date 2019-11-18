@@ -26,27 +26,16 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>kim123</td>
-									<td>김태호</td>
-									<td>Laverth</td>
-									<td>hyssop9734@naver.com</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>lee123</td>
-									<td>이호진</td>
-									<td>hojin2312</td>
-									<td>hojin9314@google.com</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>hong319</td>
-									<td>홍길동</td>
-									<td>Gildond32</td>
-									<td>hong3314@daum.net</td>
-								</tr>															
+								
+								<c:forEach var="member" items="${list }" varStatus="status">
+									<tr>
+										<td>${status.count }</td>
+										<td>${member.userId }</td>
+										<td>${member.userName }</td>
+										<td>${member.nickName }</td>
+										<td>${member.email }</td>
+									</tr>
+								</c:forEach>															
 							</tbody>
 						</table>
 					</div>				

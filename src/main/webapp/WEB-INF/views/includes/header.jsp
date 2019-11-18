@@ -148,7 +148,7 @@
 						<li>
 							<a href="#manage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Manage</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="manage" class="collapse">
-								<ul class="nav">				
+								<ul class="nav">		
 									<c:forEach items="${login.groups }" var="group">
 										<c:if test="${group.leader == login.member.nickName }">
 											<li><a href="/manage/${group.groupCode }" class=""><i class="lnr lnr-users"></i>${group.groupName }</a></li>
@@ -157,15 +157,20 @@
 								</ul>						
 							</div>
 						</li>
-						<li>
-							<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="adminPage" class="collapse">
-								<ul class="nav">							
-									<li><a href="/admin/member" class=""><i class="lnr lnr-users"></i>회원 관리</a></li>
-									<li><a href="/admin/group" class=""><i class="lnr lnr-users"></i>그룹 관리</a></li>
-								</ul>						
-							</div>
-						</li>					
+						
+						<c:if test="${login.member.admin == 1 }">
+							<li>
+								<a href="#adminPage" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Admin Pages</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="adminPage" class="collapse">
+									<ul class="nav">							
+										<li><a href="/admin/member" class=""><i class="lnr lnr-users"></i>회원 관리</a></li>
+										<li><a href="/admin/group" class=""><i class="lnr lnr-users"></i>그룹 관리</a></li>
+									</ul>						
+								</div>
+							</li>					
+						
+						</c:if>
+						
 					</ul>
 				</nav>
 			</div>

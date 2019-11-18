@@ -39,6 +39,7 @@
 							<!-- 댓글 페이징 처리 -->
 							<div class="row">
 								<div class="text-center" id="paging">
+								
 								</div>
 							</div>
 							
@@ -143,10 +144,18 @@ $(function(){
 	
 	//댓글 등록
 	registerBtn.click(function(){
+		
+		var replyContent = $("#replyText").val();
+		
+		if (replyContent == '' || replyContent.length == 0){
+			alert("내용을 입력해야 합니다.");
+			return;
+		}
+		
 		var params = {
 				code:code,
 				bno:bno,
-				reply:$("#replyText").val(),
+				reply:replyContent,
 				replyer:nickName
 		};
 
@@ -154,9 +163,7 @@ $(function(){
 			if(result == "success"){
 				$("#replyText").val("");
 				showList(-1);
-			} else {
-				alert("뭔가 잘못됐나본데?")
-			}
+			} 
 		});
 	})
 	
@@ -167,7 +174,7 @@ $(function(){
 			var rno = $(this).data("rno");		
 			replySerivce.remove({code:code, rno:rno}, function(result){
 				if(result){
-					showList(1);
+					showList(-1);
 				}		 
 			
 			});
@@ -210,7 +217,7 @@ $(function(){
 		var reply = $(this).closest("nav").find("textarea").val();
 		
 		replySerivce.modify({code:code, rno:rno, reply:reply}, function(result){		
-			showList(1);	
+			showList(-1);	
 		})		
 	})
 			
@@ -243,19 +250,26 @@ $(function(){
 		})
 	})
 	
+	// 댓글 페이지 영역
+	var replyPageFooter = $("#paging");
+	var pageNum = 1;
+	
 	function showList(page){ //Read에 들어오면 글번호에 해당하는 댓글들을 가져와 뿌려줌
 		replySerivce.getList({code:code,bno:bno,page:page||1}, function(total,replys){
-		
-			replyContent.html("");
-			if (list == null || replys.length == 0){
+			console.log(replys);
+
+			if(page==-1){  //새 글을 등록하였을때.
+				pageNum = Math.ceil(total/5.0);
+				showList(pageNum);
 				return;
 			}
 			
-			if(page==-1){  //새 글을 등록하였을때.
-				pageNum=Math.ceil(total/10.0);
-				showList(pageNum)
+			if (replys == null || replys.length == 0){
+				replyContent.html("");
+				replyPageFooter.html("");
 				return;
 			}
+			
 
 			var str = "";
 			for (var i=0, len=replys.length||0; i<len; i++){	
@@ -283,19 +297,16 @@ $(function(){
 	
 	
 	
-	// 댓글 페이지 영역
-	var replyPageFooter = $("#paging");
-	var pageNum = 1;
 	
 	function showReplyPage(total){
 		
-		var endPage = Math.ceil(pageNum / 10.0)*10; //마지막 페이지 계산
-		var startPage = endPage-9; //시작 페이지
+		var endPage = Math.ceil(pageNum / 5.0)*5; //마지막 페이지 계산
+		var startPage = endPage-4; //시작 페이지
 		var prev = startPage != 1; //이전 버튼
 		var next = false; //다음 버튼
 		
 		if (endPage*10 >= total){
-			endPage = Math.ceil(total/10.0);
+			endPage = Math.ceil(total/5.0);
 		}
 		if (endPage*10 < total){
 			next = true;

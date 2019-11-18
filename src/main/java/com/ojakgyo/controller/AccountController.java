@@ -61,7 +61,7 @@ public class AccountController {
 	    	LoginVO login = accountservice.Login(vo2);
 	    	// accountservice.Login() => MemberVO 가 널이 아니라면
 
-	    	session.setMaxInactiveInterval(1000*60*60*24*10);
+	    	session.setMaxInactiveInterval(60*60);
 	    	session.setAttribute("login", login);
 	    		// 홈이 보여지게 만들어 주고
 	    	return "redirect:/";	    	
@@ -70,14 +70,15 @@ public class AccountController {
 	
 // 로그아웃
 	@GetMapping("/logout")
-	public String logout(SessionStatus session) {
+	public String logout(HttpSession session) {
 		log.info("로그아웃 처리...");
 		// 세션삭제
 		// 세션이 있다면 세션삭제
-		if (!session.isComplete()) {
-			// 세션이 존재하면 false 존재하지 않으면 true
-			session.setComplete();
-		}
+		session.invalidate();
+//		if (!session.isComplete()) {
+//			// 세션이 존재하면 false 존재하지 않으면 true
+//			session.setComplete();
+//		}
 		return "redirect:/";
 	}
 
@@ -91,13 +92,13 @@ public class AccountController {
 
 // 회원탈퇴
 	@PostMapping("/account/delete")
-	public String DeletePost(MemberVO vo, SessionStatus status) {
+	public String DeletePost(MemberVO vo, HttpSession session) {
 		log.info("회원탈퇴 진행");
 
 		if (accountservice.Delete(vo)) {
 			// 세션해제
 			// redirect
-			status.setComplete();
+			session.invalidate();
 			return "redirect:/";
 		}
 		return "redirect:/delete";

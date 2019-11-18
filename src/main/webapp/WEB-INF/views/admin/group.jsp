@@ -68,7 +68,7 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
-										<td><a href="${group.groupCode }/board/list" data-code="${group.groupCode }">${group.groupName }</a></td>
+										<td><a href="/${group.groupCode }/board/list">${group.groupName }</a></td>
 										<td>${group.leader }</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<td><span class="label label-success">SUCCESS</span></td>

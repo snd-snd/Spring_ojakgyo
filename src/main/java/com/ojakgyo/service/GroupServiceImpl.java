@@ -79,7 +79,7 @@ public class GroupServiceImpl implements GroupService {
 		
 		boolean result = mapper.changeStatus(group);
 		if (result && group.getStatus() == 1) {
-			if (item_mapper.check_item(group.getGroupCode()) != 0) {
+			if (item_mapper.check_item(group.getGroupCode()) == 0) {
 				ProcedureVO procedure = new ProcedureVO();
 				procedure.setIndata(group.getGroupCode());
 				System.out.println(procedure.getIndata());
@@ -97,7 +97,8 @@ public class GroupServiceImpl implements GroupService {
 					} else if (member.getGroupCode4() == null) {
 						member.setGroupCode4(group.getGroupCode());
 					}									
-					result = account_mapper.modify(member);
+					account_mapper.modify(member);
+					result = mapper.register(group.getGroupCode(), member);
 					
 				} else {
 					result = false;

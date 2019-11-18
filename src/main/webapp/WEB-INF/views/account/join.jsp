@@ -40,7 +40,7 @@
 								<div class="logo text-center"><img src="/resources/assets/img/logo-ojakgyo.png" alt="Klorofil Logo"></div>
 								<p class="lead">회원가입</p>
 							</div>
-							<form id="join" class="form-auth-small" action="" method="post">
+							<form id="join" class="form-auth-small" action="/account/join" method="post">
 								<div class="form-group">
 									<label for="userId" class="control-label sr-only">아이디</label>
 									<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요">
@@ -89,5 +89,12 @@
 	</div>
 	<!-- END WRAPPER -->
 </body>
-
+<script>
+$(function(){
+	var btn = (".btn-block");
+	btn.click(function(){
+		alert("클릭했어");
+	})
+})
+</script>
 </html>

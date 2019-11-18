@@ -1,6 +1,5 @@
 package com.ojakgyo.handler;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class LoginHandler extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+
 		HttpSession session = request.getSession();
 		LoginVO login = (LoginVO) session.getAttribute("login");
 		
@@ -33,6 +32,7 @@ public class LoginHandler extends HandlerInterceptorAdapter {
 		
 		String uri = request.getRequestURI().substring(1);
 		List<String> codes = login.getMember().getGroupCodes();
+		int admin = login.getMember().getAdmin();
 		
 		if (uri.contains("board")) {
 			boolean result = false;
@@ -47,7 +47,7 @@ public class LoginHandler extends HandlerInterceptorAdapter {
 
 				result = codes.stream().anyMatch(s -> s.equals(code));
 
-				if (!result) {
+				if (!result && admin == 0) {
 					response.sendRedirect("/notGroupMember");
 					return false;
 				}		
