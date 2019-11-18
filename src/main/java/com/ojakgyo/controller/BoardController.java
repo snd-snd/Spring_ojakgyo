@@ -37,6 +37,7 @@ public class BoardController {
 		if (info != null) {
 			model.addAttribute("info", info);
 			model.addAttribute("page", new PageVO(criteria, service.totalCount(criteria)));
+			model.addAttribute("groupCode", groupCode);
 		}	 
 		return "/board/list";
 	}
