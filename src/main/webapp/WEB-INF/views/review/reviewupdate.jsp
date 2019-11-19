@@ -89,41 +89,6 @@
 		<!-- END LABELS -->
 	</div>
 	<!-- END MAIN CONTENT -->
-	<!-- MAIN CONTENT -->
-	<div class="main-content">
-		<div class="container-fluid">
-			<div class="panel panel-headline">
-				<div class="panel-heading">
-					<h3 class="panel-title">Reply</h3>
-					<div class="panel panel-headline">
-						<div class="panel-body">
-
-							<div>
-								&nbsp<span class="panel-subtitle">Writer</span> <span
-									class="panel-subtitle" style="float: right;">regDate</span>
-							</div>
-							<br>
-							<textarea class="form-control" placeholder="content" rows="4"></textarea>
-							<br>
-							<p class="demo-button">
-								<button type="button" class="btn1 btn-success">
-									<i class="fa fa-check-circle"></i> Publish
-								</button>
-								<button type="button" class="btn1 btn-warning">
-									<i class="fa fa-refresh fa-spin"></i> Update
-								</button>
-								<button type="button" class="btn1 btn-danger">
-									<i class="fa fa-trash-o"></i> Delete
-								</button>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
 
@@ -163,14 +128,15 @@ $(function(){
 			formObj.attr('action','reviewupdate');
 			formObj.attr('method','post');
 			formObj2.attr('method','post');
-			
+			formObj.submit();
+			formObj2.submit();
 			
 		}else if(oper=='list'){
 			formObj.attr('action','reviewlist');
 			formObj.attr('method','get');
+			formObj.submit();
 		}
-		formObj.submit();
-		formObj2.submit();
+		
 	})
 });
 

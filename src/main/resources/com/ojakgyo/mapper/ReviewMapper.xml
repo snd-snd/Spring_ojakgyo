@@ -8,12 +8,13 @@
 			select * from
 			(select /*+INDEX_DESC(ReviewBoard pk_reviewboard)*/
 			rownum rn,bno,title,content,writer,regDate,replyCnt,readCount
-			from ReviewBoard where 
+			from ReviewBoard where
 		]]>
 		<include refid="criteria" />
 		<![CDATA[	
-			rownum<= #{pageNum} * #{amount})
+			rownum<= #{pageNum} * #{amount} order by readCount desc)
 			where rn> (#{pageNum}-1)*#{amount}
+			
 		]]>
 	</select>
 
