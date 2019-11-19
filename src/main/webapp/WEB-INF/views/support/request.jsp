@@ -268,7 +268,7 @@ $(function(){
 			
 			groupRequest.register({userId:userId, nickName:nickName, code:code}, function(result){
 				if (result == 'success'){
-					alert(name+"에 가입되었습니다.");
+					alert(name+"에 가입되었습니다. 재접속 이후 사용 가능합니다.");
 					location.href = "/account/complete";			
 				} else {
 					alert("뭔가 잘못됐나본데?");

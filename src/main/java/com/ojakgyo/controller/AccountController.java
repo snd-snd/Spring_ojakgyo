@@ -47,25 +47,34 @@ public class AccountController {
 
 	@PostMapping("/account/login")
 // login.jsp에서 넘긴 값 가지고 오기
-	public String loginPost(MemberVO vo, HttpSession session) {
+	public String loginPost(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
 		log.info("로그인 요청...");		
 		
 		MemberVO vo2 = accountservice.read(vo.getUserId());
+		
+		if (vo2 == null) {
+			rttr.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			return "redirect:/account/login";
+		}
+		
 		String encPassword = vo2.getUserPw();
-
+		
 		if (!passwordEncoder.matches(vo.getUserPw(), encPassword)) {
 			// rttr.addFlashAttribute("error", "아이디나 비밀번호를 확인해주세요");
-	    	// LoginVO가 널이라면 로그인창으로 돌아가기
+			// LoginVO가 널이라면 로그인창으로 돌아가기
 			return "redirect:/account/login";// forward(데이터를 살릴수있다) or sendRedirect
-	    } else {
-	    	LoginVO login = accountservice.Login(vo2);
-	    	// accountservice.Login() => MemberVO 가 널이 아니라면
-
-	    	session.setMaxInactiveInterval(60*60);
-	    	session.setAttribute("login", login);
-	    		// 홈이 보여지게 만들어 주고
-	    	return "redirect:/";	    	
-	    }
+		} else {
+			LoginVO login = accountservice.Login(vo2);
+			// accountservice.Login() => MemberVO 가 널이 아니라면
+			
+			session.setMaxInactiveInterval(60*60);
+			session.setAttribute("login", login);
+			// 홈이 보여지게 만들어 주고
+			return "redirect:/";	    	
+		}
+			
+		
+		
 	}
 	
 // 로그아웃

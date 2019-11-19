@@ -41,9 +41,10 @@ public class ManageController {
 
 		if (group != null && group.getLeader().equals(login.getMember().getNickName())) {
 			
-			List<GroupMemberVO> list = service.list(groupCode);
+			List<GroupMemberVO> list = service.list(groupCode);			
 			model.addAttribute("list", list);
 			model.addAttribute("code", groupCode);
+			model.addAttribute("group", group);
 			return "/manage/list";
 		}
 		

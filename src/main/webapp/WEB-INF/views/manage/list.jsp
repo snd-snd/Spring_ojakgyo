@@ -10,6 +10,7 @@
 <%@ include file="../includes/header.jsp" %>
 <!-- MAIN -->
 <div class="main">
+   <%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
@@ -78,7 +79,7 @@
                 	<input class="form-control" id="modalNick" readonly="readonly">
                 </div>
                 <div class="form-group">
-                	<label>소개 글</label>
+                	<label>내용</label>
                 	<textarea class="form-control" id="modalContent" placeholder="사유를 적어주세요." rows="4"></textarea>
                 </div>
       </div>
@@ -92,6 +93,7 @@
 <!-- Modal end -->
 
 
+<input type="hidden"  id="groupName" value="${group.groupName }"/>
 <!-- END MAIN -->
 <div class="clearfix"></div>
 <script src="/resources/js/manage/manage.js"></script>
@@ -114,14 +116,16 @@ $(function(){
 		var check = confirm("정말 추방하시겠습니까?");
 		var nickName = $("#modalNick").val();
 		var content = $("#modalContent").val();
-		
+		var groupName= $("#groupName").val();
 		
 		if (check){
+			groupKick();
 			manage.remove({nickName:nickName, groupCode:groupCode}, function(result){
 				if (result == "success"){
 					modal.modal("hide");
 					location.href="/manage/"+groupCode;
 				}
+				
 			}) 
 		}
 	
