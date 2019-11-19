@@ -44,7 +44,7 @@ public class BoardController {
 
 	@GetMapping("/read/{bno}")
 	public String read(@PathVariable("groupCode") String groupCode, @PathVariable("bno") int bno,
-			@ModelAttribute("criteria") CriteriaVO criteria, Model model) {
+			@ModelAttribute("criteria") CriteriaVO criteria, Model model,String msg) {
 		log.info("BoardController => 요청한 글 읽기");
 		
 		BoardVO board = service.read(groupCode, bno);
@@ -52,6 +52,8 @@ public class BoardController {
 		if (board != null) {
 			board.setGroupCode(groupCode);
 			model.addAttribute("board", board);
+			if (msg != null)
+				model.addAttribute("msg", msg);
 		}
 			
 		return "/board/read";

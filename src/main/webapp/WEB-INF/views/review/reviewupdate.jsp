@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="reviewupdate";
+  </script>
+
 <%@include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/assets/css/reviewlist.css">
 

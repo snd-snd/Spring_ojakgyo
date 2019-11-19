@@ -9,3 +9,4 @@
 	
 	<input type="hidden" id="SessionUserid" name="SessionUserid" value="${login.member.userId}" />
 	<input type="hidden" id="SessionNickname" name="SessionNickname" value="${login.member.nickName}" />
+	<input type="hidden" id="SessionAdmin" name="SessionAdmin" value="${login.member.admin}" />

@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="reviewread";
+  </script>
+
+
 <%@ include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/assets/css/reviewlist.css">
 <!-- 실제 지도를 그리는 Javascript API를 불러오기 , 발급받은appkey삽입-->
@@ -187,12 +196,14 @@
 		var title = $("#title").val();
 		var writer = $("#writer").val();
 		
-		$("#modalRegisterBtn").click(function(e) {
 			//리뷰 게시판 알람을 동작하는 함수 (alaram.js)
+		function replyAralm(){
 			if (userid != "") {
 				ReviewReplySend();
 			}; 
-		}) 
+				
+			}
+
 	</script>
 
 	<script>
@@ -285,7 +296,6 @@
 			})
 
 			$("#modalRegisterBtn").click(function() {
-				
 				var reply = {
 					bno : bno,
 					reply : modalInputReply.val(),
@@ -302,6 +312,7 @@
 						showList(-1);
 					}
 				}); //add 종료		
+				replyAralm();
 			})
 
 			function showList(page) {
@@ -330,7 +341,7 @@
 
 									for (var i = 0, len = list.length || 0; i < len; i++) {
 										str += "<li class='left clearfix' style = 'list-style: none;' data-rno='"+list[i].rno+"'>";
-										str += "<div'><div class='header'><strong style=' color:black;'>"
+										str += "<div'><div class='header'><strong style=' color:black; border=1;'>"
 												+ list[i].replyer + "</strong>";
 										str += "<small class='pull-right text-muted' style = 'color:gray;'>"
 												+ ReviewReplyService

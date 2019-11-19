@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="manage-list";
+  </script> 
 <%@ include file="../includes/header.jsp" %>
 <!-- MAIN -->
 <div class="main">
@@ -67,7 +73,14 @@
         </button>
       </div>
       <div class="modal-body">
-        
+        <div class="form-group">
+                	<label>닉네임</label>
+                	<input class="form-control" id="modalNick" readonly="readonly">
+                </div>
+                <div class="form-group">
+                	<label>소개 글</label>
+                	<textarea class="form-control" id="modalContent" placeholder="사유를 적어주세요." rows="4"></textarea>
+                </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="expulsion">추방</button>
@@ -92,12 +105,16 @@ $(function(){
 	
 	$("table").on("click", "button", function(){	
 		modal.modal("show");
-		$(".modal-body").html($(this).data("name"));		
+		var value = $(this).data("name");
+		
+		$("#modalNick").val(value);		
 	})
 	
 	expulsion.click(function(){
 		var check = confirm("정말 추방하시겠습니까?");
-		var nickName = $(".modal-body").html();
+		var nickName = $("#modalNick").val();
+		var content = $("#modalContent").val();
+		
 		
 		if (check){
 			manage.remove({nickName:nickName, groupCode:groupCode}, function(result){
@@ -112,7 +129,9 @@ $(function(){
 	
 	delegation.click(function(){
 		var check = confirm("그룹을 정말 위임하시겠습니까?");
-		var nickName = $(".modal-body").html();
+		var nickName = $("#modalNick").val();
+		var content = $("#modalContent").val();
+		
 		if (check){
 			manage.modify({nickName:nickName, groupCode:groupCode}, function(result){
 				modal.modal("hide");

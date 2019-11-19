@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+  
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="support-request";
+  </script>
 <%@ include file="../includes/header.jsp" %>
 
 <!-- MAIN -->
 <div class="main">
+  <%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
@@ -121,6 +127,17 @@
 </div>
 <!-- END Modal -->
 <script src="/resources/js/support/group.js"></script>
+
+
+<script>
+$(document).ready(function() {
+	$("#modalRegisterBtn").click(function(){
+		SupportAdmin();
+	});
+})
+</script>
+
+
 <script>
 $(function(){
 	var modal = $("#myModal");	
@@ -130,8 +147,11 @@ $(function(){
 	// 그룹신청 버튼 클릭시 모달창을 띄워 폼 보여주기
 	requestBtn.on("click", function() {
 		
+		//버튼이 눌린다면 SupportAdmin 함수를 통해 관리자에게 알람.
+		
+	
  		var size = '${login.groupSize}';
-
+	
 		if (size == 4){
 			alert("허용 가능한 그룹 수를 초과했습니다.");
 			return;

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="board-list";
+  </script> 
 <%@ include file="../includes/header.jsp"%>
 
  
@@ -174,6 +180,7 @@
 		</div>
 	</div>
 	<!-- END MAIN CONTENT -->
+	
 </div>
 <!-- END MAIN -->
 <div class="clearfix"></div>
@@ -192,6 +199,9 @@
 	<input type="hidden" name="keyword" value="${page.criteria.keyword }" />
 
 </form>
+
+
+<input type="hidden" id="groupCode" value="${groupCode}"/>
 <script src="/resources/js/board/like.js"></script>
 
 <script>

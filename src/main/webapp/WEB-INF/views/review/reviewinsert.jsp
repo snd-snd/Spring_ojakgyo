@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="reviewinsert";
+  </script>
+
 <%@include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/assets/css/reviewlist.css">
 <!-- 실제 지도를 그리는 Javascript API를 불러오기 , 발급받은appkey삽입-->
@@ -29,7 +36,7 @@
 								<input class="form-control" name="title" required="required">
 								<br>
 								<p>Writer</p>
-								<input class="form-control" name="writer" required="required">
+								<input class="form-control" name="writer" readonly="readonly" value="${login.member.nickName}">
 								<br>
 								<p>Content</p>
 								<textarea class="form-control" name="content" rows="9"

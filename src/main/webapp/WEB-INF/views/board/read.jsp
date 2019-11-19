@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+  <script>
+  //헤더에 들어가기전에 알람이 뜨는 장소와 자기가 있는 현재 페이지가 같다면
+  // 알람을 띄우지 않게 하기위해 자신의위치를 알려주는 flag
+  var flagPage="board-read";
+  </script>
+    
 <%@ include file="../includes/header.jsp" %>
 <!-- MAIN -->
 <div class="main">
+  <%@ include file="../includes/alarm.jsp"%>
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
-	<%@ include file="../includes/alarm.jsp"%>
 		<div class="container-fluid">
 			<h3 class="page-title">Read</h3>
 			<div class="row">
@@ -66,6 +73,14 @@
 	<!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
+
+
+<input type="hidden" name="groupCode" id="groupCode" value="${board.groupCode}" />	
+<input type="hidden" name="writer" id="writer" value="${board.writer}" />	
+<input type="hidden" name="title" id="title" value="${board.title }" />	
+<input type="hidden" name="bno" id="bno" value="${board.bno }" />	
+
+
 <div class="clearfix"></div>
 <footer>
 	<div class="container-fluid">
@@ -81,14 +96,16 @@
 </form>
 <script src="/resources/js/board/reply.js"></script>
 <script src="/resources/js/board/like.js"></script>
+
 <script>
 $(function(){
 	
 	var form = $("form");
 	var code = '${board.groupCode }';
 	var nickName = '${login.member.nickName}';
-	var wirter = '${board.writer}';
+	var writer = '${board.writer}';
 	var bno = '${board.bno}';
+	var check = '${msg}';
 	
 	var likeBtn = $("#like");
 	var modifyBtn = $("#modify");
@@ -96,8 +113,11 @@ $(function(){
 	var listBtn = $("#list");
 	var registerBtn = $("#register");
 	
-			
-	showList(1); //댓글 목록가져오기
+	if (check == '' && check.length){
+		showList(1); //댓글 목록가져오기
+	} else {
+		showList(-1); //댓글 목록가져오기
+	}
 	
 	likeService.likeCheck({code:code, bno:bno, nickName:nickName}, function(result){
 		if(result){
@@ -108,7 +128,7 @@ $(function(){
 	});
 	
 	$("#buttons").find("button").hide();	
-	if (nickName == wirter){
+	if (nickName == writer){
 		modifyBtn.show();
 		removeBtn.show();
 		listBtn.show();
@@ -145,6 +165,13 @@ $(function(){
 	//댓글 등록
 	registerBtn.click(function(){
 		
+ 		//그룹페이지의 댓글 알람
+ 		var groupCode=$("#groupCode").val();
+		var writerCheck=$("#writer").val();
+		var titleCheck=$("#title").val();
+		var bnoCheck=$("#bno").val();
+ 		groupReply();
+		
 		var replyContent = $("#replyText").val();
 		
 		if (replyContent == '' || replyContent.length == 0){
@@ -165,7 +192,9 @@ $(function(){
 				showList(-1);
 			} 
 		});
+ 		
 	})
+	
 	
 	//댓글 삭제
 	replyContent.on("click", "button[name='remove']", function(){
