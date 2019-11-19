@@ -62,11 +62,9 @@ create table ReviewReply(
 	constraint fk_reviewreplyreplyer foreign key(replyer) references members(nickName)
 )
 
-
 create sequence seq_reviewreply --리뷰댓글테이블의 rno를 위한 시퀀스
 
 create index idx_reviewreply on ReviewReply(bno desc, rno asc);
-
 
 drop table members
 drop table groups
