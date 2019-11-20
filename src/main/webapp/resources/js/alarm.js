@@ -77,7 +77,8 @@
 	}
 		//채팅 버튼을 누르면 보내는 메세지
 		function ChatSendMessage() {
-	    	socket.send("msg@%%\^websocket@%%\^"+SessionUserid+"@%%\^"+$("#btn-input").val()+"@%%\^"+SessionNickname+"@%%\^"+SessionGroupCode);
+	    	socket.send("msg@%%\^websocket@%%\^"+SessionUserid+"@%%\^"+
+	    		       $("#btn-input").val()+"@%%\^"+SessionNickname+"@%%\^"+SessionGroupCode);
 	    };
 	    
 	    //채팅을 보내면  메세지값 넣기
@@ -95,7 +96,7 @@
 					str += "</div>";
 					$("#message_send").append(str);
 				}else if(msg[3] =="" ){
-					console.log("채팅에 공백만 넣지마라");
+					console.log("채팅에 공백만 넣었습니다.");
 				}else {
 					str +="<div class='row msg_container base_receive'";
 					str +=" style='margin-bottom: 15px; border: 2px solid #5AAEFF; border-radius: 10px'>";
@@ -147,7 +148,7 @@
 				str +="<button type='button' class='btn btn-danger' style='float: right; vertical-align:middle;' id='alarmBtn' >닫기</button></p></div>"
 				$("#alarm").css("display", "");
 				$("#alarm").prepend(str);
-				$("#chageUrl").attr("href","/support/request");
+				$("#chageUrl").attr("href","/admin/group");
 				$("#alarm").attr("tabindex",-1).focus();
 			}
 		}

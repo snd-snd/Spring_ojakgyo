@@ -32,15 +32,14 @@ public class EchoHandler extends TextWebSocketHandler{
 				sess.sendMessage(new TextMessage(message.getPayload()));
 		}
 	}
-
 	//클라이언트와 접속이 끊기면 해당 session연결을 끊어버림
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
 		sessionList.remove(session);
 		
-		logger.info("{} 연결 끊김).",session.getId());
-		
+		logger.info("{} 연결 끊김).",session.getId());		
 	}
+	
 
 }

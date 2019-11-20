@@ -41,7 +41,12 @@
 
 										<td>${status.count }</td>
 										<td>${group.groupCode }</td>
-										<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
+										<c:if test="${group.status == 1}">
+											<td>${group.groupName }</td>
+										</c:if>
+										<c:if test="${group.status != 1}">
+											<td><a href="" data-code="${group.groupCode }">${group.groupName }</a></td>
+										</c:if>
 										<td>${group.leader }</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${group.regDate }"/></td>
 										<c:if test="${group.status == 1}">
