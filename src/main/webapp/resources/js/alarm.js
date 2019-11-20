@@ -62,8 +62,9 @@
 			}else if(msgSplit[0]=="groupReply"){
 				groupReplyRecive(msgSplit);
 			}else if(msgSplit[0]=="groupkick"){
-				groupKickAlarm(msgSplit);
-				
+				groupKickAlarm(msgSplit);	
+			}else if(msgSplit[0]=="changeLeader"){
+				groupChangeLeader(msgSplit);
 			}
 			
 		};
@@ -210,6 +211,35 @@
 				var str="";
 				str +=	"<div class='alert alert-success' role='alert' id='alarmDiv'>" ;			
 				str +="<p> "+msg[3]+"그룹에서 추방되었습니다. 재접속을 부탁드립니다. 사유 :관리자에게 문의하세요.  <a id='chageUrl'>재접속 하기</a>";
+				str +="<button type='button' class='btn btn-danger' style='float: right; vertical-align:middle;' id='alarmBtn' >닫기</button></p></div>"
+				$("#alarm").css("display", "");
+				$("#alarm").prepend(str);
+				$("#chageUrl").attr("href","/logout");
+				$("#alarm").attr("tabindex",-1).focus();
+			}
+		}
+		function changeLeader(){
+			var nickName = $("#modalNick").val();
+			var content = $("#modalContent").val();
+			var groupName= $("#groupName").val();
+			alert(nickName+content+groupName);
+			socket.send("changeLeader"+"@%%\^"+nickName+"@%%\^"+content+"@%%\^"+groupName);
+			
+		}
+		function groupChangeLeader(msg){
+			if(msg[1]==SessionNickname && msg[2] !="" && msg[2].length !=0){
+				var str="";
+				str +=	"<div class='alert alert-success' role='alert' id='alarmDiv'>" ;			
+				str +="<p> "+msg[3]+"그룹의 리더가 되었습니다. 재접속을 부탁드립니다. 사유 :"+msg[2]+" <a id='chageUrl'>재접속 하기</a>";
+				str +="<button type='button' class='btn btn-danger' style='float: right; vertical-align:middle;' id='alarmBtn' >닫기</button></p></div>"
+				$("#alarm").css("display", "");
+				$("#alarm").prepend(str);
+				$("#chageUrl").attr("href","/logout");
+				$("#alarm").attr("tabindex",-1).focus();	
+			}else{
+				var str="";
+				str +=	"<div class='alert alert-success' role='alert' id='alarmDiv'>" ;			
+				str +="<p> "+msg[3]+"그룹의 리더가 되었습니다. 재접속을 부탁드립니다. 사유 :개인적인 사정으로 리더의 역할을 위임해드립니다.  <a id='chageUrl'>재접속 하기</a>";
 				str +="<button type='button' class='btn btn-danger' style='float: right; vertical-align:middle;' id='alarmBtn' >닫기</button></p></div>"
 				$("#alarm").css("display", "");
 				$("#alarm").prepend(str);

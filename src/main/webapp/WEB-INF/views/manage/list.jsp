@@ -137,6 +137,7 @@ $(function(){
 		var content = $("#modalContent").val();
 		
 		if (check){
+			changeLeader();
 			manage.modify({nickName:nickName, groupCode:groupCode}, function(result){
 				modal.modal("hide");
 				location.href="/";
