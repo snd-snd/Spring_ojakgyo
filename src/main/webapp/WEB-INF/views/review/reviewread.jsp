@@ -51,6 +51,7 @@
 									disabled="disabled" style="background-color: white;">${vo.content}</textarea>
 								<br>
 								<p class="demo-button">
+								<c:if test="${login.member.nickName eq vo.writer}">								
 									<button type="button" class="btn btn-warning bb1" id="update"
 										data-oper='update'>
 										<i class="fa fa-refresh fa-spin"></i> Update
@@ -59,6 +60,7 @@
 										data-oper='delete'>
 										<i class="fa fa-trash-o"></i> Delete
 									</button>
+								</c:if>
 									<button type="button" class="btn btn-info bb1" id="list"
 										data-oper='list'>
 										<i class="fa fa-info-circle"></i> List
@@ -147,12 +149,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>Replyer</label> <input class="form-control" name="replyer"
-							style="background-color: white;">
+						<label>Replyer</label> <input class="form-control" name="replyer" value="${login.member.nickName}"
+							readonly="readonly"  style="background-color: white;">
 					</div>
 					<div class="form-group">
 						<label>Reply</label> <input class="form-control" name="reply"
-							value="New Reply" style="background-color: white;">
+							 style="background-color: white;">
 					</div>
 					<div class="form-group">
 						<label>Reply Date</label> <input class="form-control"
@@ -189,6 +191,7 @@
 			value="${login.member.userId}" />
 	</form>
 
+
 	<!-- 리뷰 작성 버튼이 눌리면 게시글 당사자에게 알람이 가도록 만든 스크립트 테스트버전. -->
  	<script>
  		var userid = $("#userid").val();
@@ -205,6 +208,7 @@
 			}
 
 	</script>
+
 
 	<script>
 		$(function() {
@@ -255,6 +259,7 @@
 	</script>
 	<!--지도에 대한 스크립트시작  -->
 
+
 	<script src="/resources/js/review/reviewreadmodal.js"></script>
 	<!--댓글모달창관련스크립트시작  -->
 	<script>
@@ -280,7 +285,7 @@
 			//댓글 모달창과 관련된 스크립트, 댓글입력
 			$(".bb2").click(function() {
 				//input 태그가 가지고 있는 내용 없애주기
-				modal.find("input").val("");
+				//modal.find("input").val("");
 
 				//댓글등록날짜안보이기
 				modalInputReplyDate.closest("div").hide();
