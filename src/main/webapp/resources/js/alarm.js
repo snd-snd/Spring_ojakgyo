@@ -198,6 +198,7 @@
 			socket.send("groupkick"+"@%%\^"+nickName+"@%%\^"+content+"@%%\^"+groupName);
 			
 		}
+		
 		function groupKickAlarm(msg){
 			if(msg[1]==SessionNickname && msg[2] !="" && msg[2].length !=0){
 				var str="";
